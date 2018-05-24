@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Redis," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Redis中的事务(transaction)是一组命令的集合。事务同命令一样都是Redis 的最小执行单位，一个事务中的命令要么都执行，要么都不执行。 123456789redis&amp;gt; MULTIOKredis&amp;gt; SADD &amp;quot;user:1:following&amp;quot; 2QUEUEDredis&amp;gt; SADD &amp;quot;user:2:followers&amp;quot; 1QU">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis基础（二）">
+<meta property="og:url" content="http://yoursite.com/2016/01/14/Redis基础（二）/index.html">
+<meta property="og:site_name" content="刘国坤">
+<meta property="og:description" content="Redis中的事务(transaction)是一组命令的集合。事务同命令一样都是Redis 的最小执行单位，一个事务中的命令要么都执行，要么都不执行。 123456789redis&amp;gt; MULTIOKredis&amp;gt; SADD &amp;quot;user:1:following&amp;quot; 2QUEUEDredis&amp;gt; SADD &amp;quot;user:2:followers&amp;quot; 1QU">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-24T11:02:40.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis基础（二）">
+<meta name="twitter:description" content="Redis中的事务(transaction)是一组命令的集合。事务同命令一样都是Redis 的最小执行单位，一个事务中的命令要么都执行，要么都不执行。 123456789redis&amp;gt; MULTIOKredis&amp;gt; SADD &amp;quot;user:1:following&amp;quot; 2QUEUEDredis&amp;gt; SADD &amp;quot;user:2:followers&amp;quot; 1QU">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/01/14/Redis基础（二）/"/>
+
+
+
+
+
+  <title>Redis基础（二） | 刘国坤</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">刘国坤</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自先沉稳 而后爱人</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-个人简历">
+          <a href="/resume/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            个人简历
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/01/14/Redis基础（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘国坤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘国坤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Redis基础（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-01-14T10:00:45+08:00">
+                2016-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Redis中的事务-transaction"><a href="#Redis中的事务-transaction" class="headerlink" title="Redis中的事务(transaction)"></a>Redis中的事务(transaction)</h2><p>是一组命令的集合。事务同命令一样都是Redis 的最小执行单位，一个事务中的命令要么都执行，要么都不执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; MULTI</span><br><span class="line">OK</span><br><span class="line">redis&gt; SADD &quot;user:1:following&quot; 2</span><br><span class="line">QUEUED</span><br><span class="line">redis&gt; SADD &quot;user:2:followers&quot; 1</span><br><span class="line">QUEUED</span><br><span class="line">redis&gt; EXEC</span><br><span class="line">1) (integer) 1</span><br><span class="line">2) (integer) 1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Redis 的事务还能保证一个事务内的命令依次执行而不被其他命令插入。试想客户端A需要执行几条命令，同时客户端B发送了一条命令，如果不使用事务，则客户端B的命令可能会插入到客户端A的几条命令中执行。</p>
+</blockquote>
+<h2 id="Redis事务错误处理"><a href="#Redis事务错误处理" class="headerlink" title="Redis事务错误处理"></a>Redis事务错误处理</h2><ul>
+<li>语法错误</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; MULTI</span><br><span class="line">OK</span><br><span class="line">redis&gt; SET key value</span><br><span class="line">QUEUED</span><br><span class="line">redis&gt; SET key</span><br><span class="line">(error) ERR wrong number of arguments for &apos;set&apos; command</span><br><span class="line">redis&gt; ERRORCOMMAND key</span><br><span class="line">(error) ERR unknown command &apos;ERRORCOMMAND&apos;</span><br><span class="line">redis&gt; EXEC</span><br><span class="line">(error) EXECABORT Transaction discarded because of previous errors.</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>只要有一个命令有语法错误，执行 EXEC 命令后 Redis就会直接返回错误，连语法正确的命令也不会执行。</p>
+<ul>
+<li>运行错误</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; MULTI</span><br><span class="line">OK</span><br><span class="line">redis&gt; SET key 1</span><br><span class="line">QUEUED</span><br><span class="line">redis&gt; SADD key 2</span><br><span class="line">QUEUED</span><br><span class="line">redis&gt; SET key 3</span><br><span class="line">QUEUED</span><br><span class="line">redis&gt; EXEC</span><br><span class="line">1) OK</span><br><span class="line">2) (error) WRONGTYPE Operation against a key holding the wrong kind of value</span><br><span class="line">3) OK</span><br><span class="line">redis&gt; GET key</span><br><span class="line">&quot;3&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>运行错误指在命令执行时出现的错误，比如使用散列类型的命令操作集合类型的键，这种错误在实际执行之前 Redis 是无法发现的，所以在事务里这样的命令是会被 Redis接受并执行的。如果事务里的一条命令出现了运行错误，事务里其他的命令依然会继续执行（包括出错命令之后的命令）</p>
+</blockquote>
+<blockquote>
+<p>Redis的事务没有关系数据库事务提供的回滚（rollback）功能。</p>
+</blockquote>
+<h2 id="watch命令介绍"><a href="#watch命令介绍" class="headerlink" title="watch命令介绍"></a>watch命令介绍</h2><p>watch 命令可以监控一个或多个键，一旦其中有一个键被修改（或删除），之后的事务就不会执行。监控一直持续到 EXEC 命令（事务中的命令是在EXEC之后才执行的，所以在MULTI命令后可以修改WATCH监控的键值）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; SET key 1</span><br><span class="line">OK</span><br><span class="line">redis&gt; WATCH key</span><br><span class="line">OK</span><br><span class="line">redis&gt; SET key 2</span><br><span class="line">OK</span><br><span class="line">redis&gt; MULTI</span><br><span class="line">OK</span><br><span class="line">redis&gt; SET key 3</span><br><span class="line">QUEUED</span><br><span class="line">redis&gt; EXEC</span><br><span class="line">(nil)</span><br><span class="line">redis&gt; GET key</span><br><span class="line">&quot;2&quot;</span><br></pre></td></tr></table></figure>
+<h2 id="过期时间"><a href="#过期时间" class="headerlink" title="过期时间"></a>过期时间</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">expire [key] [seconds]  //指定秒数后过期</span><br><span class="line"></span><br><span class="line">ttl [key]   //查看一个键的剩余存活时间</span><br><span class="line"></span><br><span class="line">persist [key]   //将键恢复成永久</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>除了PERSIST命令之外，使用SET或GETSET命令为键赋值也会同时清除键的过期时间</p>
+</blockquote>
+<blockquote>
+<p>如果使用 WATCH命令监测了一个拥有过期时间的键，该键时间到期自动删除并不会被WATCH命令认为该键被改变。</p>
+<ul>
+<li>expire会重新设置键的过期时间</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; SET foo bar</span><br><span class="line">OK</span><br><span class="line">redis&gt; EXPIRE foo 20</span><br><span class="line">(integer) 1</span><br><span class="line">redis&gt; TTL foo</span><br><span class="line">(integer) 15</span><br><span class="line">redis&gt; EXPIRE foo 20</span><br><span class="line">(integer) 1</span><br><span class="line">redis&gt; TTL foo</span><br><span class="line">(integer) 17</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果想要更精确的控制键的过期时间应该使用 pexpire命令，其时间单位是毫秒，对应地可以用PTTL命令以毫秒为单位返回键的剩余时间</p>
+</blockquote>
+<h2 id="实现缓存"><a href="#实现缓存" class="headerlink" title="实现缓存"></a>实现缓存</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$rank = GET cache:rank</span><br><span class="line">if not $rank</span><br><span class="line">$rank = 计算排名...</span><br><span class="line">MUlTI</span><br><span class="line">SET cache:rank, $rank</span><br><span class="line">EXPIRE cache:rank, 7200</span><br><span class="line">EXEC</span><br></pre></td></tr></table></figure>
+<h2 id="排序"><a href="#排序" class="headerlink" title="排序"></a>排序</h2><p>SORT命令可以对列表类型、集合类型和有序集合类型键进行排序，并且可以完成与关系数据库中的连接查询相类似的任务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort [key]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在对有序集合类型排序时会忽略元素的分数，只针对元素自身的值进行排序</p>
+</blockquote>
+<ul>
+<li>除了可以排列数字外，SORT命令还可以通过ALPHA参数实现按照字典顺序排列非数字元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; LPUSH mylistalpha a c e d B C A</span><br><span class="line">(integer) 7</span><br><span class="line">redis&gt; SORT mylistalpha</span><br><span class="line">(error) ERR One or more scores can&apos;t be converted into double</span><br><span class="line">redis&gt; SORT mylistalpha ALPHA</span><br><span class="line">1) &quot;A&quot;</span><br><span class="line">2) &quot;B&quot;</span><br><span class="line">3) &quot;C&quot;</span><br><span class="line">4) &quot;a&quot;</span><br><span class="line">5) &quot;c&quot;</span><br><span class="line">6) &quot;d&quot;</span><br><span class="line">7) &quot;e”</span><br></pre></td></tr></table></figure>
+<ul>
+<li>倒序排序</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort [key] desc</span><br></pre></td></tr></table></figure>
+<ul>
+<li>返回指定范围的排序结果</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort [key] limit (start)num (end)num</span><br></pre></td></tr></table></figure>
+<h3 id="by参数"><a href="#by参数" class="headerlink" title="by参数"></a>by参数</h3><p>如果提供了 BY 参数，SORT 命令将不再依据元素自身的值进行排序，而是对每个元素使用元素的值替换参考键中的第一个“*”并获取其值，然后依据该值对元素排序。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; SORT tag:ruby:posts BY post:*-&gt;time DESC</span><br><span class="line">1) &quot;12&quot;</span><br><span class="line">2) &quot;26&quot;</span><br><span class="line">3) &quot;6&quot;</span><br><span class="line">4) &quot;2&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>除了散列类型之外，参考键还可以是字符串类型</p>
+</blockquote>
+<blockquote>
+<p>当参考键名不包含“*”时（即常量键名，与元素值无关），SORT命令将不会执行排序操作</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; SORT sortbylist BY itemscore:* DESC</span><br><span class="line">1) &quot;2&quot;</span><br><span class="line">2) &quot;1&quot;</span><br><span class="line">3) &quot;3&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="get参数"><a href="#get参数" class="headerlink" title="get参数"></a>get参数</h3><p>GET参数不影响排序，它的作用是使 SORT命令的返回结果不再是元素自身的值，而是GET参数中指定的键值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; SORT tag:ruby:posts BY post:*-&gt;time DESC GET post:*-&gt;title</span><br><span class="line">1) &quot;Windows 8 app designs&quot;</span><br><span class="line">2) &quot;RethinkDB - An open-source distributed database built with love&quot;</span><br><span class="line">3) &quot;Uses for cURL&quot;</span><br><span class="line">4) &quot;The Nature of Ruby&quot;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在一个SORT命令中可以有多个GET参数（而BY参数只能有一个）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; SORT tag:ruby:posts BY post:*-&gt;time DESC GET post:*-&gt;title GET post:*-&gt;time</span><br><span class="line">1) &quot;Windows 8 app designs&quot;</span><br><span class="line">2) &quot;1352620100&quot;</span><br><span class="line">3) &quot;RethinkDB - An open-source distributed database built with love&quot;</span><br><span class="line">4) &quot;1352620000&quot;</span><br><span class="line">5) &quot;Uses for cURL&quot;</span><br><span class="line">6) &quot;1352619600&quot;</span><br><span class="line">7) &quot;The Nature of Ruby&quot;</span><br><span class="line">8) &quot;1352619200&quot;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>GET #会返回元素本身的值</p>
+</blockquote>
+<h3 id="store参数"><a href="#store参数" class="headerlink" title="store参数"></a>store参数</h3><p>默认情况下SORT会直接返回排序结果，如果希望保存排序结果，可以使用store参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//把结果保存到sort.result键中</span><br><span class="line"></span><br><span class="line">redis&gt; SORT tag:ruby:posts BY post:*-&gt;time DESC GET post:*-&gt;title GET post:*-&gt;time GET # STORE sort.result</span><br><span class="line">(integer) 12</span><br><span class="line">redis&gt; LRANGE sort.result 0 -1</span><br><span class="line">1) &quot;Windows 8 app designs&quot;</span><br><span class="line">2) &quot;1352620100&quot;</span><br><span class="line">3) &quot;12&quot;</span><br><span class="line">4) &quot;RethinkDB - An open-source distributed database built with love&quot;</span><br><span class="line">5) &quot;1352620000&quot;</span><br><span class="line">6) &quot;26&quot;</span><br><span class="line">7) &quot;Uses for cURL&quot;</span><br><span class="line">8) &quot;1352619600&quot;</span><br><span class="line">9) &quot;6&quot;</span><br><span class="line">10) &quot;The Nature of Ruby&quot;</span><br><span class="line">11) &quot;1352619200&quot;</span><br><span class="line">12) &quot;2&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h3><blockquote>
+<p>SORT命令的时间复杂度是O(n+mlog(m))</p>
+<ul>
+<li>尽可能减少待排序键中元素的数量（使N尽可能小）。</li>
+<li>使用LIMIT参数只获取需要的数据（使M尽可能小）。</li>
+<li>如果要排序的数据数量较大，尽可能使用STORE参数将结果缓存。</li>
+</ul>
+</blockquote>
+<h2 id="任务队列"><a href="#任务队列" class="headerlink" title="任务队列"></a>任务队列</h2><p>为了测试实现对列，我们可以打开两个redis-cli实例，进行演示</p>
+<ol>
+<li>在redis-cli[A]中进行如下操作</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis A&gt; BRPOP queue 0</span><br><span class="line"></span><br><span class="line">//键入回车后会处于阻塞状态</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>在redis-cli[B]中进行如操作</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis B&gt; LPUSH queue task</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>在LPUSH命令执行后redis-cli[A]马上就返回了结果</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1) &quot;queue&quot;</span><br><span class="line">2) &quot;task&quot;</span><br><span class="line"></span><br><span class="line">//同时会发现redis-cli[B]中queue的元素已经被取走：</span><br><span class="line">redis&gt; LLEN queue</span><br><span class="line">(integer) 0</span><br></pre></td></tr></table></figure>
+<h2 id="优先级队列"><a href="#优先级队列" class="headerlink" title="优先级队列"></a>优先级队列</h2><p>例如打开两个 redis-cli 实例，在实例A中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis A&gt; BLPOP queue:1 queue:2 queue:3 0</span><br></pre></td></tr></table></figure></p>
+<p>在实例B中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis B&gt; LPUSH queue:2 task</span><br><span class="line">(integer) 1</span><br></pre></td></tr></table></figure></p>
+<p>则实例A中会返回：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1) &quot;queue:2&quot;</span><br><span class="line">2) &quot;task&quot;</span><br></pre></td></tr></table></figure></p>
+<p>如果多个键都有元素则按照从左到右的顺序取第一个键中的一个元素。我们先在queue:2和queue:3中各加入一个元素：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; LPUSH queue:2 task1</span><br><span class="line">1) (integer) 1</span><br><span class="line">redis&gt; LPUSH queue:3 task2</span><br><span class="line">2) (integer) 1</span><br><span class="line">然后执行BRPOP命令：</span><br><span class="line">redis&gt; BRPOP queue:1 queue:2 queue:3 0</span><br><span class="line">1) &quot;queue:2&quot;</span><br><span class="line">2) &quot;task1&quot;</span><br></pre></td></tr></table></figure></p>
+<h2 id="“发布-订阅”模式"><a href="#“发布-订阅”模式" class="headerlink" title="“发布/订阅”模式"></a>“发布/订阅”模式</h2><p>发布/订阅”模式中包含两种角色，分别是发布者和订阅者。订阅者可以订阅一个或若干个频道（channel），而发布者可以向指定的频道发送消息，所有订阅此频道的订阅者都会收到此消息。</p>
+<ol>
+<li>发布者发布消息的命令是 PUBLISH</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; PUBLISH channel.1 hi</span><br><span class="line">(integer) 0</span><br><span class="line">//向channel.1频道发布内容为“hi”的信息，返回值为0，表示没有订阅者收到消息（因为此时并没有用户订阅该频道）</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>订阅频道的命令是 SUBSCRIBE<br>“现在新开一个redis-cli 实例 A，用它来订阅 channel.1：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">redis A&gt; SUBSCRIBE channel.1</span><br><span class="line">Reading messages... (press Ctrl-C to quit)</span><br><span class="line">1) &quot;subscribe&quot;</span><br><span class="line">2) &quot;channel.1&quot;</span><br><span class="line">3) (integer) 1</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>执行 SUBSCRIBE 命令后客户端会进入订阅状态，处于此状态下客户端不能使用除SUBSCRIBE、UNSUBSCRIBE、PSUBSCRIBE和PUNSUBSCRIBE这4个之外的命令，否则会报错。</p>
+<ul>
+<li>subscribe。表示订阅成功的反馈信息。第二个值是订阅成功的频道名称，第三个值是当前客户端订阅的频道数量。</li>
+<li>message。这个类型的回复是我们最关心的，它表示接收到的消息。第二个值表示产生消息的频道名称，第三个值是消息的内容。</li>
+<li>unsubscribe。表示成功取消订阅某个频道。第二个值是对应的频道名称，第三个值是当前客户端订阅的频道数量，当此值为0时客户端会退出订阅状态，之后就可以执行其他非“发布/订阅”模式的命令了。</li>
+</ul>
+<ol start="3">
+<li>这时我们打开另一个redis-cli实例B，并向channel.1发送一条消息：</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis B&gt; PUBLISH channel.1 hi!</span><br><span class="line">(integer) 1</span><br><span class="line">返回值为1表示有一个客户端订阅了channel.1，</span><br></pre></td></tr></table></figure>
+<p>此时实例A收到了类型为message的回复：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1) &quot;message&quot;</span><br><span class="line">2) &quot;channel.1&quot;</span><br><span class="line">3) &quot;hi!&quot;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"><i class="fa fa-tag"></i> Redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/12/Redis基础（一）/" rel="next" title="Redis基础（一）">
+                <i class="fa fa-chevron-left"></i> Redis基础（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/22/NGINX/" rel="prev" title="NGINX">
+                NGINX <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com"
+                alt="刘国坤" />
+            
+              <p class="site-author-name" itemprop="name">刘国坤</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Liuguokun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1353002081@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5591938345?refer_flag=1001030101_&is_hot=1" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-vk"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis中的事务-transaction"><span class="nav-number">1.</span> <span class="nav-text">Redis中的事务(transaction)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis事务错误处理"><span class="nav-number">2.</span> <span class="nav-text">Redis事务错误处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#watch命令介绍"><span class="nav-number">3.</span> <span class="nav-text">watch命令介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#过期时间"><span class="nav-number">4.</span> <span class="nav-text">过期时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现缓存"><span class="nav-number">5.</span> <span class="nav-text">实现缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#排序"><span class="nav-number">6.</span> <span class="nav-text">排序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#by参数"><span class="nav-number">6.1.</span> <span class="nav-text">by参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#get参数"><span class="nav-number">6.2.</span> <span class="nav-text">get参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#store参数"><span class="nav-number">6.3.</span> <span class="nav-text">store参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能优化"><span class="nav-number">6.4.</span> <span class="nav-text">性能优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#任务队列"><span class="nav-number">7.</span> <span class="nav-text">任务队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优先级队列"><span class="nav-number">8.</span> <span class="nav-text">优先级队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#“发布-订阅”模式"><span class="nav-number">9.</span> <span class="nav-text">“发布/订阅”模式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘国坤</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

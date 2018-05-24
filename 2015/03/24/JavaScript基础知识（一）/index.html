@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="DOM对象文档对象模型简称DOM，是W3C组织推荐的处理可扩展置标语言的标准编程接口。   DOM实际上是以面向对象方式描述的文档模型。DOM定义了表示和修改文档所需的对象、这些对象的行为和属性以及这些对象之间的关系。  通过DOM，可以访问所有的 HTML 元素，连同它们所包含的文本和属性。可以对其中的内容进行修改和删除，同时也可以创建新的元素。  DOM 独立于平台和编程语言。它可被任何编程语">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript基础知识（一）">
+<meta property="og:url" content="http://yoursite.com/2015/03/24/JavaScript基础知识（一）/index.html">
+<meta property="og:site_name" content="刘国坤">
+<meta property="og:description" content="DOM对象文档对象模型简称DOM，是W3C组织推荐的处理可扩展置标语言的标准编程接口。   DOM实际上是以面向对象方式描述的文档模型。DOM定义了表示和修改文档所需的对象、这些对象的行为和属性以及这些对象之间的关系。  通过DOM，可以访问所有的 HTML 元素，连同它们所包含的文本和属性。可以对其中的内容进行修改和删除，同时也可以创建新的元素。  DOM 独立于平台和编程语言。它可被任何编程语">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-24T10:44:54.372Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript基础知识（一）">
+<meta name="twitter:description" content="DOM对象文档对象模型简称DOM，是W3C组织推荐的处理可扩展置标语言的标准编程接口。   DOM实际上是以面向对象方式描述的文档模型。DOM定义了表示和修改文档所需的对象、这些对象的行为和属性以及这些对象之间的关系。  通过DOM，可以访问所有的 HTML 元素，连同它们所包含的文本和属性。可以对其中的内容进行修改和删除，同时也可以创建新的元素。  DOM 独立于平台和编程语言。它可被任何编程语">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/03/24/JavaScript基础知识（一）/"/>
+
+
+
+
+
+  <title>JavaScript基础知识（一） | 刘国坤</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">刘国坤</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自先沉稳 而后爱人</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-个人简历">
+          <a href="/resume/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            个人简历
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/03/24/JavaScript基础知识（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘国坤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘国坤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript基础知识（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-03-24T10:00:45+08:00">
+                2015-03-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="DOM对象"><a href="#DOM对象" class="headerlink" title="DOM对象"></a>DOM对象</h2><p>文档对象模型简称DOM，是W3C组织推荐的处理可扩展置标语言的标准编程接口。</p>
+<hr>
+<ul>
+<li><p>DOM实际上是以面向对象方式描述的文档模型。DOM定义了表示和修改文档所需的对象、这些对象的行为和属性以及这些对象之间的关系。</p>
+</li>
+<li><p>通过DOM，可以访问所有的 HTML 元素，连同它们所包含的文本和属性。可以对其中的内容进行修改和删除，同时也可以创建新的元素。</p>
+</li>
+<li><p>DOM 独立于平台和编程语言。它可被任何编程语言诸如 Java、JavaScript 使用。</p>
+</li>
+<li><p>DOM对象，即是我们用传统的方法(javascript)获得的对象。</p>
+</li>
+<li><p>DOM准确说是对文档对象的一种规范标准(文档对象模型),标准只定义了属性和方法行为</p>
+</li>
+</ul>
+<h2 id="JS的引入"><a href="#JS的引入" class="headerlink" title="JS的引入"></a>JS的引入</h2><ul>
+<li>直接在HTML中写</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">   var str = &quot;Hello, World!&quot;;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>外部导入</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;text_name.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>注意事项</strong>：JS最好在HTML文件末尾引入</p>
+<ul>
+<li>一是为了提升页面加载速度</li>
+</ul>
+<ul>
+<li><p>二是为了生成完整的DOM对象，避免JS执行失效</p>
+<h2 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h2></li>
+<li><p>可以用_、数字、字母、$、组成，且数字不能开头</p>
+</li>
+<li><p>用 var 来声明变量，如果不用var声明，也不会报错，但是会污染全局变量</p>
+</li>
+</ul>
+<h2 id="JS基本变量类型"><a href="#JS基本变量类型" class="headerlink" title="JS基本变量类型"></a>JS基本变量类型</h2><ul>
+<li><p>数值型</p>
+</li>
+<li><p>字符串类型</p>
+</li>
+<li><p>布尔类型</p>
+</li>
+<li><p>undefined型：原生数据类型变量[以上3种，其本身也是]没有值，返回的是undefined</p>
+</li>
+<li><p>null型：对象类型变量[DOM对象，数组等]没有值，返回的是null</p>
+</li>
+<li><p>JS组合数据类型</p>
+</li>
+</ul>
+<h2 id="对象类型"><a href="#对象类型" class="headerlink" title="对象类型"></a>对象类型</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//声明</span><br><span class="line">var object = &#123;name:&apos;zhangsan&apos;, age:20&#125;;</span><br><span class="line"></span><br><span class="line">//调用</span><br><span class="line">console.log(object.name);</span><br><span class="line">//也可以用下面这用方式</span><br><span class="line">console.log(object[ame]);</span><br></pre></td></tr></table></figure>
+<h2 id="数组类型"><a href="#数组类型" class="headerlink" title="数组类型"></a>数组类型</h2><ul>
+<li><p>即便中间删除一些数据，编号依然是从0~n，中间不会有空缺</p>
+</li>
+<li><p>数组里面的数据可以是不同类型</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//声明</span><br><span class="line">var arr = [&apos;a&apos;,23,&quot;hellw&quot;,true];</span><br><span class="line"></span><br><span class="line">//调用</span><br><span class="line">console.log(arr[2]);</span><br></pre></td></tr></table></figure>
+<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ul>
+<li><p>基本的+、-、*、/、不想说，懒癌发作。</p>
+</li>
+<li><p>JS的连接运算符是：”+”</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">	console.log(2+3);                    //输出 5</span><br><span class="line">	</span><br><span class="line">	console.log(&quot;hellow&quot;+&quot;&quot;+&quot;world&quot;);    //输出 hello world</span><br><span class="line">	</span><br><span class="line">	console.log(2+3+5+&quot;hello&quot;+6+8);      //输出 10hello68，一旦碰到非法数字，后面的一律理解为拼接</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>逻辑运算符：不是单纯的返回true或false，而是返回最早能判断表达式整体结果的值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">	var a = false;</span><br><span class="line">	var b = 6;</span><br><span class="line">	var c = a || b;</span><br><span class="line">	console.log(c);        //输出 6</span><br><span class="line"></span><br><span class="line">	var d = true；</span><br><span class="line">	var e = a || b || d;</span><br><span class="line">	console.log(d);        //输出 6</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="控制结构"><a href="#控制结构" class="headerlink" title="控制结构"></a>控制结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//遍历数组</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	var arr = [&quot;赵&quot;,&quot;钱&quot;,&quot;孙&quot;,&quot;李&quot;];</span><br><span class="line">	for(var i=0; i++; i&lt;arr.length)&#123;</span><br><span class="line">	    console.log(arr[i]);</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">//遍历对象</span><br><span class="line">&lt;script&gt;</span><br><span class="line">	var obj = &#123;name:&quot;lisi&quot;,age:28,height:180&#125;;</span><br><span class="line">	for(var k in obj)&#123;</span><br><span class="line">	    console.log(k);        //正确</span><br><span class="line">	    console.log(obj.k);    //错误</span><br><span class="line">	    console.log(obj[k]);   //正确</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="对象操作"><a href="#对象操作" class="headerlink" title="对象操作"></a>对象操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">	var str = &quot;helloworld&quot;;</span><br><span class="line">	console.log(str.length);        //输出 10</span><br><span class="line">	console.log(str.substr(2,3));   //输出 llo</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在JS中，如果调用属性和方法，会自动将变量转化为对象，这是JS中的重要思想<h2 id="indexOf-函数"><a href="#indexOf-函数" class="headerlink" title="indexOf()函数"></a>indexOf()函数</h2></li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var str = &quot;helloworld&quot;;</span><br><span class="line">    console.log(str.indexOf(&quot;he&quot;));        //找到了，返回值为0，为false</span><br><span class="line">    console.log(str.indexOf(&quot;dede&quot;));      //找不到，返回值为-1，为true</span><br><span class="line">    //这就比较尴尬了，所以要进行如下处理</span><br><span class="line">    console.log(str.indexOf(&quot;he&quot;) &gt;= 0 ？ &quot;find&quot; : &quot;not find&quot;);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="JS内置对象"><a href="#JS内置对象" class="headerlink" title="JS内置对象"></a>JS内置对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var dt = new Date();                    //想调用时间函数，需要先实例化</span><br><span class="line">    console.log(dt.getFullYear());</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">//但是Math是个例外，不需要实例化，就可以直接使用</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    console.log(Math.floor(2.3));           //调用的其实是Math类的静态方法</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="浏览器window对象-即BOM对象"><a href="#浏览器window对象-即BOM对象" class="headerlink" title="浏览器window对象 [即BOM对象]"></a>浏览器window对象 [即BOM对象]</h2><ul>
+<li><p>window对象是浏览器宿主对象，简单说就是用户看到的浏览器窗口。其本身和JS语言没有关系</p>
+</li>
+<li><p>window对象又包含很多子对象</p>
+</li>
+<li><p>location               //控制地址栏</p>
+</li>
+<li><p>screen                //控制屏幕</p>
+</li>
+<li><p>history                //控制浏览器历史记录</p>
+</li>
+<li><p>document           //控制页面文本，这就是DOM对象</p>
+</li>
+</ul>
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    function t1()&#123;</span><br><span class="line">        var str = &quot;china&quot;;</span><br><span class="line">        function t2()&#123;</span><br><span class="line">            var str = &quot;japan&quot;;    //输出结果为 japan,如果将本行注释掉，输出结果为 china</span><br><span class="line">            alert(str);</span><br><span class="line">        &#125;</span><br><span class="line">        t2();</span><br><span class="line">    &#125;</span><br><span class="line">    t1();</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    window.str = &quot;union&quot;;</span><br><span class="line">    function t1()&#123;</span><br><span class="line">       function t2()&#123;</span><br><span class="line">           str = &quot;japan&quot;;</span><br><span class="line">           alert(str);</span><br><span class="line">       &#125;</span><br><span class="line">       t2();</span><br><span class="line">    &#125;</span><br><span class="line">    t1();</span><br><span class="line">    alert(window.str);        //输出结果为 japan japan</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>如果一个变量在自身作用域内没有赋值，那么它会一直向上级查找，如多查到window层面[全局]还没有，就返回undefined</p>
+</li>
+<li><p>变量前不加 var，就是赋值，比如第二个例子，第一次打印的是t2()的japan,但是由于其赋值运算污染了全局变量的值，所以，第二次也是japan</p>
+</li>
+</ul>
+<h2 id="找对象"><a href="#找对象" class="headerlink" title="找对象"></a>找对象</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Document&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;关键是找对象&lt;/h1&gt;</span><br><span class="line">    &lt;div id=&quot;test1&quot;&gt;</span><br><span class="line">        &lt;p&gt;&lt;/p&gt;</span><br><span class="line">        &lt;p&gt;&lt;/p&gt;</span><br><span class="line">        &lt;p&gt;&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">    &lt;div id=&quot;test2&quot;&gt;&lt;/div&gt;</span><br><span class="line">    &lt;input type=&quot;text&quot; name=&quot;username&quot; id=&quot;&quot; value=&quot;poly&quot;&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;script&gt;</span><br><span class="line">    //用ID来查询，返回值是&quot;对象&quot;</span><br><span class="line">    console.log(document.getElementById(&apos;test1&apos;));</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    //用标签来查询，返回值是&quot;对象的集合&quot;，即使只找到一个对象，也包装成对象集合返回</span><br><span class="line">    var ps = document.getElementsByTagName(&apos;p&apos;);</span><br><span class="line">    ps[1].style.background = &apos;green&apos;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    //对于表单元素，可以用name来查询，返回值是对象集合</span><br><span class="line">    alert(document.getElementsByName(&apos;username&apos;)[0].value);</span><br><span class="line">    document.getElementsByName(&apos;username&apos;)[0].value = &apos;lucy&apos;;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    //按照类名查找，返回值是&quot;对象的集合&quot;</span><br><span class="line">    document.getElementsByClassName(&apos;test2&apos;)[0].style.background = &apos;gray&apos;;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    //查找子节点或父节点</span><br><span class="line">    alert(document.getElementById(&apos;test1&apos;).childNodes.length);    //输出 7,标准属性,一般不用</span><br><span class="line">    </span><br><span class="line">    alert(document.getElementById(&apos;test1&apos;).children.length);      //输出 3</span><br><span class="line">    /* children非标准属性，但兼容性好，它不包含空白节点 */</span><br><span class="line">    </span><br><span class="line">    document/getElementsByTagName(&apos;p&apos;)[2].parentNode.style.border = &apos;1px solid green&apos;;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="操作对象的属性"><a href="#操作对象的属性" class="headerlink" title="操作对象的属性"></a>操作对象的属性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img src=&quot;&quot; alt=&quot;&quot; title=&quot;&quot; style=&quot;width: 300px; height: 300px;&quot;&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>普通属性可以通过：[ 对象.标签属性 ] 访问</p>
+</li>
+<li><p>CSS属性通过：[ 对象.style.属性 ] 访问，这种方式只适用于将css直接写在HTML标签内的属性</p>
+</li>
+<li><p>对类名进行操作，需要使用下面这种方式：[  对象.className ]</p>
+</li>
+<li><p>如果CSS带有横线，如border-top-style，则把横线去除，并且横线后的第一和字母大写，如 [ 对象.borderTopStyle ]</p>
+</li>
+</ul>
+<h3 id="获取对象在内存中计算后的样式"><a href="#获取对象在内存中计算后的样式" class="headerlink" title="获取对象在内存中计算后的样式"></a>获取对象在内存中计算后的样式</h3><p>上一节中，obj.style只能取得“内联style”的值，对于<style></style>中的CSS属性值，则无能为力，我们可以用obj.currentStyle和window.getConputeStyle来获取。</p>
+<p>注意：只有IE和Opera支持使用currentStyle获取HTML Element的计算后的样式，其他浏览器中不支持，标准浏览器中使用getComputeStyle，IE9及以上也支持getComputeStyle</p>
+<p>window.getComputeStyle(obj,伪元素)</p>
+<h4 id="参数说明："><a href="#参数说明：" class="headerlink" title="参数说明："></a>参数说明：</h4><ul>
+<li><p>第一个参数为要获取计算后的样式的目标元素</p>
+</li>
+<li><p>第二个参数为期望的伪元素，如”:after”、”:first-letter”等，一般设为null</p>
+</li>
+</ul>
+<h4 id="考虑兼容性，封装函数"><a href="#考虑兼容性，封装函数" class="headerlink" title="考虑兼容性，封装函数"></a>考虑兼容性，封装函数</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    function getStyle()&#123;</span><br><span class="line">        return e1.getcurrentStyle ? e1.getcurrentStyle[attr] : getComputeStyle(e1,null)[atttr];</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：这2个方法获取的对象是只读的，要该样式，还得靠obj.style</p>
+</blockquote>
+<h2 id="删除节点"><a href="#删除节点" class="headerlink" title="删除节点"></a>删除节点</h2><ul>
+<li><p>找到对象</p>
+</li>
+<li><p>找到它的父对象parentObj</p>
+</li>
+<li><p>parentObj.removeChild(子对象);</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">//删除最后一个li</span><br><span class="line">&lt;input type=&quot;button&quot; value=&quot;删除最后一个li&quot; onclick=&quot;del();&quot;&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;春&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;夏&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;秋&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;冬&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    function del()&#123;</span><br><span class="line">        var lis = document.getElementsByTagName(li);</span><br><span class="line">	var lastli = lis[lis.length-1];</span><br><span class="line">	lastli.parentNode.removeChild(lastli);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="创建节点"><a href="#创建节点" class="headerlink" title="创建节点"></a>创建节点</h2><ul>
+<li><p>创建对象</p>
+</li>
+<li><p>找到父对象parentObj</p>
+</li>
+<li><p>parentObj.addChild(对象);</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//添加一个li</span><br><span class="line">&lt;input type=&quot;button&quot; value=&quot;删除最后一个li&quot; onclick=&quot;add();&quot;&gt;</span><br><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;春&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;夏&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;秋&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    function add()&#123;</span><br><span class="line">        var li = document.createElement(&apos;li&apos;);                       //创建节点</span><br><span class="line">        var text = document.createTextNode(&apos;冬&apos;);                    //创建一个文本节点</span><br><span class="line">        li.appendChild(text);                                        //向节点添加最后一个子节点。</span><br><span class="line">        document.getElementsByTagName(&apos;ul&apos;)[0].appendChild(&apos;li&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="暴力操作节点"><a href="#暴力操作节点" class="headerlink" title="暴力操作节点"></a>暴力操作节点</h2><p>innerHTML：代表节点内的内容，能读能写，不是一个W3C规定的标准对象属性，但是，各浏览器支持的很好。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type=&quot;button&quot; value=&quot;添加春夏秋&quot; onclick=&quot;add3();&quot;&gt;</span><br><span class="line">&lt;input type=&quot;button&quot; value=&quot;添加冬&quot; onclick=&quot;add1();&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    function add3()&#123;                                           </span><br><span class="line">        var ul = document.getElementsByTagName(&apos;ul&apos;)[0];</span><br><span class="line">        ui.innerHTML = &quot;&lt;li&gt;春&lt;/li&gt;&lt;li&gt;夏&lt;/li&gt;&lt;li&gt;秋&lt;/li&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">     function add1()&#123;                                           </span><br><span class="line">        var ul = document.getElementsByTagName(&apos;ul&apos;)[0];</span><br><span class="line">        ui.innerHTML += &quot;&lt;li&gt;冬&lt;/li&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/18/Frameset搭建框架集/" rel="next" title="Frameset搭建框架集">
+                <i class="fa fa-chevron-left"></i> Frameset搭建框架集
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/03/30/JavaScript基础知识（二）/" rel="prev" title="JavaScript基础知识（二）">
+                JavaScript基础知识（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com"
+                alt="刘国坤" />
+            
+              <p class="site-author-name" itemprop="name">刘国坤</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Liuguokun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1353002081@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5591938345?refer_flag=1001030101_&is_hot=1" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-vk"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM对象"><span class="nav-number">1.</span> <span class="nav-text">DOM对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS的引入"><span class="nav-number">2.</span> <span class="nav-text">JS的引入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量声明"><span class="nav-number">3.</span> <span class="nav-text">变量声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS基本变量类型"><span class="nav-number">4.</span> <span class="nav-text">JS基本变量类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象类型"><span class="nav-number">5.</span> <span class="nav-text">对象类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组类型"><span class="nav-number">6.</span> <span class="nav-text">数组类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运算符"><span class="nav-number">7.</span> <span class="nav-text">运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#控制结构"><span class="nav-number">8.</span> <span class="nav-text">控制结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象操作"><span class="nav-number">9.</span> <span class="nav-text">对象操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#indexOf-函数"><span class="nav-number">10.</span> <span class="nav-text">indexOf()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS内置对象"><span class="nav-number">11.</span> <span class="nav-text">JS内置对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器window对象-即BOM对象"><span class="nav-number">12.</span> <span class="nav-text">浏览器window对象 [即BOM对象]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-number">13.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#找对象"><span class="nav-number">14.</span> <span class="nav-text">找对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作对象的属性"><span class="nav-number">15.</span> <span class="nav-text">操作对象的属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取对象在内存中计算后的样式"><span class="nav-number">15.1.</span> <span class="nav-text">获取对象在内存中计算后的样式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#参数说明："><span class="nav-number">15.1.1.</span> <span class="nav-text">参数说明：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#考虑兼容性，封装函数"><span class="nav-number">15.1.2.</span> <span class="nav-text">考虑兼容性，封装函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除节点"><span class="nav-number">16.</span> <span class="nav-text">删除节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建节点"><span class="nav-number">17.</span> <span class="nav-text">创建节点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#暴力操作节点"><span class="nav-number">18.</span> <span class="nav-text">暴力操作节点</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘国坤</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

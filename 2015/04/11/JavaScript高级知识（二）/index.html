@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JS面向对象的特点 在JS中，有对象，没有类（但有构造函数），因此，有人说JS是“基于对象”而非面向对象，其实JS的面向对象非常灵活，比起静态语言，能达到意想不到的效果。  JS的对象不依赖类而存在，可以直接生成。   1var chicken = &amp;#123;leg:2,sing:function()&amp;#123;alert(&amp;quot;在下是鸟！&amp;quot;);&amp;#125;&amp;#125;;">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript高级知识（二）">
+<meta property="og:url" content="http://yoursite.com/2015/04/11/JavaScript高级知识（二）/index.html">
+<meta property="og:site_name" content="刘国坤">
+<meta property="og:description" content="JS面向对象的特点 在JS中，有对象，没有类（但有构造函数），因此，有人说JS是“基于对象”而非面向对象，其实JS的面向对象非常灵活，比起静态语言，能达到意想不到的效果。  JS的对象不依赖类而存在，可以直接生成。   1var chicken = &amp;#123;leg:2,sing:function()&amp;#123;alert(&amp;quot;在下是鸟！&amp;quot;);&amp;#125;&amp;#125;;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEd460c84d0e663a27013301d79dd9a9a2/441">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEf3b56bef33274f2ebf1b1481a97e396e/474">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE3dac7344e7d1a2cb2adb66adbc5e0a88/479">
+<meta property="og:updated_time" content="2018-05-24T10:48:15.490Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript高级知识（二）">
+<meta name="twitter:description" content="JS面向对象的特点 在JS中，有对象，没有类（但有构造函数），因此，有人说JS是“基于对象”而非面向对象，其实JS的面向对象非常灵活，比起静态语言，能达到意想不到的效果。  JS的对象不依赖类而存在，可以直接生成。   1var chicken = &amp;#123;leg:2,sing:function()&amp;#123;alert(&amp;quot;在下是鸟！&amp;quot;);&amp;#125;&amp;#125;;">
+<meta name="twitter:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEd460c84d0e663a27013301d79dd9a9a2/441">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/04/11/JavaScript高级知识（二）/"/>
+
+
+
+
+
+  <title>JavaScript高级知识（二） | 刘国坤</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">刘国坤</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自先沉稳 而后爱人</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-个人简历">
+          <a href="/resume/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            个人简历
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/04/11/JavaScript高级知识（二）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘国坤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘国坤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript高级知识（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-04-11T10:00:45+08:00">
+                2015-04-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="JS面向对象的特点"><a href="#JS面向对象的特点" class="headerlink" title="JS面向对象的特点"></a>JS面向对象的特点</h2><ul>
+<li><p>在JS中，有对象，没有类（但有构造函数），因此，有人说JS是“基于对象”而非面向对象，其实JS的面向对象非常灵活，比起静态语言，能达到意想不到的效果。</p>
+</li>
+<li><p>JS的对象不依赖类而存在，可以直接生成。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var chicken = &#123;leg:2,sing:function()&#123;alert(&quot;在下是鸟！&quot;);&#125;&#125;;    //json格式</span><br></pre></td></tr></table></figure>
+<ul>
+<li>JS对象的属性可以任意添加和删除（方法和属性不必严格区分）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var chicken.arm = 2;    //添加属性</span><br><span class="line">delete chicken.sing;    //删除方法</span><br><span class="line">对象的三大特点：封装，继承，多态</span><br></pre></td></tr></table></figure>
+<h2 id="私有属性与封装"><a href="#私有属性与封装" class="headerlink" title="私有属性与封装"></a>私有属性与封装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">//封装</span><br><span class="line">function Dog()&#123;</span><br><span class="line">    this.leg = 4;</span><br><span class="line">    this.bark = function()&#123;</span><br><span class="line">        alert(&quot;汪汪&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var huzi = new Dog();</span><br><span class="line">huzi.bark();        //输出 汪汪</span><br><span class="line">alert(huzi.leg);    //输出 4</span><br><span class="line">/*</span><br><span class="line">此处，我们并没有完成面向对象的“封装”，所谓封装：就是要封闭一部分，外界无法访问，</span><br><span class="line">开放一部分，通过开放部分简介访问私有部分。</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">//通过闭包完成私有属性的封装</span><br><span class="line">function Dog(name,feature)&#123;</span><br><span class="line">    var private = feature;    //外界无法直接访问，只能通过对象属性调用</span><br><span class="line">    this.leg = 4;</span><br><span class="line">    this.eat = function()&#123;</span><br><span class="line">        return feature;</span><br><span class="line">    &#125;</span><br><span class="line">    this.favorite_eat = function()&#123;</span><br><span class="line">        feature = &quot;骨头&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var dog = new Dog(&quot;huzi&quot;,&quot;吃屎&quot;);</span><br><span class="line">alert(dog.name + &quot;喜欢&quot; + dog.eat());</span><br><span class="line">alert(dog.name + &quot;喜欢&quot; + dog.favorite_eat());</span><br></pre></td></tr></table></figure>
+<h2 id="详解原型链继承"><a href="#详解原型链继承" class="headerlink" title="详解原型链继承"></a>详解原型链继承</h2><p>JS没有类的概念，因此，JS的继承，不是通过类的继承来实现的，而是通过“原型”的概念来完成的。</p>
+<p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEd460c84d0e663a27013301d79dd9a9a2/441" alt="QQ20171226-223004.png"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">//创建cat的构造函数</span><br><span class="line">function Cat()&#123;</span><br><span class="line">    this.climb = function()&#123;</span><br><span class="line">        alert(&quot;我会爬树&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//创建tiger的构造函数</span><br><span class="line">function Tiger()&#123;</span><br><span class="line">    this.bark = function()&#123;</span><br><span class="line">        alert(&quot;我是百兽之王&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//下面让虎继承猫的属性：爬树</span><br><span class="line">Tiger.prototype = new Cat();</span><br><span class="line">var hnhu = new Tiger();</span><br><span class="line">hnhu.climb();</span><br><span class="line">hnhu.valueOf();</span><br></pre></td></tr></table></figure></p>
+<p>老虎是如何爬树和valueOf的呢?</p>
+<ul>
+<li><p>老虎先在自身对象上寻找，没有爬树方法，valueOf()方法，去找原型，原型cat对象上由此方法，得以调用climb()方法，但valueOf()仍没有找到，因此，继续沿着原型查找，找到cat空对象，仍没有valueOf()放法，再找，找到Objecte对象，有valueOf()方法，调用成功。</p>
+</li>
+<li><p>对象–&gt;原型–&gt;原型的原型–&gt;Object对象–&gt;Null，这样的一条链称为原型链</p>
+</li>
+<li><p>对象的属性和方法，就是沿着原型链查找和调用的，也就是JS中的原型继承</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">//给所有对象添加一个方法</span><br><span class="line">Object.prototype.sing = function()&#123;</span><br><span class="line">    alert(&quot;我会唱歌&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Pig()&#123;</span><br><span class="line">    this.eat = &quot;10KG&quot;;</span><br><span class="line">&#125;</span><br><span class="line">var zhu = new Pig();</span><br><span class="line">zhu.sing();</span><br></pre></td></tr></table></figure>
+<p>原型冒充及复制继承</p>
+<p>JS的语法非常灵活，不仅可以用原型继承，还有其他办法，如：原型冒充或复制继承<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//原型冒充</span><br><span class="line">function Cat(leg,tail)&#123;</span><br><span class="line">   this.leg = leg;</span><br><span class="line">   this.tail = tail;</span><br><span class="line">   this.climb = function()&#123;</span><br><span class="line">   	alert(&quot;我会爬树&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Tiger(leg,tail,color)&#123;</span><br><span class="line">   //把要继承的类的语句，拿来执行一遍</span><br><span class="line">   this.parent = Cat;	//把父类构造函数引入到一个parent属性上</span><br><span class="line">   this.parent.apply(this,arguments);    //获取Cat参数</span><br><span class="line">   this.color = color;</span><br><span class="line">   delete this.parent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var tiger = new Tiger();</span><br><span class="line">tiger.climb();</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>用Tiger造对象时，用Tiger语句影响一个空对象{ }，在此过程中，Tiger影响空对象前，先由Cat函数实施影响，因此，最终得到的对象，是由Cat和Tiger两者共同作用过得对象。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">//复制继承</span><br><span class="line">function Cat(leg,tail)&#123;</span><br><span class="line">   this.leg = leg;</span><br><span class="line">   this.tail = tail;</span><br><span class="line">   this.climb = function()&#123;</span><br><span class="line">   	alert(&quot;我会爬树&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Tiger(leg,tail,color)&#123;</span><br><span class="line">   this.color = color;</span><br><span class="line">   this.extend = function(parent)&#123;</span><br><span class="line">   	for(var key in parent)&#123;</span><br><span class="line">   		this[key] = parent[key];</span><br><span class="line">   	&#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var tiger = new Tiger(&quot;yellow&quot;);</span><br><span class="line">tiger.extend(new Cat(4,1));</span><br><span class="line">tiger.climb();</span><br></pre></td></tr></table></figure>
+<p>动态语言谈不上多态</p>
+<p>JS谈不上多态，因为即JS就没有限制参数类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">function Dog()&#123;</span><br><span class="line">   this.leg = 4;</span><br><span class="line">   this.bark = null;</span><br><span class="line">&#125;</span><br><span class="line">function Hashiqi()&#123;</span><br><span class="line">    this.bark = function()&#123;</span><br><span class="line">    	alert(&quot;wuwu&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Jingba()&#123;</span><br><span class="line">   this.bark = function()&#123;</span><br><span class="line">    	alert(&quot;wuwu&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Hashiqi.prototype = Jingba.prototype = new Dog();</span><br><span class="line">var h = new Hashiqi();</span><br><span class="line">var j = new Jingba();</span><br><span class="line"></span><br><span class="line">function test(dog)&#123;</span><br><span class="line">    dog.bark();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">test(h);</span><br><span class="line">test(j);</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>传入不同的狗，叫声也不同</li>
+</ul>
+<h2 id="JS面向对象之静态方法"><a href="#JS面向对象之静态方法" class="headerlink" title="JS面向对象之静态方法"></a>JS面向对象之静态方法</h2><ul>
+<li><p>构造函数通过new来制造对象</p>
+</li>
+<li><p>函数本身也是对象</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">function Machine()&#123;</span><br><span class="line">  this.on = function ()&#123;</span><br><span class="line">  	alert(&quot;我可以制作豆浆！&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Machine.heat = function()&#123;</span><br><span class="line">  alert(&quot;加热！&quot;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var m = new Machine();    //m没有heat方法，就像豆浆机的加热功能不会跑到豆浆里</span><br><span class="line">m.on();</span><br><span class="line">Machine.heat();</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>heat方法属于函数本身的，和返回的对象没有关系</p>
+</li>
+<li><p>on要调用，必须要new Machine();得到对象，且由返回对象才能调用</p>
+</li>
+<li><p>heat方法要调用，不需要new对象，直接用Machie来调用</p>
+</li>
+</ul>
+<h2 id="绑定事件的2种常用方式"><a href="#绑定事件的2种常用方式" class="headerlink" title="绑定事件的2种常用方式"></a>绑定事件的2种常用方式</h2><p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEf3b56bef33274f2ebf1b1481a97e396e/474" alt="image"></p>
+<ul>
+<li>事件对象：事件发生的一瞬间，关于事件的各种信息，如时间，如发生时鼠标在屏幕上的坐标，事件类型等等，这些信息被打包成一个对象，便于我们获取</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">第一种事件绑定方式：把事件写在标签属性里，如：&lt;a href=&quot;#&quot; onclick=&quot;t()&quot;&gt;百度&lt;/a&gt;</span><br><span class="line">这是DOM 0级标准（非常古老）</span><br><span class="line">好处：大家都会，几乎所有的浏览器都支持</span><br><span class="line">坏处：代码夹杂在HMTL中，不简洁，其次，这种事件写法，效率不高，再者不符合“行为，结构，样式”相分离</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//第二种事件绑定方式：用事件的属性来绑定函数</span><br><span class="line">document.getElementById(&quot;test&quot;).onclick = function()&#123;</span><br><span class="line">    alert(&quot;有人点我&quot;);</span><br><span class="line">&#125; </span><br><span class="line">/*</span><br><span class="line">好处1：完成了行为的分离</span><br><span class="line">好处2：便于操作当事对象，因为function是作为对象的on***属性出现的，因此，函数里操作该对象，直接用this就能引用当事对象</span><br><span class="line">好处3：方便读取事件对象</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<h2 id="addEventListener高级事件绑定"><a href="#addEventListener高级事件绑定" class="headerlink" title="addEventListener高级事件绑定"></a>addEventListener高级事件绑定</h2><p>第三种事件绑定方式：W3c中的标准——addEventListener</p>
+<ol>
+<li><p>绑定在哪个事件上？click，load，change，blur，focus等等</p>
+</li>
+<li><p>绑定什么函数？——自定义事件函数</p>
+</li>
+<li><p>什么方式监听执行事件函数？——捕捉，冒泡。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var test = document.getElementById(&apos;test&apos;);</span><br><span class="line">test.addEventListener(&apos;click&apos;,function()&#123;this.style.background = &quot;gray&quot;;&#125;,false);</span><br><span class="line">test.addEventListener(&apos;click&apos;,function()&#123;alert(&quot;自学！&quot;);&#125;,false);</span><br><span class="line">test.addEventListener(&apos;click&apos;,function()&#123;alert(&quot;IT&quot;);&#125;,false);</span><br></pre></td></tr></table></figure>
+<p>细节：</p>
+<ul>
+<li><p>事件名一律不带on</p>
+</li>
+<li><p>绑定事件函数的“this”，指绑定该事件的对象</p>
+</li>
+<li><p>执行顺序是按绑定顺序来执行的。</p>
+</li>
+</ul>
+<h2 id="捕捉模型与冒泡模型"><a href="#捕捉模型与冒泡模型" class="headerlink" title="捕捉模型与冒泡模型"></a>捕捉模型与冒泡模型</h2><p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE3dac7344e7d1a2cb2adb66adbc5e0a88/479" alt="image"><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function $(id)&#123;</span><br><span class="line">    return document.getElementById(id);</span><br><span class="line">&#125;</span><br><span class="line">$(&quot;china&quot;).addEventListener(&apos;click&apos;,function()&#123;alert(&quot;进入chian&quot;);&#125;,true);</span><br><span class="line">$(&quot;bj&quot;).addEventListener(&apos;click&apos;,function()&#123;alert(&quot;进入bj&quot;);&#125;,true);</span><br><span class="line">$(&quot;hd&quot;).addEventListener(&apos;click&apos;,function()&#123;alert(&quot;进入hd&quot;);&#125;,true);</span><br><span class="line"></span><br><span class="line">$(&quot;china&quot;).addEventListener(&apos;click&apos;,function(ev)&#123;alert(&quot;离开chian&quot;);&#125;,false);</span><br><span class="line">$(&quot;bj&quot;).addEventListener(&apos;click&apos;,function()&#123;alert(&quot;离开bj&quot;);&#125;,false);</span><br><span class="line">$(&quot;hd&quot;).addEventListener(&apos;click&apos;,function()&#123;alert(&quot;离开hd&quot;);&#125;,false);</span><br></pre></td></tr></table></figure></p>
+<p>总结：</p>
+<ul>
+<li><p>第三个参数true/false代表捕捉/冒泡模型，如果不填，默认为false（不建议省略）</p>
+</li>
+<li><p>系统会为事件函数自动传入事件对象，作为第一个参数传入：ev</p>
+</li>
+</ul>
+<h2 id="事件停止传播与效果阻止"><a href="#事件停止传播与效果阻止" class="headerlink" title="事件停止传播与效果阻止"></a>事件停止传播与效果阻止</h2><ul>
+<li>事件（捕捉/冒泡）的过程中，如果想停止事件的传播，比如：被bj捕捉后，hd就不会再去捕捉了，事件到此停止，或hd冒泡后，事件结束，bj就不能冒泡。就需要使用事件对象的stopPropagation();函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function $(id)&#123;</span><br><span class="line">    return document.getElementById(id);</span><br><span class="line">&#125;</span><br><span class="line">$(&quot;china&quot;).addEventListener(&apos;click&apos;,function()&#123;alert(&quot;进入chian&quot;);&#125;,true);</span><br><span class="line">$(&quot;bj&quot;).addEventListener(&apos;click&apos;,function(ev)&#123;alert(&quot;进入bj&quot;;ev.stopPropagation(););&#125;,true);</span><br><span class="line">$(&quot;hd&quot;).addEventListener(&apos;click&apos;,function()&#123;alert(&quot;进入hd&quot;);&#125;,true);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>以表单为例，我想点击“onsubmit”时，检查是否填写完全，如果不完全，不让它提交，即取消事件本应有的效果，就需要使用事件对象的preventDefault();函数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;form&quot;).addEventListener(&apos;submit&apos;,function(ev)&#123;</span><br><span class="line">    if($(&quot;age&quot;).value = &apos;&apos;)&#123;</span><br><span class="line">        ev.preventDefault();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;,false);</span><br></pre></td></tr></table></figure>
+<h2 id="解除绑定"><a href="#解除绑定" class="headerlink" title="解除绑定"></a>解除绑定</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;哈哈&lt;/p&gt;</span><br><span class="line">&lt;input type=&quot;button&quot; value=&quot;让你哭&quot; onclick=&quot;addcry()&quot;&gt;</span><br><span class="line">&lt;input type=&quot;button&quot; value=&quot;让你笑&quot; onclick=&quot;addla()&quot;&gt;</span><br><span class="line">&lt;input type=&quot;button&quot; value=&quot;你别哭&quot; onclick=&quot;remcry()&quot;&gt;</span><br><span class="line">&lt;input type=&quot;button&quot; value=&quot;你别哭&quot; onclick=&quot;remcry()&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    function cry()&#123;</span><br><span class="line">	alert(&quot;我想哭！&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function la()&#123;</span><br><span class="line">	alert(&quot;我想笑！&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function addcry()&#123;</span><br><span class="line">        document.getElementsByTagName(&apos;p&apos;)[0].addEventListener(&apos;click&apos;,cry,false);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function addla()&#123;</span><br><span class="line">        document.getElementsByTagName(&apos;p&apos;)[0].addEventListener(&apos;click&apos;,la,false);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function remcry()&#123;</span><br><span class="line">        document.getElementsByTagName(&apos;p&apos;)[0].removeEventListener(&apos;click&apos;,cry,false);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    function remla()&#123;</span><br><span class="line">        document.getElementsByTagName(&apos;p&apos;)[0].removeEventListener(&apos;click&apos;,la,false);</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="IE事件模型与标准事件模型详细对比"><a href="#IE事件模型与标准事件模型详细对比" class="headerlink" title="IE事件模型与标准事件模型详细对比"></a>IE事件模型与标准事件模型详细对比</h2><ul>
+<li><p>IE9及以上版本，已经支持W3c标准，在IE9以下版本中，是IE独有的事件模型，与W3c标准模型主要有以下几点不同：</p>
+</li>
+<li><p>绑定事件的函数不一样，IE用attachEvent();，移除事件函数用detachEvent();</p>
+</li>
+<li><p>事件必须要加on</p>
+</li>
+<li><p>绑定的事件不是严格的顺序执行，是随机执行</p>
+</li>
+<li><p>W3c中，this指向对象本身，而IE模型中，this指向window</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">window.onload = function()&#123;</span><br><span class="line">			document.getElementById(&apos;test1&apos;).attachEvent(&apos;onclick&apos;,function()&#123;alert(&quot;捕捉&quot;);&#125;,true);</span><br><span class="line">			document.getElementById(&apos;test1&apos;).attachEvent(&apos;onclick&apos;,function()&#123;alert(&quot;冒泡&quot;);&#125;,false);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/04/06/JavaScript高级知识（一）/" rel="next" title="JavaScript高级知识（一）">
+                <i class="fa fa-chevron-left"></i> JavaScript高级知识（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/05/24/PHP基础知识（一、静态变量）/" rel="prev" title="PHP基础知识（一、静态变量)">
+                PHP基础知识（一、静态变量) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com"
+                alt="刘国坤" />
+            
+              <p class="site-author-name" itemprop="name">刘国坤</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Liuguokun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1353002081@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5591938345?refer_flag=1001030101_&is_hot=1" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-vk"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JS面向对象的特点"><span class="nav-number">1.</span> <span class="nav-text">JS面向对象的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私有属性与封装"><span class="nav-number">2.</span> <span class="nav-text">私有属性与封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#详解原型链继承"><span class="nav-number">3.</span> <span class="nav-text">详解原型链继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JS面向对象之静态方法"><span class="nav-number">4.</span> <span class="nav-text">JS面向对象之静态方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#绑定事件的2种常用方式"><span class="nav-number">5.</span> <span class="nav-text">绑定事件的2种常用方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#addEventListener高级事件绑定"><span class="nav-number">6.</span> <span class="nav-text">addEventListener高级事件绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#捕捉模型与冒泡模型"><span class="nav-number">7.</span> <span class="nav-text">捕捉模型与冒泡模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事件停止传播与效果阻止"><span class="nav-number">8.</span> <span class="nav-text">事件停止传播与效果阻止</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解除绑定"><span class="nav-number">9.</span> <span class="nav-text">解除绑定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IE事件模型与标准事件模型详细对比"><span class="nav-number">10.</span> <span class="nav-text">IE事件模型与标准事件模型详细对比</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘国坤</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="作用域123456789101112&amp;lt;script&amp;gt;    var a = 2;    function t1()&amp;#123;      var b = 3;        function t2()&amp;#123;          var c = 4;          alert(a+b+c);        &amp;#125;      t2();    &amp;#125;    t1();&amp;">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript高级知识（一）">
+<meta property="og:url" content="http://yoursite.com/2015/04/06/JavaScript高级知识（一）/index.html">
+<meta property="og:site_name" content="刘国坤">
+<meta property="og:description" content="作用域123456789101112&amp;lt;script&amp;gt;    var a = 2;    function t1()&amp;#123;      var b = 3;        function t2()&amp;#123;          var c = 4;          alert(a+b+c);        &amp;#125;      t2();    &amp;#125;    t1();&amp;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEf97d49cf58442a2b05bd31bab9a07003/467">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE357044344a1960ea5263d6d0ec5de927/469">
+<meta property="og:updated_time" content="2018-05-24T10:46:05.873Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript高级知识（一）">
+<meta name="twitter:description" content="作用域123456789101112&amp;lt;script&amp;gt;    var a = 2;    function t1()&amp;#123;      var b = 3;        function t2()&amp;#123;          var c = 4;          alert(a+b+c);        &amp;#125;      t2();    &amp;#125;    t1();&amp;">
+<meta name="twitter:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEf97d49cf58442a2b05bd31bab9a07003/467">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/04/06/JavaScript高级知识（一）/"/>
+
+
+
+
+
+  <title>JavaScript高级知识（一） | 刘国坤</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">刘国坤</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自先沉稳 而后爱人</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-个人简历">
+          <a href="/resume/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            个人简历
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/04/06/JavaScript高级知识（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘国坤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘国坤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript高级知识（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-04-06T10:00:45+08:00">
+                2015-04-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    var a = 2;</span><br><span class="line">    function t1()&#123;</span><br><span class="line">      var b = 3;</span><br><span class="line">        function t2()&#123;</span><br><span class="line">          var c = 4;</span><br><span class="line">          alert(a+b+c);</span><br><span class="line">        &#125;</span><br><span class="line">      t2();</span><br><span class="line">    &#125;</span><br><span class="line">    t1();</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>在JS中，函数嵌套是非常普遍的，在函数嵌套中，对变量进行如下的寻找方式：首先在函数内寻找，寻找不到，则往函数外层寻找，……，直到全局（window）区域</li>
+</ul>
+<h2 id="声明变量var"><a href="#声明变量var" class="headerlink" title="声明变量var"></a>声明变量var</h2><ul>
+<li>var是在函数运行的上下文中，声明一个变量，如果不加var，则是一个赋值操作，但不要狭隘的理解为–&gt;声明了一个全局变量【见下例】</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    function t1()&#123;</span><br><span class="line">      var a;</span><br><span class="line">      function t2()&#123;</span><br><span class="line">        a = 2;</span><br><span class="line">        b = 4;</span><br><span class="line">      &#125;</span><br><span class="line">      t2();</span><br><span class="line">    &#125;</span><br><span class="line">    t1();   </span><br><span class="line">    console.log(a);    //输出undefined</span><br><span class="line">    console.log(b);    //输出2</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>以window.xxx引用全局变量，寻找不到，作为某个属性不存在，返回undefined 【window.a】</p>
+</li>
+<li><p>直接以xxx引用某个变量，寻找不到，则是报xxx is not defined错误的 【a】</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;                                             &lt;script&gt;                                       </span><br><span class="line">    var str1 = &quot;global&quot;;                                var str1 = &quot;global&quot;;</span><br><span class="line">    function t1()&#123;                                      function t1()&#123;</span><br><span class="line">      console.log(str1);   //global                         console.log(str1);    //global  </span><br><span class="line">      console.log(str2);   // str is not definded           console.log(str2);    //undefinded</span><br><span class="line">      str2 = &quot;local&quot;;                                       var str2 = &quot;local&quot;;</span><br><span class="line">    &#125;                                                    &#125;</span><br><span class="line">    t1();                                                t1();</span><br><span class="line">&lt;/script&gt;                                            &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>JS代码自上而下执行，但是，JS代码在整体运行时分为【词法分析期】和【运行期】两部分</p>
+</li>
+<li><p>自上而下执行之前，先有一个【词法分析】过程，以上面的结果为例：</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">第一步：分析t1()</span><br><span class="line">       t1()&#123;</span><br><span class="line">           var str2;    //分析出t1内有str2局部变量，注意此时函数未执行，因此str2的值是undefined</span><br><span class="line">       &#125;</span><br><span class="line">       </span><br><span class="line">第一步：执行t1()</span><br><span class="line">       console.log(str1);    //global                     </span><br><span class="line">       console.log(str2);    //undefinded     </span><br><span class="line">       str2 = &quot;local&quot;;       //此时str2的值为local</span><br></pre></td></tr></table></figure>
+<h2 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h2><p>语法分析，分析3样东西：</p>
+<ul>
+<li><p>第一步：先分析参数</p>
+</li>
+<li><p>第二步：在分析变量声明</p>
+</li>
+<li><p>第三步：分析函数声明</p>
+</li>
+</ul>
+<blockquote>
+<p>一个函数能使用的局部变量，就从上面的3步分析而来</p>
+</blockquote>
+<p>具体步骤：</p>
+<ul>
+<li><p>第一步：函数运行前的一瞬间，生成Active Object（活动对象），下称AO</p>
+</li>
+<li><p>第二步：把函数声明的参数，形成AO的属性，值全是undefined，如果有实参，则接收，并形成AO相应的属性的值</p>
+</li>
+<li><p>第三步：分析变量声明！如var age，如果AO上还没有age属性，则添加AO属性，值是undefined；如果AO上已经有age属性，则不做任何影响</p>
+</li>
+<li><p>第四步：分析函数声明，如 function foo(){ }，则把函数赋给AO.foo属性，如果此前foo属性已经存在，则被无情的覆盖</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    function t3(great)&#123;</span><br><span class="line">        var great = &quot;hello&quot;;</span><br><span class="line">        alert(great);</span><br><span class="line">        function great()&#123;</span><br><span class="line">        &#125;</span><br><span class="line">        alert(great);</span><br><span class="line">    &#125;</span><br><span class="line">    t3(null);        //输出 hello hello</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">  分析过程：</span><br><span class="line">  1.形成AO = &#123;&#125;</span><br><span class="line">  2.分析形参，AO = &#123;great:undefined&#125;，接收实参，AO = &#123;b:null&#125;</span><br><span class="line">  3.分析great变量声明，发现AO已有age属性，不做任何影响</span><br><span class="line">  4.分析great函数声明，AO.great = function great()&#123;&#125;,被覆盖成函数</span><br><span class="line">  </span><br><span class="line">  执行过程：</span><br><span class="line">  great = &quot;hello&quot;;</span><br><span class="line">  alert(great);</span><br><span class="line">  alert(great);</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    function a(b)&#123;</span><br><span class="line">        alert(b);</span><br><span class="line">        function b()&#123;</span><br><span class="line">            alert(b);</span><br><span class="line">        &#125;</span><br><span class="line">        b();</span><br><span class="line">    &#125;</span><br><span class="line">    a(1);       </span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">  分析过程：</span><br><span class="line">  1.形成AO = &#123;&#125;</span><br><span class="line">  2.分析形参，AO = &#123;b:undefined&#125;,接收实参，AO = &#123;b:1&#125;</span><br><span class="line">  3.分析var变量声明，此函数没有var</span><br><span class="line">  4.分析函数声明，AO = &#123;b:function b()&#123;alert(b);&#125;&#125;,被覆盖成函数</span><br><span class="line">  </span><br><span class="line">  执行过程：</span><br><span class="line">  alert(b);        //function</span><br><span class="line">  b();             //由作用域寻找到a函数中的b,即function</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    function a(b)&#123;</span><br><span class="line">        alert(b);</span><br><span class="line">        b = function ()&#123;</span><br><span class="line">            alert(b);</span><br><span class="line">        &#125;</span><br><span class="line">        b();</span><br><span class="line">    &#125;</span><br><span class="line">    a(1);       </span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">  分析过程：</span><br><span class="line">  1.形成AO = &#123;&#125;</span><br><span class="line">  2.分析形参，AO = &#123;b:undefined&#125;,接收实参，AO = &#123;b:1&#125;</span><br><span class="line">  3.分析var变量声明，此函数没有var</span><br><span class="line">  4.分析函数声明，没有！b = function()&#123;&#125;,是一个赋值，在执行期才有用</span><br><span class="line">  </span><br><span class="line">  执行过程：</span><br><span class="line">  alert(b);        // 1</span><br><span class="line">  b = function ()&#123;</span><br><span class="line">            alert(b);</span><br><span class="line">        &#125;</span><br><span class="line">  b();             //由作用域寻找到a函数中的b,即function</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<h2 id="函数声明与函数表达式"><a href="#函数声明与函数表达式" class="headerlink" title="函数声明与函数表达式"></a>函数声明与函数表达式</h2><ul>
+<li><p>函数可以赋值给变量，也可以作为参数来传递</p>
+</li>
+<li><p>JS被称为披着C外衣的lisp语言，lisp是一种强大的函数式语言</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function t1()&#123;&#125;</span><br><span class="line"></span><br><span class="line">t2 = function()&#123;&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">这两种方式效果是不同的：</span><br><span class="line">t1是函数声明，虽然全局内也得到一个t1变量，值是function</span><br><span class="line">而t2只是一个赋值过程，值就是右侧表达式的返回结果，即函数</span><br><span class="line"></span><br><span class="line">因此t1,t2两种方式在词法分析时，有着本质去区别：</span><br><span class="line">前者在词法分析阶段就发挥作用，而后者，在运行阶段才发挥作用</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">(function(window,undefined)&#123;&#125;)            //内层表达式，返回值是函数，包在小括号里，当成表达式来执行</span><br><span class="line">(function(window,undefined)&#123;&#125;)(window)    //立即调用</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">内层函数没有起名字，称为匿名函数，这种手法，匿名函数，立即执行，不污染全局，称为立即执行匿名函数表达式，</span><br><span class="line">在第二个括号里面传入window，是为了我提升内部查找变量的速度，不传undefined,是为了安全，因为在低版本IE和火狐中，</span><br><span class="line">undefined可以被重新赋值，如undefined = 3，声明undefined局部变量（名字是undefined而已），</span><br><span class="line">同时，又不传参，值自然是undefined，防止了外界对undefined的污染</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<h2 id="作用域链"><a href="#作用域链" class="headerlink" title="作用域链"></a>作用域链</h2><p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEf97d49cf58442a2b05bd31bab9a07003/467" alt="QQ20171222-141204.png"></p>
+<h2 id="argumengs详解"><a href="#argumengs详解" class="headerlink" title="argumengs详解"></a>argumengs详解</h2><ul>
+<li><p>是一个长得很像数组的对象</p>
+</li>
+<li><p>内容是函数运行时的实参列表</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">//arguments收集“所有”的实参，即使没有与之相对应的形参</span><br><span class="line">(function(d,e,f)&#123;</span><br><span class="line">    //在此函数内，无法用d,e,f形参来取得“haha”,因为没有与之相应的形参，但我们可以用arguments来获取任意多个实参</span><br><span class="line">    console.log(arguments[3]);</span><br><span class="line">    arguments[3] = &quot;china&quot;;</span><br><span class="line">    console.log(arguments[d]);    //输出 china，形参与对应的arguments单元，其实是相互映射的，互相影响</span><br><span class="line">&#125;)(&quot;hello&quot;,&quot;world&quot;,&quot;!&quot;,&quot;haha&quot;)</span><br><span class="line"></span><br><span class="line">//arguments可以获取函数运行时，收到的实参个数（在多态里可以用到）</span><br><span class="line">(function(d,e,f)&#123;</span><br><span class="line">    console.log(arguments.length);    //输出 3</span><br><span class="line">&#125;)(&quot;hello&quot;,&quot;world&quot;,&quot;!&quot;,&quot;haha&quot;)</span><br><span class="line"></span><br><span class="line">//arguments.callee属性代表“当前运行的函数”</span><br><span class="line"></span><br><span class="line">(function()&#123;            //不用函数名，匿名函数，立即执行，完成递归</span><br><span class="line">    if(n &lt;= 1)&#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        return n + arguments.callee(n-1);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(100);</span><br></pre></td></tr></table></figure>
+<p>函数运行期内，有三个关键的对象：</p>
+<ul>
+<li><p>AO    ——&gt;    本函数AO上没有某属性，则继续去外层函数的AO上找，直到全局对象，叫做 作用域链</p>
+</li>
+<li><p>arguments     ——&gt;    每个函数都有自己的callee，但不会向外层函数接着找arguments的相关属性，即不形成链</p>
+</li>
+<li><p>this     ——&gt;    也不形成链</p>
+</li>
+</ul>
+<h2 id="this详解"><a href="#this详解" class="headerlink" title="this详解"></a>this详解</h2><ul>
+<li>在JS中函数有4种调用方式</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">alert(window.x);    //输出 undefined</span><br><span class="line">function t()&#123;</span><br><span class="line">    this.x = 333;</span><br><span class="line">&#125;</span><br><span class="line">t();</span><br><span class="line">alert(window.x);    // 输出 333</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">作为普通函数来调用时，this的指向window，准确的说，this为null，但被解释成window，但在ECMASCRIPT标准中，</span><br><span class="line">如果this为null则解释成undefined</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">//作为对象的方法来调用，this指向方法的调用者，即该对象</span><br><span class="line">var obj = &#123;xx:999,yy:888,t:function()&#123;alert(this.xx);&#125;&#125;;</span><br><span class="line">obj.t();    //输出 99</span><br><span class="line">var dog = &#123;xx:&quot;wangwang&quot;&#125;;</span><br><span class="line">dog.t = obj.t;</span><br><span class="line">dog.t()    //输出 wangwang</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">作为方法调用时，this指向其调用那一刻的调用者，即母体对象，不管被调用函数，声明时属于方法还是函数，</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">//函数作为构造函数调用时</span><br><span class="line">//JS中没有类的概念，创建对象是用构造函数来完成，或直接用json格式来写对象</span><br><span class="line">function Dog (name,age)&#123;</span><br><span class="line">    this.name = name;</span><br><span class="line">    this.age = age;</span><br><span class="line">    this.bark = function()&#123;</span><br><span class="line">      alert(&apos;I am &apos; + this.name + &apos;!&apos;);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">var dog = new Dog(&apos;huzi&apos;,2);</span><br><span class="line">dog.bark();</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">new Dog发生了以下几个步骤：</span><br><span class="line">1.系统创建空对象&#123;&#125;，（空对象construcor属性指向Dog函数，先别管）</span><br><span class="line">2.把函数的this ——&gt; 指向该空对象</span><br><span class="line">3.执行该函数</span><br><span class="line">4.返回该对象</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">function Pig()&#123;</span><br><span class="line">    this.age = 99;</span><br><span class="line">    return &apos;abc&apos;;</span><br><span class="line">&#125;</span><br><span class="line">var pig = new Pig();    //返回pig对象，因为函数作为构造函数运行时，return的值是忽略的，还是返回对象</span><br><span class="line"></span><br><span class="line">//函数通过call，apply调用</span><br><span class="line">//语法格式：函数.call(对象，参数1，参数2，……，参数N);</span><br><span class="line">function t (num)&#123;</span><br><span class="line">    alert(&apos;我的真实年龄是&apos;+ this.age);        //输出 我的真实年龄是28</span><br><span class="line">    alert(&apos;但我告诉别人是&apos;+ (this.age+num));  //输出 但我告诉别人是18</span><br><span class="line">  &#125;</span><br><span class="line">var human = &#123;name:&apos;lisi&apos;,age:28&#125;;</span><br><span class="line">human.t = t;</span><br><span class="line">human.t(-10);    //this指向了human，但human多了一个方法</span><br><span class="line"></span><br><span class="line">//接下来我们不把t赋为human的属性，也能把this指向human</span><br><span class="line">var wangwu = &#123;name:&apos;wangwu&apos;,age:30&#125;;</span><br><span class="line">t.call(&apos;wangwu&apos;,5);    //输出 我的真实年龄是30 但我告诉别人是35</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">解释fn.call(对象，参数1，参数2，……，参数N);</span><br><span class="line">运行如下：</span><br><span class="line">1.fn函数中的this ——&gt; 指向对象obj</span><br><span class="line">2.运行fn(对象，参数1，参数2，……，参数N);</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE357044344a1960ea5263d6d0ec5de927/469" alt="image"></p>
+<ul>
+<li><p>在大部分语言中，t1被调用执行，则申请内存并把其局部变量push入栈。t1函数执行完毕，内部的局部变量，随着函数的退出而销毁，因此age = 20的局部变量已经消息。</p>
+</li>
+<li><p>但是在JS中，age = 20这个变量，却被t2捕捉，即使t1执行完毕，通过t2，依然能访问该变量</p>
+</li>
+<li><p>像这种情况：返回的函数，并非孤立的函数，甚至把其周围的变量环境，形成了一封闭的“环境包”，共同返回，所以叫闭包。</p>
+</li>
+<li><p>一句话概括：函数的作用域取决于声明时，而不取决于调用时！</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/30/JavaScript基础知识（二）/" rel="next" title="JavaScript基础知识（二）">
+                <i class="fa fa-chevron-left"></i> JavaScript基础知识（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/04/11/JavaScript高级知识（二）/" rel="prev" title="JavaScript高级知识（二）">
+                JavaScript高级知识（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com"
+                alt="刘国坤" />
+            
+              <p class="site-author-name" itemprop="name">刘国坤</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Liuguokun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1353002081@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5591938345?refer_flag=1001030101_&is_hot=1" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-vk"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-number">1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#声明变量var"><span class="nav-number">2.</span> <span class="nav-text">声明变量var</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#词法分析"><span class="nav-number">3.</span> <span class="nav-text">词法分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数声明与函数表达式"><span class="nav-number">4.</span> <span class="nav-text">函数声明与函数表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域链"><span class="nav-number">5.</span> <span class="nav-text">作用域链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#argumengs详解"><span class="nav-number">6.</span> <span class="nav-text">argumengs详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#this详解"><span class="nav-number">7.</span> <span class="nav-text">this详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#闭包"><span class="nav-number">8.</span> <span class="nav-text">闭包</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘国坤</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Memcache," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在Mac环境下安装memcache 没 brew 安装brew  brew安装完成后，执行以下命令：brew insatall memcached   123456789101112131415161718Updating Homebrew...==&amp;gt; Installing dependencies for memcached:libevent==&amp;gt; Installing memcac">
+<meta name="keywords" content="Memcache">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Memcache">
+<meta property="og:url" content="http://yoursite.com/2018/02/14/Memcache/index.html">
+<meta property="og:site_name" content="刘国坤">
+<meta property="og:description" content="在Mac环境下安装memcache 没 brew 安装brew  brew安装完成后，执行以下命令：brew insatall memcached   123456789101112131415161718Updating Homebrew...==&amp;gt; Installing dependencies for memcached:libevent==&amp;gt; Installing memcac">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEaf4bf61a4d316fe99b28789d7e5cc931/569">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE539d6ec4ac3386778b59b05bbea7594f/570">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE1a075a264685802192ae9772ebff446c/1854">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEb17cb81f2f2d75ca8ae223ee32aabee2/1860">
+<meta property="og:updated_time" content="2018-05-24T10:57:00.407Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Memcache">
+<meta name="twitter:description" content="在Mac环境下安装memcache 没 brew 安装brew  brew安装完成后，执行以下命令：brew insatall memcached   123456789101112131415161718Updating Homebrew...==&amp;gt; Installing dependencies for memcached:libevent==&amp;gt; Installing memcac">
+<meta name="twitter:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEaf4bf61a4d316fe99b28789d7e5cc931/569">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/02/14/Memcache/"/>
+
+
+
+
+
+  <title>Memcache | 刘国坤</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">刘国坤</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自先沉稳 而后爱人</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-个人简历">
+          <a href="/resume/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            个人简历
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/14/Memcache/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘国坤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘国坤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Memcache</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-14T10:00:45+08:00">
+                2018-02-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="在Mac环境下安装memcache"><a href="#在Mac环境下安装memcache" class="headerlink" title="在Mac环境下安装memcache"></a>在Mac环境下安装memcache</h2><ol>
+<li><p>没 brew 安装brew</p>
+</li>
+<li><p>brew安装完成后，执行以下命令：brew insatall memcached</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Updating Homebrew...</span><br><span class="line">==&gt; Installing dependencies for memcached:libevent</span><br><span class="line">==&gt; Installing memcached dependency:libevent</span><br><span class="line">==&gt; Downloading https://homebrew.bintray.com/bottles/libevent-2.0.22.sierra.bott</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">==&gt; Pouring libevent-2.0.22.sierra.bottle.1.tar.gz</span><br><span class="line">��  /usr/local/Cellar/libevent/2.0.22: 734 files, 2.0M</span><br><span class="line">==&gt; Installing memcached </span><br><span class="line">==&gt; Downloading https://homebrew.bintray.com/bottles/memcached-1.4.33.sierra.bot</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">==&gt; Pouring memcached-1.4.33.sierra.bottle.tar.gz</span><br><span class="line">==&gt; Caveats</span><br><span class="line">To have launchd start memcached now and restart at login:</span><br><span class="line">  brew services start memcached</span><br><span class="line">Or, if you don&apos;t want/need a background service you can just run:</span><br><span class="line">  /usr/local/opt/memcached/bin/memcached</span><br><span class="line">==&gt; Summary</span><br><span class="line">��  /usr/local/Cellar/memcached/1.4.33: 11 files, 184.5K</span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动停止命令：  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew services start memcached</span><br><span class="line"></span><br><span class="line">brew services stop memcached</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装客户端：brew install libmemcached</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">==&gt; Downloading https://homebrew.bintray.com/bottles/libmemcached-1.0.18_1.sierr</span><br><span class="line">######################################################################## 100.0%</span><br><span class="line">==&gt; Pouring libmemcached-1.0.18_1.sierra.bottle.tar.gz</span><br><span class="line">�  /usr/local/Cellar/libmemcached/1.0.18_1: 230 files, 1.8M</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>设置启动，守护线程  内存  ip端口：memcached  -p 11211 -m 2048 -u root -d </p>
+</li>
+<li><p>测试连接：telnet localhost 11211</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Trying 127.0.0.1...</span><br><span class="line">Connected to bogon.</span><br><span class="line">Escape character is &apos;^]&apos;.</span><br></pre></td></tr></table></figure>
+<ul>
+<li>按Ctrl + ] 会呼出telnet的命令行，出来telnet命令好之后就可以执行telnet命令</li>
+</ul>
+<h2 id="memcached的命令"><a href="#memcached的命令" class="headerlink" title="memcached的命令"></a>memcached的命令</h2><p>分为 增删改查4类，沿着这个思路来学习</p>
+<h4 id="增：add往内存增加一行新纪录"><a href="#增：add往内存增加一行新纪录" class="headerlink" title="增：add往内存增加一行新纪录"></a>增：add往内存增加一行新纪录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：add key flag expire length</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>用add时，如果内存中已经有这个键，就无法再使用add进行添加，但是可以使用replace进行替换/更改</p>
+</blockquote>
+<p>key：给值取一个独特的名字</p>
+<p>flag：标志，要求为一个正整数</p>
+<p>expire：有效期</p>
+<p>length：缓存的长度（字节为单位）</p>
+<p>flag的意义：memcache基本文本协议，传输的东西，理解成字符串来存储</p>
+<h5 id="question：想存一个PHP对象和一个PHP数组怎么办？"><a href="#question：想存一个PHP对象和一个PHP数组怎么办？" class="headerlink" title="question：想存一个PHP对象和一个PHP数组怎么办？"></a>question：想存一个PHP对象和一个PHP数组怎么办？</h5><p>answer：序列化成字符串，往外取得时候，自然还要反序列成对象/数组/json/格式等等，这是flag的意义就体现出来了</p>
+<p>expire的意义：设置缓存的有效期，有3种格式</p>
+<ol>
+<li><p>设置秒数，从设定开始数，第N秒后失效</p>
+</li>
+<li><p>时间戳，到指定事件戳后失效，（适用于团购活动倒计时等场景）</p>
+</li>
+<li><p>设置为0，不自动失效（不是永不失效，如服务器重启或者老数据被挤出，都会导致数据失效，即便什么都没发生，30天后也会失效）</p>
+</li>
+</ol>
+<h4 id="删：删除内存中的一行记录"><a href="#删：删除内存中的一行记录" class="headerlink" title="删：删除内存中的一行记录"></a>删：删除内存中的一行记录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：delete key [time seconds]</span><br></pre></td></tr></table></figure>
+<p>中括号里面的秒数是可选参数，加上之后是指，被删除的key，N秒内不能再用，目的是让网站上的页面缓存也代谢完毕</p>
+<h4 id="替换："><a href="#替换：" class="headerlink" title="替换："></a>替换：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：replace key flag expire length</span><br></pre></td></tr></table></figure>
+<p>参数与add完全一样，不再赘述</p>
+<blockquote>
+<p>只有key值存在时，才能修改键值，</p>
+</blockquote>
+<h4 id="查询：查询一条记录"><a href="#查询：查询一条记录" class="headerlink" title="查询：查询一条记录"></a>查询：查询一条记录</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：get key</span><br></pre></td></tr></table></figure>
+<p>返回key值</p>
+<h4 id="set-是设置和修改值：相当于有set和replace两者的功能"><a href="#set-是设置和修改值：相当于有set和replace两者的功能" class="headerlink" title="set 是设置和修改值：相当于有set和replace两者的功能"></a>set 是设置和修改值：相当于有set和replace两者的功能</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法：set key flag expire length</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>如果服务器无此键 ——&gt; 增加的效果</p>
+</li>
+<li><p>如果服务器有此键 ——&gt; 修改的效果</p>
+</li>
+</ul>
+<h4 id="incr、decr命令：增加或减少值的大小（适用于抢购等场景）"><a href="#incr、decr命令：增加或减少值的大小（适用于抢购等场景）" class="headerlink" title="incr、decr命令：增加或减少值的大小（适用于抢购等场景）"></a>incr、decr命令：增加或减少值的大小（适用于抢购等场景）</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">incr key num</span><br><span class="line"></span><br><span class="line">decr key num</span><br></pre></td></tr></table></figure>
+<p>示例：incr age 2 //年龄增加2岁<br>需要注意的是，这两个命令是把值当做32位无符号来操作的，也就是说，值最小是0，不会出现负数</p>
+<h4 id="stats：统计命令"><a href="#stats：统计命令" class="headerlink" title="stats：统计命令"></a>stats：统计命令</h4><h4 id="flush-all命令：清空所有存储对象"><a href="#flush-all命令：清空所有存储对象" class="headerlink" title="flush_all命令：清空所有存储对象"></a>flush_all命令：清空所有存储对象</h4><h2 id="memcache内存分配机制"><a href="#memcache内存分配机制" class="headerlink" title="memcache内存分配机制"></a>memcache内存分配机制</h2><h5 id="内存的碎片化"><a href="#内存的碎片化" class="headerlink" title="内存的碎片化?"></a>内存的碎片化?</h5><p>如果用C语言直接malloc，free来向操作系统申请和释放内存时，在不断的申请和释放过程中，形成了一些很小的内存碎片，无法再利用，这种空闲，但无法利用内存的现象，称为内存的碎片化</p>
+<h5 id="memcache是如何缓解内存碎片化的？"><a href="#memcache是如何缓解内存碎片化的？" class="headerlink" title="memcache是如何缓解内存碎片化的？"></a>memcache是如何缓解内存碎片化的？</h5><p>memcache用slab allocator机制来管理内存</p>
+<p>基本原理：预先把内存分成数个slab仓库，各仓库，切分成不同尺寸的小块，需要存入内容时，判断内容的大小，为其选择合理的仓库</p>
+<p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEaf4bf61a4d316fe99b28789d7e5cc931/569" alt="image"><br><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE539d6ec4ac3386778b59b05bbea7594f/570" alt="image"></p>
+<blockquote>
+<p>需要注意的是，如果有100byte的内容要存，但122大小的仓库中的chunk满了，并不会寻找更大的仓库，如144的仓库来存储，而是把122仓库的旧数据踢掉。详见过期与删除机制</p>
+</blockquote>
+<h5 id="对于固定大小的chunk，也会有浪费，如何缓解？"><a href="#对于固定大小的chunk，也会有浪费，如何缓解？" class="headerlink" title="对于固定大小的chunk，也会有浪费，如何缓解？"></a>对于固定大小的chunk，也会有浪费，如何缓解？</h5><p>对于特定的网站，可以长期统计网站内的缓存数据，根据自己网站的特点，设置chunk的大小</p>
+<p>一般而言，观察缓数据大小的变化规律，设置合理的生长因子,grow factor默认是1.25倍，可以使用 -f num根据网站缓存的大小进行设置</p>
+<h2 id="memcache的过期数据删除机制"><a href="#memcache的过期数据删除机制" class="headerlink" title="memcache的过期数据删除机制"></a>memcache的过期数据删除机制</h2><ol>
+<li><p>当某个值过期后，并没有从内存中删除，因此，stats统计时，curr_item仍有其信息</p>
+</li>
+<li><p>当某个新值去占用他的位置时，当成chunk来占用</p>
+</li>
+<li><p>当get值时，判断是否过期，如果过期，返回空，并且清空，curr_item就减少了</p>
+</li>
+</ol>
+<blockquote>
+<p>即这个过期数据只是让用户看不到而已，并没有在过期的瞬间立即从内存删除，这个称谓lazy expiration，惰性失效</p>
+</blockquote>
+<h5 id="如果chunk都满了，又有新的值要加入，要挤掉谁？"><a href="#如果chunk都满了，又有新的值要加入，要挤掉谁？" class="headerlink" title="如果chunk都满了，又有新的值要加入，要挤掉谁？"></a>如果chunk都满了，又有新的值要加入，要挤掉谁？</h5><p>memcache此处用的是LRU删除机制</p>
+<p>操作系统的内存管理：</p>
+<p>FIFO：先进先出</p>
+<p>LRU：最近最少使用：当某个单元被请求时，维护一个计数器，通过计数器来判断，最近谁最少被使用，就把谁踢出</p>
+<h2 id="memcache中的参数限制"><a href="#memcache中的参数限制" class="headerlink" title="memcache中的参数限制"></a>memcache中的参数限制</h2><ul>
+<li><p>key的长度：250字节，（二级制协议支持6535个字节）</p>
+</li>
+<li><p>value的限制：1M，一般都是存储一些文本，如新闻列表等等，这个值足够了</p>
+</li>
+<li><p>内存的限制：32位下最大设置到2G，64位基本不需要考虑</p>
+</li>
+</ul>
+<blockquote>
+<p>如果有30G数据要缓存，一般也不会单实例装30G，（不要把鸡蛋放在一个篮子），一般建议，开启多个实例（可以再不同的机器，或同台机器上的不同端口）</p>
+</blockquote>
+<h2 id="PHP连接memcache"><a href="#PHP连接memcache" class="headerlink" title="PHP连接memcache"></a>PHP连接memcache</h2><ol>
+<li><p>下载memcached.dll，并放在php/ext目录下，下载是需要考虑3个条件（在phpinfo()中查看），PHP版本/ts或nts/vc6还是vc9</p>
+</li>
+<li><p>观察正确的目录和配置文件路径，并观察extension_dir的路径，先运行phpinfo()，确认真正使用的php.ini是哪一个</p>
+</li>
+<li><p>把dll放入extension目录，并修改php.ini，引入dll</p>
+</li>
+</ol>
+<h2 id="一致性哈希分布式"><a href="#一致性哈希分布式" class="headerlink" title="一致性哈希分布式"></a>一致性哈希分布式</h2><h4 id="1-余数Hash"><a href="#1-余数Hash" class="headerlink" title="1. 余数Hash"></a>1. 余数Hash</h4><p>假设现在通过相关计算，可以算得某字符串str的hashcode,同时现在又有3台服务器，利用余数hash便可以算得该字符串应该存储在哪台服务器上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0 % 3 ~ 0</span><br><span class="line">1 % 3 ~ 1</span><br><span class="line">2 % 3 ~ 2</span><br><span class="line">3 % 3 ~ 0</span><br><span class="line">4 % 3 ~ 1</span><br><span class="line">5 % 3 ~ 2</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>HashCode</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>路由到的服务器</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>假设我现在将服务器扩充到了4台，就会出现如下变化</p>
+<table>
+<thead>
+<tr>
+<th>HashCode</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>路由到的服务器</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>数据由原来100%的命中率，下降为30%，这个结果显然是无法接受的，在网站业务中，大部分的业务数据的操作请求上事实上是通过缓存获取的，只有少量读操作会访问数据库，因此数据库的负载能力是以有缓存为前提而设计的。当大部分被缓存了的数据因为服务器扩容而不能正确读取时，这些数据访问的压力就落在了数据库的身上，这将大大超过数据库的负载能力，严重的可能会导致数据库宕机。</p>
+<ul>
+<li>这个问题有解决方案，解决步骤为：</li>
+</ul>
+<ol>
+<li><p>在网站访问量低谷，通常是深夜，技术团队加班，扩容、重启服务器</p>
+</li>
+<li><p>通过模拟请求的方式逐渐预热缓存，使缓存服务器中的数据重新分布</p>
+</li>
+</ol>
+<h4 id="1-一致性Hash"><a href="#1-一致性Hash" class="headerlink" title="1. 一致性Hash"></a>1. 一致性Hash</h4><p>一致性Hash算法通过一个叫做一致性Hash环的数据结构实现Key到缓存服务器的Hash映射，看一下我自己画的一张图：</p>
+<p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE1a075a264685802192ae9772ebff446c/1854" alt="image"></p>
+<p>具体算法过程为：先构造一个长度为2^32^的整数环（这个环被称为一致性Hash环），根据节点名称的Hash值（其分布为[0, 2^32^-1]）将缓存服务器节点放置在这个Hash环上，然后根据需要缓存的数据的Key值计算得到其Hash值（其分布也为[0, 2^32^-1]），然后在Hash环上顺时针查找距离这个Key值的Hash值最近的服务器节点，完成Key到服务器的映射查找。</p>
+<p>就如同图上所示，三个Node点分别位于Hash环上的三个位置，然后Key值根据其HashCode，在Hash环上有一个固定位置，位置固定下之后，Key就会顺时针去寻找离它最近的一个Node，把数据存储在这个Node的MemCache服务器中。使用Hash环如果加了一个节点会怎么样，看一下：</p>
+<p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEb17cb81f2f2d75ca8ae223ee32aabee2/1860" alt="image"></p>
+<p>看到我加了一个Node4节点，只影响到了一个Key值的数据，本来这个Key值应该是在Node1服务器上的，现在要去Node4了。采用一致性Hash算法，的确也会影响到整个集群，但是影响的只是加粗的那一段而已，相比余数Hash算法影响了远超一半的影响率，这种影响要小得多。更重要的是，集群中缓存服务器节点越多，增加节点带来的影响越小，很好理解。换句话说，随着集群规模的增大，继续命中原有缓存数据的概率会越来越大，虽然仍然有小部分数据缓存在服务器中不能被读到，但是这个比例足够小，即使访问数据库，也不会对数据库造成致命的负载压力。</p>
+<p>至于具体应用，这个长度为2^32^的一致性Hash环通常使用二叉查找树实现，至于二叉查找树，就是算法的问题了，可以自己去查询相关资料。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Memcache/" rel="tag"><i class="fa fa-tag"></i> Memcache</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/22/NGINX/" rel="next" title="NGINX">
+                <i class="fa fa-chevron-left"></i> NGINX
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/23/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com"
+                alt="刘国坤" />
+            
+              <p class="site-author-name" itemprop="name">刘国坤</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Liuguokun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1353002081@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5591938345?refer_flag=1001030101_&is_hot=1" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-vk"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在Mac环境下安装memcache"><span class="nav-number">1.</span> <span class="nav-text">在Mac环境下安装memcache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#memcached的命令"><span class="nav-number">2.</span> <span class="nav-text">memcached的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#增：add往内存增加一行新纪录"><span class="nav-number">2.0.1.</span> <span class="nav-text">增：add往内存增加一行新纪录</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#question：想存一个PHP对象和一个PHP数组怎么办？"><span class="nav-number">2.0.1.1.</span> <span class="nav-text">question：想存一个PHP对象和一个PHP数组怎么办？</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删：删除内存中的一行记录"><span class="nav-number">2.0.2.</span> <span class="nav-text">删：删除内存中的一行记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#替换："><span class="nav-number">2.0.3.</span> <span class="nav-text">替换：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询：查询一条记录"><span class="nav-number">2.0.4.</span> <span class="nav-text">查询：查询一条记录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#set-是设置和修改值：相当于有set和replace两者的功能"><span class="nav-number">2.0.5.</span> <span class="nav-text">set 是设置和修改值：相当于有set和replace两者的功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#incr、decr命令：增加或减少值的大小（适用于抢购等场景）"><span class="nav-number">2.0.6.</span> <span class="nav-text">incr、decr命令：增加或减少值的大小（适用于抢购等场景）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stats：统计命令"><span class="nav-number">2.0.7.</span> <span class="nav-text">stats：统计命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#flush-all命令：清空所有存储对象"><span class="nav-number">2.0.8.</span> <span class="nav-text">flush_all命令：清空所有存储对象</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#memcache内存分配机制"><span class="nav-number">3.</span> <span class="nav-text">memcache内存分配机制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#内存的碎片化"><span class="nav-number">3.0.0.1.</span> <span class="nav-text">内存的碎片化?</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#memcache是如何缓解内存碎片化的？"><span class="nav-number">3.0.0.2.</span> <span class="nav-text">memcache是如何缓解内存碎片化的？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对于固定大小的chunk，也会有浪费，如何缓解？"><span class="nav-number">3.0.0.3.</span> <span class="nav-text">对于固定大小的chunk，也会有浪费，如何缓解？</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#memcache的过期数据删除机制"><span class="nav-number">4.</span> <span class="nav-text">memcache的过期数据删除机制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#如果chunk都满了，又有新的值要加入，要挤掉谁？"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">如果chunk都满了，又有新的值要加入，要挤掉谁？</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#memcache中的参数限制"><span class="nav-number">5.</span> <span class="nav-text">memcache中的参数限制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP连接memcache"><span class="nav-number">6.</span> <span class="nav-text">PHP连接memcache</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一致性哈希分布式"><span class="nav-number">7.</span> <span class="nav-text">一致性哈希分布式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-余数Hash"><span class="nav-number">7.0.1.</span> <span class="nav-text">1. 余数Hash</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-一致性Hash"><span class="nav-number">7.0.2.</span> <span class="nav-text">1. 一致性Hash</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘国坤</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
