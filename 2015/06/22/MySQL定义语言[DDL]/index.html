@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MySQL," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="创建表table123456create table table_name (    列名 属性,    age int,    ...    name varchar(10)); 整型列 tinyint：1字节，取值范围[-128 ~ 127]，非负取值范围[0 ~ 255]  smallint：2字节，取值范围[-32768 ~ 32767]，非负取值范围[0 ~ 65535]  medium">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL定义语言[DDL]">
+<meta property="og:url" content="http://yoursite.com/2015/06/22/MySQL定义语言[DDL]/index.html">
+<meta property="og:site_name" content="刘国坤">
+<meta property="og:description" content="创建表table123456create table table_name (    列名 属性,    age int,    ...    name varchar(10)); 整型列 tinyint：1字节，取值范围[-128 ~ 127]，非负取值范围[0 ~ 255]  smallint：2字节，取值范围[-32768 ~ 32767]，非负取值范围[0 ~ 65535]  medium">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE65a6533aab8617841aae205aaddd388d/716">
+<meta property="og:updated_time" content="2018-05-24T03:28:23.580Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL定义语言[DDL]">
+<meta name="twitter:description" content="创建表table123456create table table_name (    列名 属性,    age int,    ...    name varchar(10)); 整型列 tinyint：1字节，取值范围[-128 ~ 127]，非负取值范围[0 ~ 255]  smallint：2字节，取值范围[-32768 ~ 32767]，非负取值范围[0 ~ 65535]  medium">
+<meta name="twitter:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE65a6533aab8617841aae205aaddd388d/716">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/06/22/MySQL定义语言[DDL]/"/>
+
+
+
+
+
+  <title>MySQL定义语言[DDL] | 刘国坤</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">刘国坤</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自先沉稳 而后爱人</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-个人简历">
+          <a href="/resume/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            个人简历
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/22/MySQL定义语言[DDL]/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘国坤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘国坤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL定义语言[DDL]</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-22T10:00:45+08:00">
+                2015-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="创建表table"><a href="#创建表table" class="headerlink" title="创建表table"></a>创建表table</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table table_name (</span><br><span class="line">    列名 属性,</span><br><span class="line">    age int,</span><br><span class="line">    ...</span><br><span class="line">    name varchar(10)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="整型列"><a href="#整型列" class="headerlink" title="整型列"></a>整型列</h2><ul>
+<li><p>tinyint：1字节，取值范围[-128 ~ 127]，非负取值范围[0 ~ 255]</p>
+</li>
+<li><p>smallint：2字节，取值范围[-32768 ~ 32767]，非负取值范围[0 ~ 65535]</p>
+</li>
+<li><p>mediumint：3字节，取值范围[-8388608 ~ 8388607]，非负取值范围[0 ~ 16777215]</p>
+</li>
+<li><p>int：4字节，取值范围[-21亿 ~ 21亿]，非负取值范围[0 ~ 42亿]</p>
+</li>
+<li><p>bigint：8字节</p>
+</li>
+</ul>
+<h2 id="整型例的可选参数【属性】"><a href="#整型例的可选参数【属性】" class="headerlink" title="整型例的可选参数【属性】"></a>整型例的可选参数【属性】</h2><ul>
+<li><p>各种整型数据类型默认为带符号的取值范围</p>
+</li>
+<li><p>unsigned：无符号，列的值从0开始，不为负。</p>
+</li>
+<li><p>[M] zerofill：适合用于学号，编码等固定宽度的数字，可以用0填充至固定宽度，并且默认决定列为unsigned属性。</p>
+</li>
+</ul>
+<p>如果数字位数超过了[M],并不影响，MySQL会字节存取。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert table table_name add 列名 tinyint(5) zerofill;    添加一个固定宽度为5的列</span><br></pre></td></tr></table></figure></p>
+<h2 id="浮点列与定点列"><a href="#浮点列与定点列" class="headerlink" title="浮点列与定点列"></a>浮点列与定点列</h2><ul>
+<li><p>float[M,D]：浮点型，M表示精度，总位数；D表示标度，小数位数；这两个参数可以省略不写，默认为普通浮点数。</p>
+</li>
+<li><p>double[M,D]：与上相同，只是默认精度更高。</p>
+</li>
+<li><p>decimal[M,D]：定点型，float和double有精度损失，而decimal没有，更精确。</p>
+</li>
+</ul>
+<h2 id="字符型列"><a href="#字符型列" class="headerlink" title="字符型列"></a>字符型列</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>宽度</th>
+<th>可存字符</th>
+<th>实存字符[i&lt;=M]</th>
+<th>实占空间</th>
+<th>利用率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>char</td>
+<td>M</td>
+<td>M</td>
+<td>i</td>
+<td>M</td>
+<td>&lt;=100%</td>
+</tr>
+<tr>
+<td>varchar</td>
+<td>M</td>
+<td>M</td>
+<td>i</td>
+<td>i字符(+1-2)字节</td>
+<td>&lt;100%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>char型如果不够M个字符，内部活用空格补齐，取出时再把右侧空格删掉。[这意味着，如果右侧本身有空格，将会丢失]，但是char速度更快。</p>
+</li>
+<li><p>M是字符，是几就表示可以存几个汉字。</p>
+</li>
+<li><p>text：文本型，可存储约6万字。</p>
+</li>
+<li><p>blob：用来存储二进制文件，如图片，音频等，由于采用的是二进制形式，不用考虑字符集。</p>
+</li>
+<li><p>enum：枚举型，是定义好值就在某几个枚举范围内。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert table table_name add 列名 enum(&quot;男&quot;,&quot;女&quot;);</span><br><span class="line">//只能选址一个值进行插入操作</span><br><span class="line"></span><br><span class="line">alert table table_name add 列名 set(&quot;男&quot;,&quot;女&quot;);    //可以选择一个或多个值进行插入操作</span><br></pre></td></tr></table></figure>
+<h2 id="日期时间型列"><a href="#日期时间型列" class="headerlink" title="日期时间型列"></a>日期时间型列</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>样式</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>year</td>
+<td>1995</td>
+<td>1901~2155</td>
+</tr>
+<tr>
+<td>date</td>
+<td>1998-12-31</td>
+<td>1000/01/01~9999/12/31</td>
+</tr>
+<tr>
+<td>time</td>
+<td>12:32:45</td>
+<td>-838:59:59 ~ 838:59:59</td>
+</tr>
+<tr>
+<td>datetime</td>
+<td>1998-12-31 12:32:45</td>
+<td>-</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>1512394064</td>
+<td>可不写，系统自动获取</td>
+</tr>
+</tbody>
+</table>
+<h2 id="列的默认值"><a href="#列的默认值" class="headerlink" title="列的默认值"></a>列的默认值</h2><p>因为null查询不便且索引效率不高，所以在实际应用中，应尽量避免列的值为null，如果想避免，声明列not null default “默认值”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert table table_name add 列名 int not null default 1;</span><br></pre></td></tr></table></figure></p>
+<h2 id="主键与自增"><a href="#主键与自增" class="headerlink" title="主键与自增"></a>主键与自增</h2><p>主键：次列不重复，能够区分每一行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//写法一</span><br><span class="line">create table table_name(</span><br><span class="line">    id int primary key,</span><br><span class="line">    name char(10)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">//写法二</span><br><span class="line">create table table_name(</span><br><span class="line">    id int,</span><br><span class="line">    name char(10),</span><br><span class="line">    primary key(id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>自增：一张表，只能有一个自增列，且此列必须加索引[index/key id]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">    id int,</span><br><span class="line">    name char(10),</span><br><span class="line">    index id(id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>主键且自增<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">    id int primary key auto_increment,</span><br><span class="line">    name char(10),</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<h2 id="列的增删改"><a href="#列的增删改" class="headerlink" title="列的增删改"></a>列的增删改</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">alert table 表名 add 列名 列类型 列属性；               //添加列，默认在表最后</span><br><span class="line"></span><br><span class="line">alert table 表名 add 列名 列类型 列属性 after 列名；     //添加一个新列并放在某列之后</span><br><span class="line"></span><br><span class="line">alert table 表名 drop 列名；                   //删除列</span><br><span class="line"></span><br><span class="line">alert table 表名 change 列名 新列名 新列类型；          //修改列名和列类型</span><br><span class="line"></span><br><span class="line">alert table 表名 modify 列名 新列类型；                //只能修改列类型</span><br></pre></td></tr></table></figure>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create view  视图名 as select 列1, 列2, 列3 from table_name;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>如果一个查询结果集需要经常被用到，就需要创建视图。</p>
+</li>
+<li><p>又被称为虚拟表，是sql的查询结果。</p>
+</li>
+<li><p>作用：</p>
+<ul>
+<li>权限控制。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>比如说某几个列允许用户查询，其他列不允许，可以通过视图开放其中一列或几列起到权限控制的作用。</p>
+</blockquote>
+<ul>
+<li><p>简化复杂的查询</p>
+</li>
+<li><p>如果视图的所有列都来自物理表，那么视图中的数据就可以修改；如果视图中存在某一列或几列是经过物理表中的列进行运算得到的，那么视图中这样的列中的数据就不能被修改。</p>
+</li>
+</ul>
+<h2 id="视图的algorithm-视图放在哪？"><a href="#视图的algorithm-视图放在哪？" class="headerlink" title="视图的algorithm [视图放在哪？]"></a>视图的algorithm [视图放在哪？]</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//指定使用merge算法</span><br><span class="line">create algorithm=merge view  视图名 as select 列1, 列2, 列3 from table_name;</span><br><span class="line"></span><br><span class="line">////指定使用temptable算法</span><br><span class="line">create algorithm=temptable view  视图名 as select 列1, 列2, 列3 from table_name;</span><br><span class="line"></span><br><span class="line">//由MySQL自己决定使用何种算法</span><br><span class="line">create view  视图名 as select 列1, 列2, 列3 from table_name;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>对于简单查询形成的view，再对view进行查询时，如where，order等等，可以把建视图语句+查视图语句合并成 –&gt; 查物理的语句。这种视图的算法叫merge [合并]</p>
+</li>
+<li><p>也有可能创建视图的语句本身就比较复杂，很难在和查询视图的语句进行合并，MySQL可以先执行视图的创建语句，把结果集形成内存中的临时表，然后去查询临时表。这种视图的算法叫temptable [临时表]</p>
+</li>
+</ul>
+<h2 id="常用表管理语句"><a href="#常用表管理语句" class="headerlink" title="常用表管理语句"></a>常用表管理语句</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">show tables;                                //查看所有表,视图也会包含在内。</span><br><span class="line"></span><br><span class="line">desc 表名;                                   //查看表详细信息</span><br><span class="line"></span><br><span class="line">drop table 表名;                             //删除表</span><br><span class="line"></span><br><span class="line">drop view 视图名;                            //删除视图</span><br><span class="line"></span><br><span class="line">show create table 表名/视图名;                //查看建表/视图过程</span><br><span class="line"></span><br><span class="line">show table status \G;                       //查看所有表详细信息，\G表示竖排显示</span><br><span class="line"></span><br><span class="line">show table status where name = &apos;表名&apos; \G;    //查看指定表详细信息</span><br><span class="line"></span><br><span class="line">rename table 旧表名 to 新表名;                //改表名</span><br><span class="line"></span><br><span class="line">truncate 表名;                               //想当于删除后有重建了这个表</span><br><span class="line"></span><br><span class="line">delete from 表名;    //删除表中所有数据，但如果继续插入数据，自增列会在原有基础上继续自增</span><br></pre></td></tr></table></figure>
+<h2 id="存储引擎的概念"><a href="#存储引擎的概念" class="headerlink" title="存储引擎的概念"></a>存储引擎的概念</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">    id int,</span><br><span class="line">    name char(10)</span><br><span class="line">)engine innodb charset utf8;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>数据库对同样的数据有着不同的存储方式和管理方式，在MySQL中称之为数据引擎</p>
+</li>
+<li><p>在MySQL_5.5.5以前默认引擎是Myisam，从MySQL_5.5.5开始，默认引擎改为Innodb</p>
+</li>
+<li><p>Myisam数据组织方式：每一个数据库形成一个文件夹，每张表包含3个文件放在该文件夹下</p>
+<ul>
+<li><p>table_name.frm        //表结构文件</p>
+</li>
+<li><p>table_name.MYD      //表数据文件</p>
+</li>
+<li><p>table_name.MYI        //表索引文件</p>
+</li>
+<li><p>可以直接把文件夹拷走，就是一个完整的数据库</p>
+</li>
+<li><p>Myisam不支持事务</p>
+</li>
+<li><p>Innodb数据组织方式：所有数据放在一个文件内</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="字符集与乱码问题"><a href="#字符集与乱码问题" class="headerlink" title="字符集与乱码问题"></a>字符集与乱码问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">    id int,</span><br><span class="line">    name char(10)</span><br><span class="line">)engine innodb charset utf8;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>乱码是因为文字本来的的字符集与展示的字符集不一致导致</p>
+</li>
+<li><p>校对集：就是排序规则</p>
+</li>
+<li><p>一套字符集可以有几套校对集</p>
+</li>
+</ul>
+<p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE65a6533aab8617841aae205aaddd388d/716" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">character_set_client = &apos;utf8&apos;           //设置客户端发送与可接收字符集</span><br><span class="line">character_set_connection = &apos;utf8&apos;       //设置解释字符集</span><br><span class="line">character_set_results = &apos;utf8&apos;          //设置数据库返回与可接收字符集</span><br><span class="line"></span><br><span class="line">set names utf8;                         //就是将以上三个变量同时设为utf8字符集</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>解释器可以将不同编码进行翻译</p>
+</li>
+<li><p>如果客户端和MySQL使用的是不同的字符集，就会出现乱码</p>
+</li>
+<li><p>连接器使用GBK或者UTF8都可以，但是不可以使用编码范围比较小的字符集，比如ASCII，那样会造成数据丢失</p>
+</li>
+<li><p>谁能连接数据库谁就是客户端，如PHP和MySQL的控制窗口就是两个不同的客户端</p>
+</li>
+<li><p>保证HTML文件，数据库，处理脚本（如PHP），查询语句前的声明保持一致，就可以避免乱码</p>
+</li>
+</ul>
+<h2 id="索引的概念"><a href="#索引的概念" class="headerlink" title="索引的概念"></a>索引的概念</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">key                //普通索引，纯粹为了加快查询速度</span><br><span class="line"></span><br><span class="line">unique key         //唯一所以，一是为了加快查询速度，二是为了约束数据 [不能重复]</span><br><span class="line"></span><br><span class="line">primary key        //主键索引，不需要起名，因为一张表就一个</span><br><span class="line"></span><br><span class="line">fulltext           //全文索引，在中文环境下，几乎无效</span><br><span class="line">create table table_name(</span><br><span class="line">    id int,</span><br><span class="line">    name char(10),</span><br><span class="line">    key name(name),</span><br><span class="line">    unique id(id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>索引是数据的目录，能快速定位行数据的位置，索引提高了查询速度，但是影响了增删改的速度，并非加的越多越好，一般在查询频率比较高的列上加，而且在重复度的列上加效果更好</p>
+</li>
+<li><p>索引长度：建索引时，可以只索引列的前一部分内容，比如前10个字符</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">   id int,</span><br><span class="line">   name char(10),</span><br><span class="line">   key name(name(5))</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>多列索引：就是把2列或多列的值，看成一个整体然后索引。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">   xing char(5),</span><br><span class="line">   ming char(10),</span><br><span class="line">   key xm(xing,ming)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">insert into table_name values (&apos;朱&apos;,&apos;元璋&apos;);                     //插入一条数据</span><br><span class="line"></span><br><span class="line">select * from table_name where xing = &apos;朱&apos; and ming = &apos;元璋&apos;;    //索引生效</span><br><span class="line"></span><br><span class="line">select * from table_name where xing = &apos;朱&apos;;                     //索引生效</span><br><span class="line"></span><br><span class="line">select * from table_name where ming = &apos;元璋&apos;;                    //索引失效</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>索引是左前缀发挥作用</p>
+</li>
+<li><p>冗余索引：就是在某个列上，可能存在多个索引</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">   xing char(5),</span><br><span class="line">   ming char(10),</span><br><span class="line">   key xm(xing,ming),</span><br><span class="line">   key ming(ming)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="索引的操作语法"><a href="#索引的操作语法" class="headerlink" title="索引的操作语法"></a>索引的操作语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">show index from 表名; || show create table 表名;                     //查看索引</span><br><span class="line"></span><br><span class="line">alter table 表名 drop index 索引名;  ||  drop index 索引名 on 表名;    //删除索引</span><br><span class="line"></span><br><span class="line">alter table 表名 add 索引名(列名);                                    //添加索引</span><br><span class="line"></span><br><span class="line">alter table 表名 add primary key (列名);                             //添加主键索引</span><br><span class="line"></span><br><span class="line">alter table 表名 drop primary key;                                   //删除主键所以</span><br></pre></td></tr></table></figure>
+<h2 id="事务的概念"><a href="#事务的概念" class="headerlink" title="事务的概念"></a>事务的概念</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//事务执行成功</span><br><span class="line">start transaction</span><br><span class="line">update 表名 set money+500 where id=2;</span><br><span class="line">update 表名 set money-500 where id=1;</span><br><span class="line">commit;</span><br><span class="line"></span><br><span class="line">//事务执行失败，进行回滚</span><br><span class="line">start transaction</span><br><span class="line">update 表名 set money+500 where id=2;</span><br><span class="line">update 表名 set money-500 where id=1;</span><br><span class="line">rollback;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>比如转账就可以看作一个事务，包含A扣款，B收款两个部分，只有两部分都成功，才能说一个事务完成</p>
+</li>
+<li><p>事务具有以下四个特点</p>
+<ul>
+<li><p>隔离性：用户看不到事务的中间态</p>
+</li>
+<li><p>原子性：不论事务中间过程过么复杂，最后结果要么是事务执行之前的状态，要么是事务执行成功的状态</p>
+</li>
+<li><p>一致性：事务前后的数据保持守恒</p>
+</li>
+<li><p>持久性：事务一旦执行成功，就不能rollback</p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/06/17/PHP基础知识（三、多态）/" rel="next" title="PHP基础知识（三、多态）">
+                <i class="fa fa-chevron-left"></i> PHP基础知识（三、多态）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/03/MySQL操作语言[DML]/" rel="prev" title="MySQL操作语言[DML]">
+                MySQL操作语言[DML] <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com"
+                alt="刘国坤" />
+            
+              <p class="site-author-name" itemprop="name">刘国坤</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Liuguokun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1353002081@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5591938345?refer_flag=1001030101_&is_hot=1" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-vk"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建表table"><span class="nav-number">1.</span> <span class="nav-text">创建表table</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整型列"><span class="nav-number">2.</span> <span class="nav-text">整型列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整型例的可选参数【属性】"><span class="nav-number">3.</span> <span class="nav-text">整型例的可选参数【属性】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浮点列与定点列"><span class="nav-number">4.</span> <span class="nav-text">浮点列与定点列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符型列"><span class="nav-number">5.</span> <span class="nav-text">字符型列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日期时间型列"><span class="nav-number">6.</span> <span class="nav-text">日期时间型列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列的默认值"><span class="nav-number">7.</span> <span class="nav-text">列的默认值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主键与自增"><span class="nav-number">8.</span> <span class="nav-text">主键与自增</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列的增删改"><span class="nav-number">9.</span> <span class="nav-text">列的增删改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图"><span class="nav-number">10.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视图的algorithm-视图放在哪？"><span class="nav-number">11.</span> <span class="nav-text">视图的algorithm [视图放在哪？]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用表管理语句"><span class="nav-number">12.</span> <span class="nav-text">常用表管理语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储引擎的概念"><span class="nav-number">13.</span> <span class="nav-text">存储引擎的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符集与乱码问题"><span class="nav-number">14.</span> <span class="nav-text">字符集与乱码问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引的概念"><span class="nav-number">15.</span> <span class="nav-text">索引的概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引的操作语法"><span class="nav-number">16.</span> <span class="nav-text">索引的操作语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的概念"><span class="nav-number">17.</span> <span class="nav-text">事务的概念</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘国坤</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

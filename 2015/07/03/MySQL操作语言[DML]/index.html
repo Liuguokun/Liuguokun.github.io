@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MySQL," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="insert操作1insert into table_name (field1, field2,...fieldN) values (value1, value2,...valueN); 如果ID值设置为自增长，列名及其对应的值可以省略不写，但是下面这种写法除外，且值要与列名严格对应1insert into table_name values (value1, value2,...valueN);">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL操作语言[DML]">
+<meta property="og:url" content="http://yoursite.com/2015/07/03/MySQL操作语言[DML]/index.html">
+<meta property="og:site_name" content="刘国坤">
+<meta property="og:description" content="insert操作1insert into table_name (field1, field2,...fieldN) values (value1, value2,...valueN); 如果ID值设置为自增长，列名及其对应的值可以省略不写，但是下面这种写法除外，且值要与列名严格对应1insert into table_name values (value1, value2,...valueN);">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-24T03:23:40.432Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL操作语言[DML]">
+<meta name="twitter:description" content="insert操作1insert into table_name (field1, field2,...fieldN) values (value1, value2,...valueN); 如果ID值设置为自增长，列名及其对应的值可以省略不写，但是下面这种写法除外，且值要与列名严格对应1insert into table_name values (value1, value2,...valueN);">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2015/07/03/MySQL操作语言[DML]/"/>
+
+
+
+
+
+  <title>MySQL操作语言[DML] | 刘国坤</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">刘国坤</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自先沉稳 而后爱人</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-个人简历">
+          <a href="/resume/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            个人简历
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/07/03/MySQL操作语言[DML]/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘国坤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘国坤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MySQL操作语言[DML]</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-03T10:00:45+08:00">
+                2015-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="insert操作"><a href="#insert操作" class="headerlink" title="insert操作"></a>insert操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into table_name (field1, field2,...fieldN) values (value1, value2,...valueN);</span><br></pre></td></tr></table></figure>
+<p>如果ID值设置为自增长，列名及其对应的值可以省略不写，但是下面这种写法除外，且值要与列名严格对应<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into table_name values (value1, value2,...valueN);</span><br></pre></td></tr></table></figure></p>
+<p>对于数据，字符串需要添加“ ”，数字不用。列名则都不需要</p>
+<h2 id="update操作"><a href="#update操作" class="headerlink" title="update操作"></a>update操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">update table_name set </span><br><span class="line">                    field1=new-value1, </span><br><span class="line">                    field2=new-value2,</span><br><span class="line">                    field3=new-value3</span><br><span class="line">                [where Clause]</span><br></pre></td></tr></table></figure>
+<p>where条件如果不加，影响所有行</p>
+<h2 id="delete操作"><a href="#delete操作" class="headerlink" title="delete操作"></a>delete操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from table_name [where Clause]</span><br></pre></td></tr></table></figure>
+<p>where条件如果不加，影响所有行</p>
+<h2 id="select操作"><a href="#select操作" class="headerlink" title="select操作"></a>select操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select column_name,column_name from table_name [where Clause]</span><br><span class="line"></span><br><span class="line">select column_name,column_name from table_name [where Clause in (value1,value2,value3)]</span><br><span class="line">//列举查询</span><br><span class="line"></span><br><span class="line">select column_name,column_name from table_name [where Clause between value1 and value2]</span><br><span class="line">//区间查询</span><br><span class="line"></span><br><span class="line">select column_name,column_name from table_name [where Clause like &quot;%X%&quot;]</span><br><span class="line">//模糊查询</span><br></pre></td></tr></table></figure>
+<h2 id="查询模型"><a href="#查询模型" class="headerlink" title="查询模型"></a>查询模型</h2><p>在查询时可以将列看做变量进行运算<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1, 列2, 列1+列2 from table_name [where Clause] [offset M] [limit N]</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>从表中选出指定的属性值组成一个新表，即为投影；上面的查询语句属于广义投影；</p>
+</li>
+<li><p>where和后面的语句构成一个布尔表达式，解析查询语句时，数据库从头到尾根据where条件遍历整张表的每条记录，如果结果为1，则输出相应的记录结果，如果结果为0，则查看下一条记录，直至查询出结果。例如，查询条件[where 1]将输出整张表，[where 0]将什么也查不到。</p>
+</li>
+</ul>
+<h2 id="奇怪的NUll"><a href="#奇怪的NUll" class="headerlink" title="奇怪的NUll"></a>奇怪的NUll</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select 列1, 列2 from table_name where 列名 is null</span><br><span class="line">select 列1, 列2 from table_name where 列名 is not null</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>null表示空值，但null=null为假</p>
+</li>
+<li><p>在设计表时，应尽量不允许使用null</p>
+</li>
+</ul>
+<h2 id="group分组统计"><a href="#group分组统计" class="headerlink" title="group分组统计"></a>group分组统计</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">max()    //求最大值</span><br><span class="line">count()  //求行数</span><br><span class="line">avg()    //求平均数</span><br><span class="line">min()    //求最小值</span><br><span class="line">sum()    //求总和</span><br></pre></td></tr></table></figure>
+<h2 id="查询格式"><a href="#查询格式" class="headerlink" title="查询格式"></a>查询格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1, 列2, sum(列1+列2) from table_name group by 列3</span><br></pre></td></tr></table></figure>
+<ul>
+<li>group查询时会先根据where条件对数据进行排序，所以，分组查询是是比较耗费数据库系统资源的，应尽量避免</li>
+</ul>
+<h2 id="having筛选结果集"><a href="#having筛选结果集" class="headerlink" title="having筛选结果集"></a>having筛选结果集</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1, 列2, sum(列1+列2) as X from table_name having [X &gt; 100]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>在上式中 sum(列1+列2) 就是结果集，然后重命名为 X ，两者可以看做近似相等，但也有不同之处。</p>
+</li>
+<li><p>where 是对数据表中的原始数据进行筛选，因为X并不是数据表中的原始项，所以会报错。</p>
+</li>
+<li><p>having 是对已经筛选出来的结果集进行再次筛选，如果将其替换为 where 数据库无法执行。</p>
+</li>
+</ul>
+<p>习题练习</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>subject</th>
+<th>score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>张三</td>
+<td>数学</td>
+<td>90</td>
+</tr>
+<tr>
+<td>张三</td>
+<td>语文</td>
+<td>50</td>
+</tr>
+<tr>
+<td>张三</td>
+<td>地理</td>
+<td>40</td>
+</tr>
+<tr>
+<td>李四</td>
+<td>语文</td>
+<td>55</td>
+</tr>
+<tr>
+<td>李四</td>
+<td>政治</td>
+<td>45</td>
+</tr>
+<tr>
+<td>王五</td>
+<td>政治</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<p>查询出2门及2门以上不及格者的平均成绩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name,sum(score&lt;60) as gk,avg(score) as pj form resule group by name having gk&gt;=2</span><br></pre></td></tr></table></figure></p>
+<p>先查所有人所有科的平均分，再利用having筛选谁挂科量在2门及其以上</p>
+<h2 id="order排序"><a href="#order排序" class="headerlink" title="order排序"></a>order排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1, 列2 from table_name order by 列3 [asc/desc],列4 [asc/desc]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>默认为升序排列【asc】</p>
+</blockquote>
+<p>上式表示先根据列3进行排序，然后结果集再根据列4进行排序，例如，先按照国籍排序，同一国人再按照年龄排序</p>
+<h2 id="limit用法"><a href="#limit用法" class="headerlink" title="limit用法"></a>limit用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1, 列2 from table_name order by 列3 [asc/desc],列4 [asc/desc] limit [偏移量,取出条数]</span><br></pre></td></tr></table></figure>
+<p>偏移量表示跳过前几条数据，如果为0则可以不写</p>
+<h2 id="子句查询陷阱"><a href="#子句查询陷阱" class="headerlink" title="子句查询陷阱"></a>子句查询陷阱</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where -&gt; group by -&gt; having -&gt; order by -&gt; limit</span><br></pre></td></tr></table></figure>
+<p>5种子句查询有严格的顺序，不允许随意变换</p>
+<h2 id="where型子查询"><a href="#where型子查询" class="headerlink" title="where型子查询"></a>where型子查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1, 列2 from table_name where 列1 = (select max(列1) from table_name)</span><br></pre></td></tr></table></figure>
+<p>内层查询结果作为外层查询条件</p>
+<h2 id="from型子查询"><a href="#from型子查询" class="headerlink" title="from型子查询"></a>from型子查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1 from (select 列1, 列2 from table_name order by 列3)</span><br></pre></td></tr></table></figure>
+<h2 id="exists型子查询"><a href="#exists型子查询" class="headerlink" title="exists型子查询"></a>exists型子查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from 表1 where exists (select * from 表2 where 表1.列1 = 表2.列2)</span><br></pre></td></tr></table></figure>
+<h2 id="内连接查询"><a href="#内连接查询" class="headerlink" title="内连接查询"></a>内连接查询</h2><p>boy表&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;girl表<br>hid|b.name | |hid|g.name<br>—|—-|—|—|—<br>A|屌丝||B|小龙女<br>B|杨过||C|祝英台<br>C|梁山伯||D|腐女</p>
+<p>编号一样表示夫妻关系。要求联表查询出具有夫妻关系的人物名称。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select boy.hid,boy.name,girl.his,girl.name </span><br><span class="line">from</span><br><span class="line">boy inner join girl</span><br><span class="line">on b.hid = girl.hid</span><br></pre></td></tr></table></figure></p>
+<p>执行结果如下<br>boy.hid|boy.name||girl.hid|    girl.name<br>—|—|—|—|—<br>B|杨过||B|小龙女<br>C|梁山伯||C|祝英台</p>
+<h2 id="左右连接查询-【继续沿用上面两张表】"><a href="#左右连接查询-【继续沿用上面两张表】" class="headerlink" title="左右连接查询 【继续沿用上面两张表】"></a>左右连接查询 【继续沿用上面两张表】</h2><p>左连接：以左表为基准，到右表找匹配的数据，找不到匹配的用NULL补齐。查询格式如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select boy.hid,boy.name,girl.his,girl.name </span><br><span class="line">from</span><br><span class="line">boy left join girl</span><br><span class="line">on b.hid = girl.hid</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>boy.hid</th>
+<th>boy.name</th>
+<th>girl.hid</th>
+<th>girl.name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>屌丝</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr>
+<td>B</td>
+<td>杨过</td>
+<td>B</td>
+<td>小龙女</td>
+</tr>
+<tr>
+<td>C</td>
+<td>梁山伯</td>
+<td>C</td>
+<td>祝英台</td>
+</tr>
+</tbody>
+</table>
+<p>右连接：以右表为基准，到左表找匹配的数据，找不到匹配的用NULL补齐。查询格式如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select boy.hid,boy.name,girl.his,girl.name </span><br><span class="line">from</span><br><span class="line">boy right join girl</span><br><span class="line">on b.hid = girl.hid</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>boy.hid</th>
+<th>boy.name</th>
+<th>girl.hid</th>
+<th>girl.name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B</td>
+<td>杨过</td>
+<td>B</td>
+<td>小龙女</td>
+</tr>
+<tr>
+<td>C</td>
+<td>梁山伯</td>
+<td>C</td>
+<td>祝英台</td>
+</tr>
+<tr>
+<td>null</td>
+<td>null</td>
+<td>D</td>
+<td>腐女</td>
+</tr>
+</tbody>
+</table>
+<p>可以连续进行连表查询，但是在写查询语句时，需要将对连续连接的表起别名，加以区分，避免冲突。</p>
+<h2 id="union查询"><a href="#union查询" class="headerlink" title="union查询"></a>union查询</h2><p>union查询就是把2条或多条的sql查询结果。合并成一个结果集<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sql1   --&gt;   N 行 </span><br><span class="line">sql2   --&gt;   M 行 </span><br><span class="line">sql1 union sql2  --&gt; N+M 行</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>使用前提：各语句取出的列数相同，列名称未必要求一致，列名称会使用是一条sql的列名称为准</p>
+</li>
+<li><p>使用union时，完全相等的行将会被合并【合并时比较耗时的操作】，一般不让union进行合并，使用“union all”可以避免。</p>
+</li>
+<li><p>union子句中，不用写order by ，因为合并后得到的最后结果可以order by，子句order by失去意义</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/06/22/MySQL定义语言[DDL]/" rel="next" title="MySQL定义语言[DDL]">
+                <i class="fa fa-chevron-left"></i> MySQL定义语言[DDL]
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/23/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com"
+                alt="刘国坤" />
+            
+              <p class="site-author-name" itemprop="name">刘国坤</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Liuguokun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1353002081@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5591938345?refer_flag=1001030101_&is_hot=1" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-vk"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#insert操作"><span class="nav-number">1.</span> <span class="nav-text">insert操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#update操作"><span class="nav-number">2.</span> <span class="nav-text">update操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delete操作"><span class="nav-number">3.</span> <span class="nav-text">delete操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#select操作"><span class="nav-number">4.</span> <span class="nav-text">select操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询模型"><span class="nav-number">5.</span> <span class="nav-text">查询模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#奇怪的NUll"><span class="nav-number">6.</span> <span class="nav-text">奇怪的NUll</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#group分组统计"><span class="nav-number">7.</span> <span class="nav-text">group分组统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查询格式"><span class="nav-number">8.</span> <span class="nav-text">查询格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#having筛选结果集"><span class="nav-number">9.</span> <span class="nav-text">having筛选结果集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#order排序"><span class="nav-number">10.</span> <span class="nav-text">order排序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#limit用法"><span class="nav-number">11.</span> <span class="nav-text">limit用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#子句查询陷阱"><span class="nav-number">12.</span> <span class="nav-text">子句查询陷阱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#where型子查询"><span class="nav-number">13.</span> <span class="nav-text">where型子查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#from型子查询"><span class="nav-number">14.</span> <span class="nav-text">from型子查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exists型子查询"><span class="nav-number">15.</span> <span class="nav-text">exists型子查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内连接查询"><span class="nav-number">16.</span> <span class="nav-text">内连接查询</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#左右连接查询-【继续沿用上面两张表】"><span class="nav-number">17.</span> <span class="nav-text">左右连接查询 【继续沿用上面两张表】</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#union查询"><span class="nav-number">18.</span> <span class="nav-text">union查询</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘国坤</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

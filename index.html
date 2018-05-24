@@ -180,6 +180,8 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
             首页
           </a>
         </li>
@@ -188,23 +190,9 @@
         <li class="menu-item menu-item-about">
           <a href="/about/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
             关于
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-            分类
           </a>
         </li>
       
@@ -212,31 +200,19 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
             归档
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-schedule">
-          <a href="/schedule/" rel="section">
+        <li class="menu-item menu-item-个人简历">
+          <a href="/resume/" rel="section">
             
-            日程表
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-sitemap">
-          <a href="/sitemap.xml" rel="section">
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
             
-            站点地图
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-commonweal">
-          <a href="/404/" rel="section">
-            
-            公益404
+            个人简历
           </a>
         </li>
       
@@ -380,6 +356,1412 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/07/03/MySQL操作语言[DML]/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘国坤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘国坤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/07/03/MySQL操作语言[DML]/" itemprop="url">MySQL操作语言[DML]</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-07-03T10:00:45+08:00">
+                2015-07-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="insert操作"><a href="#insert操作" class="headerlink" title="insert操作"></a>insert操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into table_name (field1, field2,...fieldN) values (value1, value2,...valueN);</span><br></pre></td></tr></table></figure>
+<p>如果ID值设置为自增长，列名及其对应的值可以省略不写，但是下面这种写法除外，且值要与列名严格对应<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">insert into table_name values (value1, value2,...valueN);</span><br></pre></td></tr></table></figure></p>
+<p>对于数据，字符串需要添加“ ”，数字不用。列名则都不需要</p>
+<h2 id="update操作"><a href="#update操作" class="headerlink" title="update操作"></a>update操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">update table_name set </span><br><span class="line">                    field1=new-value1, </span><br><span class="line">                    field2=new-value2,</span><br><span class="line">                    field3=new-value3</span><br><span class="line">                [where Clause]</span><br></pre></td></tr></table></figure>
+<p>where条件如果不加，影响所有行</p>
+<h2 id="delete操作"><a href="#delete操作" class="headerlink" title="delete操作"></a>delete操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delete from table_name [where Clause]</span><br></pre></td></tr></table></figure>
+<p>where条件如果不加，影响所有行</p>
+<h2 id="select操作"><a href="#select操作" class="headerlink" title="select操作"></a>select操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">select column_name,column_name from table_name [where Clause]</span><br><span class="line"></span><br><span class="line">select column_name,column_name from table_name [where Clause in (value1,value2,value3)]</span><br><span class="line">//列举查询</span><br><span class="line"></span><br><span class="line">select column_name,column_name from table_name [where Clause between value1 and value2]</span><br><span class="line">//区间查询</span><br><span class="line"></span><br><span class="line">select column_name,column_name from table_name [where Clause like &quot;%X%&quot;]</span><br><span class="line">//模糊查询</span><br></pre></td></tr></table></figure>
+<h2 id="查询模型"><a href="#查询模型" class="headerlink" title="查询模型"></a>查询模型</h2><p>在查询时可以将列看做变量进行运算<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1, 列2, 列1+列2 from table_name [where Clause] [offset M] [limit N]</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>从表中选出指定的属性值组成一个新表，即为投影；上面的查询语句属于广义投影；</p>
+</li>
+<li><p>where和后面的语句构成一个布尔表达式，解析查询语句时，数据库从头到尾根据where条件遍历整张表的每条记录，如果结果为1，则输出相应的记录结果，如果结果为0，则查看下一条记录，直至查询出结果。例如，查询条件[where 1]将输出整张表，[where 0]将什么也查不到。</p>
+</li>
+</ul>
+<h2 id="奇怪的NUll"><a href="#奇怪的NUll" class="headerlink" title="奇怪的NUll"></a>奇怪的NUll</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select 列1, 列2 from table_name where 列名 is null</span><br><span class="line">select 列1, 列2 from table_name where 列名 is not null</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>null表示空值，但null=null为假</p>
+</li>
+<li><p>在设计表时，应尽量不允许使用null</p>
+</li>
+</ul>
+<h2 id="group分组统计"><a href="#group分组统计" class="headerlink" title="group分组统计"></a>group分组统计</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">max()    //求最大值</span><br><span class="line">count()  //求行数</span><br><span class="line">avg()    //求平均数</span><br><span class="line">min()    //求最小值</span><br><span class="line">sum()    //求总和</span><br></pre></td></tr></table></figure>
+<h2 id="查询格式"><a href="#查询格式" class="headerlink" title="查询格式"></a>查询格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1, 列2, sum(列1+列2) from table_name group by 列3</span><br></pre></td></tr></table></figure>
+<ul>
+<li>group查询时会先根据where条件对数据进行排序，所以，分组查询是是比较耗费数据库系统资源的，应尽量避免</li>
+</ul>
+<h2 id="having筛选结果集"><a href="#having筛选结果集" class="headerlink" title="having筛选结果集"></a>having筛选结果集</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1, 列2, sum(列1+列2) as X from table_name having [X &gt; 100]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>在上式中 sum(列1+列2) 就是结果集，然后重命名为 X ，两者可以看做近似相等，但也有不同之处。</p>
+</li>
+<li><p>where 是对数据表中的原始数据进行筛选，因为X并不是数据表中的原始项，所以会报错。</p>
+</li>
+<li><p>having 是对已经筛选出来的结果集进行再次筛选，如果将其替换为 where 数据库无法执行。</p>
+</li>
+</ul>
+<p>习题练习</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>subject</th>
+<th>score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>张三</td>
+<td>数学</td>
+<td>90</td>
+</tr>
+<tr>
+<td>张三</td>
+<td>语文</td>
+<td>50</td>
+</tr>
+<tr>
+<td>张三</td>
+<td>地理</td>
+<td>40</td>
+</tr>
+<tr>
+<td>李四</td>
+<td>语文</td>
+<td>55</td>
+</tr>
+<tr>
+<td>李四</td>
+<td>政治</td>
+<td>45</td>
+</tr>
+<tr>
+<td>王五</td>
+<td>政治</td>
+<td>30</td>
+</tr>
+</tbody>
+</table>
+<p>查询出2门及2门以上不及格者的平均成绩<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select name,sum(score&lt;60) as gk,avg(score) as pj form resule group by name having gk&gt;=2</span><br></pre></td></tr></table></figure></p>
+<p>先查所有人所有科的平均分，再利用having筛选谁挂科量在2门及其以上</p>
+<h2 id="order排序"><a href="#order排序" class="headerlink" title="order排序"></a>order排序</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1, 列2 from table_name order by 列3 [asc/desc],列4 [asc/desc]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>默认为升序排列【asc】</p>
+</blockquote>
+<p>上式表示先根据列3进行排序，然后结果集再根据列4进行排序，例如，先按照国籍排序，同一国人再按照年龄排序</p>
+<h2 id="limit用法"><a href="#limit用法" class="headerlink" title="limit用法"></a>limit用法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1, 列2 from table_name order by 列3 [asc/desc],列4 [asc/desc] limit [偏移量,取出条数]</span><br></pre></td></tr></table></figure>
+<p>偏移量表示跳过前几条数据，如果为0则可以不写</p>
+<h2 id="子句查询陷阱"><a href="#子句查询陷阱" class="headerlink" title="子句查询陷阱"></a>子句查询陷阱</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where -&gt; group by -&gt; having -&gt; order by -&gt; limit</span><br></pre></td></tr></table></figure>
+<p>5种子句查询有严格的顺序，不允许随意变换</p>
+<h2 id="where型子查询"><a href="#where型子查询" class="headerlink" title="where型子查询"></a>where型子查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1, 列2 from table_name where 列1 = (select max(列1) from table_name)</span><br></pre></td></tr></table></figure>
+<p>内层查询结果作为外层查询条件</p>
+<h2 id="from型子查询"><a href="#from型子查询" class="headerlink" title="from型子查询"></a>from型子查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select 列1 from (select 列1, 列2 from table_name order by 列3)</span><br></pre></td></tr></table></figure>
+<h2 id="exists型子查询"><a href="#exists型子查询" class="headerlink" title="exists型子查询"></a>exists型子查询</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from 表1 where exists (select * from 表2 where 表1.列1 = 表2.列2)</span><br></pre></td></tr></table></figure>
+<h2 id="内连接查询"><a href="#内连接查询" class="headerlink" title="内连接查询"></a>内连接查询</h2><p>boy表&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;girl表<br>hid|b.name | |hid|g.name<br>—|—-|—|—|—<br>A|屌丝||B|小龙女<br>B|杨过||C|祝英台<br>C|梁山伯||D|腐女</p>
+<p>编号一样表示夫妻关系。要求联表查询出具有夫妻关系的人物名称。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select boy.hid,boy.name,girl.his,girl.name </span><br><span class="line">from</span><br><span class="line">boy inner join girl</span><br><span class="line">on b.hid = girl.hid</span><br></pre></td></tr></table></figure></p>
+<p>执行结果如下<br>boy.hid|boy.name||girl.hid|    girl.name<br>—|—|—|—|—<br>B|杨过||B|小龙女<br>C|梁山伯||C|祝英台</p>
+<h2 id="左右连接查询-【继续沿用上面两张表】"><a href="#左右连接查询-【继续沿用上面两张表】" class="headerlink" title="左右连接查询 【继续沿用上面两张表】"></a>左右连接查询 【继续沿用上面两张表】</h2><p>左连接：以左表为基准，到右表找匹配的数据，找不到匹配的用NULL补齐。查询格式如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select boy.hid,boy.name,girl.his,girl.name </span><br><span class="line">from</span><br><span class="line">boy left join girl</span><br><span class="line">on b.hid = girl.hid</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>boy.hid</th>
+<th>boy.name</th>
+<th>girl.hid</th>
+<th>girl.name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>屌丝</td>
+<td>null</td>
+<td>null</td>
+</tr>
+<tr>
+<td>B</td>
+<td>杨过</td>
+<td>B</td>
+<td>小龙女</td>
+</tr>
+<tr>
+<td>C</td>
+<td>梁山伯</td>
+<td>C</td>
+<td>祝英台</td>
+</tr>
+</tbody>
+</table>
+<p>右连接：以右表为基准，到左表找匹配的数据，找不到匹配的用NULL补齐。查询格式如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">select boy.hid,boy.name,girl.his,girl.name </span><br><span class="line">from</span><br><span class="line">boy right join girl</span><br><span class="line">on b.hid = girl.hid</span><br></pre></td></tr></table></figure></p>
+<table>
+<thead>
+<tr>
+<th>boy.hid</th>
+<th>boy.name</th>
+<th>girl.hid</th>
+<th>girl.name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B</td>
+<td>杨过</td>
+<td>B</td>
+<td>小龙女</td>
+</tr>
+<tr>
+<td>C</td>
+<td>梁山伯</td>
+<td>C</td>
+<td>祝英台</td>
+</tr>
+<tr>
+<td>null</td>
+<td>null</td>
+<td>D</td>
+<td>腐女</td>
+</tr>
+</tbody>
+</table>
+<p>可以连续进行连表查询，但是在写查询语句时，需要将对连续连接的表起别名，加以区分，避免冲突。</p>
+<h2 id="union查询"><a href="#union查询" class="headerlink" title="union查询"></a>union查询</h2><p>union查询就是把2条或多条的sql查询结果。合并成一个结果集<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sql1   --&gt;   N 行 </span><br><span class="line">sql2   --&gt;   M 行 </span><br><span class="line">sql1 union sql2  --&gt; N+M 行</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>使用前提：各语句取出的列数相同，列名称未必要求一致，列名称会使用是一条sql的列名称为准</p>
+</li>
+<li><p>使用union时，完全相等的行将会被合并【合并时比较耗时的操作】，一般不让union进行合并，使用“union all”可以避免。</p>
+</li>
+<li><p>union子句中，不用写order by ，因为合并后得到的最后结果可以order by，子句order by失去意义</p>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/22/MySQL定义语言[DDL]/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘国坤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘国坤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/06/22/MySQL定义语言[DDL]/" itemprop="url">MySQL定义语言[DDL]</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-22T10:00:45+08:00">
+                2015-06-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="创建表table"><a href="#创建表table" class="headerlink" title="创建表table"></a>创建表table</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table table_name (</span><br><span class="line">    列名 属性,</span><br><span class="line">    age int,</span><br><span class="line">    ...</span><br><span class="line">    name varchar(10)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="整型列"><a href="#整型列" class="headerlink" title="整型列"></a>整型列</h2><ul>
+<li><p>tinyint：1字节，取值范围[-128 ~ 127]，非负取值范围[0 ~ 255]</p>
+</li>
+<li><p>smallint：2字节，取值范围[-32768 ~ 32767]，非负取值范围[0 ~ 65535]</p>
+</li>
+<li><p>mediumint：3字节，取值范围[-8388608 ~ 8388607]，非负取值范围[0 ~ 16777215]</p>
+</li>
+<li><p>int：4字节，取值范围[-21亿 ~ 21亿]，非负取值范围[0 ~ 42亿]</p>
+</li>
+<li><p>bigint：8字节</p>
+</li>
+</ul>
+<h2 id="整型例的可选参数【属性】"><a href="#整型例的可选参数【属性】" class="headerlink" title="整型例的可选参数【属性】"></a>整型例的可选参数【属性】</h2><ul>
+<li><p>各种整型数据类型默认为带符号的取值范围</p>
+</li>
+<li><p>unsigned：无符号，列的值从0开始，不为负。</p>
+</li>
+<li><p>[M] zerofill：适合用于学号，编码等固定宽度的数字，可以用0填充至固定宽度，并且默认决定列为unsigned属性。</p>
+</li>
+</ul>
+<p>如果数字位数超过了[M],并不影响，MySQL会字节存取。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert table table_name add 列名 tinyint(5) zerofill;    添加一个固定宽度为5的列</span><br></pre></td></tr></table></figure></p>
+<h2 id="浮点列与定点列"><a href="#浮点列与定点列" class="headerlink" title="浮点列与定点列"></a>浮点列与定点列</h2><ul>
+<li><p>float[M,D]：浮点型，M表示精度，总位数；D表示标度，小数位数；这两个参数可以省略不写，默认为普通浮点数。</p>
+</li>
+<li><p>double[M,D]：与上相同，只是默认精度更高。</p>
+</li>
+<li><p>decimal[M,D]：定点型，float和double有精度损失，而decimal没有，更精确。</p>
+</li>
+</ul>
+<h2 id="字符型列"><a href="#字符型列" class="headerlink" title="字符型列"></a>字符型列</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>宽度</th>
+<th>可存字符</th>
+<th>实存字符[i&lt;=M]</th>
+<th>实占空间</th>
+<th>利用率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>char</td>
+<td>M</td>
+<td>M</td>
+<td>i</td>
+<td>M</td>
+<td>&lt;=100%</td>
+</tr>
+<tr>
+<td>varchar</td>
+<td>M</td>
+<td>M</td>
+<td>i</td>
+<td>i字符(+1-2)字节</td>
+<td>&lt;100%</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>char型如果不够M个字符，内部活用空格补齐，取出时再把右侧空格删掉。[这意味着，如果右侧本身有空格，将会丢失]，但是char速度更快。</p>
+</li>
+<li><p>M是字符，是几就表示可以存几个汉字。</p>
+</li>
+<li><p>text：文本型，可存储约6万字。</p>
+</li>
+<li><p>blob：用来存储二进制文件，如图片，音频等，由于采用的是二进制形式，不用考虑字符集。</p>
+</li>
+<li><p>enum：枚举型，是定义好值就在某几个枚举范围内。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">alert table table_name add 列名 enum(&quot;男&quot;,&quot;女&quot;);</span><br><span class="line">//只能选址一个值进行插入操作</span><br><span class="line"></span><br><span class="line">alert table table_name add 列名 set(&quot;男&quot;,&quot;女&quot;);    //可以选择一个或多个值进行插入操作</span><br></pre></td></tr></table></figure>
+<h2 id="日期时间型列"><a href="#日期时间型列" class="headerlink" title="日期时间型列"></a>日期时间型列</h2><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>样式</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>year</td>
+<td>1995</td>
+<td>1901~2155</td>
+</tr>
+<tr>
+<td>date</td>
+<td>1998-12-31</td>
+<td>1000/01/01~9999/12/31</td>
+</tr>
+<tr>
+<td>time</td>
+<td>12:32:45</td>
+<td>-838:59:59 ~ 838:59:59</td>
+</tr>
+<tr>
+<td>datetime</td>
+<td>1998-12-31 12:32:45</td>
+<td>-</td>
+</tr>
+<tr>
+<td>timestamp</td>
+<td>1512394064</td>
+<td>可不写，系统自动获取</td>
+</tr>
+</tbody>
+</table>
+<h2 id="列的默认值"><a href="#列的默认值" class="headerlink" title="列的默认值"></a>列的默认值</h2><p>因为null查询不便且索引效率不高，所以在实际应用中，应尽量避免列的值为null，如果想避免，声明列not null default “默认值”<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alert table table_name add 列名 int not null default 1;</span><br></pre></td></tr></table></figure></p>
+<h2 id="主键与自增"><a href="#主键与自增" class="headerlink" title="主键与自增"></a>主键与自增</h2><p>主键：次列不重复，能够区分每一行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//写法一</span><br><span class="line">create table table_name(</span><br><span class="line">    id int primary key,</span><br><span class="line">    name char(10)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">//写法二</span><br><span class="line">create table table_name(</span><br><span class="line">    id int,</span><br><span class="line">    name char(10),</span><br><span class="line">    primary key(id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>自增：一张表，只能有一个自增列，且此列必须加索引[index/key id]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">    id int,</span><br><span class="line">    name char(10),</span><br><span class="line">    index id(id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>主键且自增<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">    id int primary key auto_increment,</span><br><span class="line">    name char(10),</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<h2 id="列的增删改"><a href="#列的增删改" class="headerlink" title="列的增删改"></a>列的增删改</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">alert table 表名 add 列名 列类型 列属性；               //添加列，默认在表最后</span><br><span class="line"></span><br><span class="line">alert table 表名 add 列名 列类型 列属性 after 列名；     //添加一个新列并放在某列之后</span><br><span class="line"></span><br><span class="line">alert table 表名 drop 列名；                   //删除列</span><br><span class="line"></span><br><span class="line">alert table 表名 change 列名 新列名 新列类型；          //修改列名和列类型</span><br><span class="line"></span><br><span class="line">alert table 表名 modify 列名 新列类型；                //只能修改列类型</span><br></pre></td></tr></table></figure>
+<h2 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create view  视图名 as select 列1, 列2, 列3 from table_name;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>如果一个查询结果集需要经常被用到，就需要创建视图。</p>
+</li>
+<li><p>又被称为虚拟表，是sql的查询结果。</p>
+</li>
+<li><p>作用：</p>
+<ul>
+<li>权限控制。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>比如说某几个列允许用户查询，其他列不允许，可以通过视图开放其中一列或几列起到权限控制的作用。</p>
+</blockquote>
+<ul>
+<li><p>简化复杂的查询</p>
+</li>
+<li><p>如果视图的所有列都来自物理表，那么视图中的数据就可以修改；如果视图中存在某一列或几列是经过物理表中的列进行运算得到的，那么视图中这样的列中的数据就不能被修改。</p>
+</li>
+</ul>
+<h2 id="视图的algorithm-视图放在哪？"><a href="#视图的algorithm-视图放在哪？" class="headerlink" title="视图的algorithm [视图放在哪？]"></a>视图的algorithm [视图放在哪？]</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//指定使用merge算法</span><br><span class="line">create algorithm=merge view  视图名 as select 列1, 列2, 列3 from table_name;</span><br><span class="line"></span><br><span class="line">////指定使用temptable算法</span><br><span class="line">create algorithm=temptable view  视图名 as select 列1, 列2, 列3 from table_name;</span><br><span class="line"></span><br><span class="line">//由MySQL自己决定使用何种算法</span><br><span class="line">create view  视图名 as select 列1, 列2, 列3 from table_name;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>对于简单查询形成的view，再对view进行查询时，如where，order等等，可以把建视图语句+查视图语句合并成 –&gt; 查物理的语句。这种视图的算法叫merge [合并]</p>
+</li>
+<li><p>也有可能创建视图的语句本身就比较复杂，很难在和查询视图的语句进行合并，MySQL可以先执行视图的创建语句，把结果集形成内存中的临时表，然后去查询临时表。这种视图的算法叫temptable [临时表]</p>
+</li>
+</ul>
+<h2 id="常用表管理语句"><a href="#常用表管理语句" class="headerlink" title="常用表管理语句"></a>常用表管理语句</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">show tables;                                //查看所有表,视图也会包含在内。</span><br><span class="line"></span><br><span class="line">desc 表名;                                   //查看表详细信息</span><br><span class="line"></span><br><span class="line">drop table 表名;                             //删除表</span><br><span class="line"></span><br><span class="line">drop view 视图名;                            //删除视图</span><br><span class="line"></span><br><span class="line">show create table 表名/视图名;                //查看建表/视图过程</span><br><span class="line"></span><br><span class="line">show table status \G;                       //查看所有表详细信息，\G表示竖排显示</span><br><span class="line"></span><br><span class="line">show table status where name = &apos;表名&apos; \G;    //查看指定表详细信息</span><br><span class="line"></span><br><span class="line">rename table 旧表名 to 新表名;                //改表名</span><br><span class="line"></span><br><span class="line">truncate 表名;                               //想当于删除后有重建了这个表</span><br><span class="line"></span><br><span class="line">delete from 表名;    //删除表中所有数据，但如果继续插入数据，自增列会在原有基础上继续自增</span><br></pre></td></tr></table></figure>
+<h2 id="存储引擎的概念"><a href="#存储引擎的概念" class="headerlink" title="存储引擎的概念"></a>存储引擎的概念</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">    id int,</span><br><span class="line">    name char(10)</span><br><span class="line">)engine innodb charset utf8;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>数据库对同样的数据有着不同的存储方式和管理方式，在MySQL中称之为数据引擎</p>
+</li>
+<li><p>在MySQL_5.5.5以前默认引擎是Myisam，从MySQL_5.5.5开始，默认引擎改为Innodb</p>
+</li>
+<li><p>Myisam数据组织方式：每一个数据库形成一个文件夹，每张表包含3个文件放在该文件夹下</p>
+<ul>
+<li><p>table_name.frm        //表结构文件</p>
+</li>
+<li><p>table_name.MYD      //表数据文件</p>
+</li>
+<li><p>table_name.MYI        //表索引文件</p>
+</li>
+<li><p>可以直接把文件夹拷走，就是一个完整的数据库</p>
+</li>
+<li><p>Myisam不支持事务</p>
+</li>
+<li><p>Innodb数据组织方式：所有数据放在一个文件内</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="字符集与乱码问题"><a href="#字符集与乱码问题" class="headerlink" title="字符集与乱码问题"></a>字符集与乱码问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">    id int,</span><br><span class="line">    name char(10)</span><br><span class="line">)engine innodb charset utf8;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>乱码是因为文字本来的的字符集与展示的字符集不一致导致</p>
+</li>
+<li><p>校对集：就是排序规则</p>
+</li>
+<li><p>一套字符集可以有几套校对集</p>
+</li>
+</ul>
+<p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE65a6533aab8617841aae205aaddd388d/716" alt="image"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">character_set_client = &apos;utf8&apos;           //设置客户端发送与可接收字符集</span><br><span class="line">character_set_connection = &apos;utf8&apos;       //设置解释字符集</span><br><span class="line">character_set_results = &apos;utf8&apos;          //设置数据库返回与可接收字符集</span><br><span class="line"></span><br><span class="line">set names utf8;                         //就是将以上三个变量同时设为utf8字符集</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>解释器可以将不同编码进行翻译</p>
+</li>
+<li><p>如果客户端和MySQL使用的是不同的字符集，就会出现乱码</p>
+</li>
+<li><p>连接器使用GBK或者UTF8都可以，但是不可以使用编码范围比较小的字符集，比如ASCII，那样会造成数据丢失</p>
+</li>
+<li><p>谁能连接数据库谁就是客户端，如PHP和MySQL的控制窗口就是两个不同的客户端</p>
+</li>
+<li><p>保证HTML文件，数据库，处理脚本（如PHP），查询语句前的声明保持一致，就可以避免乱码</p>
+</li>
+</ul>
+<h2 id="索引的概念"><a href="#索引的概念" class="headerlink" title="索引的概念"></a>索引的概念</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">key                //普通索引，纯粹为了加快查询速度</span><br><span class="line"></span><br><span class="line">unique key         //唯一所以，一是为了加快查询速度，二是为了约束数据 [不能重复]</span><br><span class="line"></span><br><span class="line">primary key        //主键索引，不需要起名，因为一张表就一个</span><br><span class="line"></span><br><span class="line">fulltext           //全文索引，在中文环境下，几乎无效</span><br><span class="line">create table table_name(</span><br><span class="line">    id int,</span><br><span class="line">    name char(10),</span><br><span class="line">    key name(name),</span><br><span class="line">    unique id(id)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>索引是数据的目录，能快速定位行数据的位置，索引提高了查询速度，但是影响了增删改的速度，并非加的越多越好，一般在查询频率比较高的列上加，而且在重复度的列上加效果更好</p>
+</li>
+<li><p>索引长度：建索引时，可以只索引列的前一部分内容，比如前10个字符</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">   id int,</span><br><span class="line">   name char(10),</span><br><span class="line">   key name(name(5))</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>多列索引：就是把2列或多列的值，看成一个整体然后索引。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">   xing char(5),</span><br><span class="line">   ming char(10),</span><br><span class="line">   key xm(xing,ming)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">insert into table_name values (&apos;朱&apos;,&apos;元璋&apos;);                     //插入一条数据</span><br><span class="line"></span><br><span class="line">select * from table_name where xing = &apos;朱&apos; and ming = &apos;元璋&apos;;    //索引生效</span><br><span class="line"></span><br><span class="line">select * from table_name where xing = &apos;朱&apos;;                     //索引生效</span><br><span class="line"></span><br><span class="line">select * from table_name where ming = &apos;元璋&apos;;                    //索引失效</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>索引是左前缀发挥作用</p>
+</li>
+<li><p>冗余索引：就是在某个列上，可能存在多个索引</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">create table table_name(</span><br><span class="line">   xing char(5),</span><br><span class="line">   ming char(10),</span><br><span class="line">   key xm(xing,ming),</span><br><span class="line">   key ming(ming)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="索引的操作语法"><a href="#索引的操作语法" class="headerlink" title="索引的操作语法"></a>索引的操作语法</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">show index from 表名; || show create table 表名;                     //查看索引</span><br><span class="line"></span><br><span class="line">alter table 表名 drop index 索引名;  ||  drop index 索引名 on 表名;    //删除索引</span><br><span class="line"></span><br><span class="line">alter table 表名 add 索引名(列名);                                    //添加索引</span><br><span class="line"></span><br><span class="line">alter table 表名 add primary key (列名);                             //添加主键索引</span><br><span class="line"></span><br><span class="line">alter table 表名 drop primary key;                                   //删除主键所以</span><br></pre></td></tr></table></figure>
+<h2 id="事务的概念"><a href="#事务的概念" class="headerlink" title="事务的概念"></a>事务的概念</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//事务执行成功</span><br><span class="line">start transaction</span><br><span class="line">update 表名 set money+500 where id=2;</span><br><span class="line">update 表名 set money-500 where id=1;</span><br><span class="line">commit;</span><br><span class="line"></span><br><span class="line">//事务执行失败，进行回滚</span><br><span class="line">start transaction</span><br><span class="line">update 表名 set money+500 where id=2;</span><br><span class="line">update 表名 set money-500 where id=1;</span><br><span class="line">rollback;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>比如转账就可以看作一个事务，包含A扣款，B收款两个部分，只有两部分都成功，才能说一个事务完成</p>
+</li>
+<li><p>事务具有以下四个特点</p>
+<ul>
+<li><p>隔离性：用户看不到事务的中间态</p>
+</li>
+<li><p>原子性：不论事务中间过程过么复杂，最后结果要么是事务执行之前的状态，要么是事务执行成功的状态</p>
+</li>
+<li><p>一致性：事务前后的数据保持守恒</p>
+</li>
+<li><p>持久性：事务一旦执行成功，就不能rollback</p>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/17/PHP基础知识（三、多态）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘国坤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘国坤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/06/17/PHP基础知识（三、多态）/" itemprop="url">PHP基础知识（三、多态）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-17T10:00:45+08:00">
+                2015-06-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>多态的概念：只抽象的声明父类，具体的工作由子类对象来完成，这样，不同的子类对象完成，有不同的特点<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Light&#123;</span><br><span class="line">	public function turn_on($arg)&#123;</span><br><span class="line">		$arg -&gt; show();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class RedGlass&#123;</span><br><span class="line">	public function show()&#123;</span><br><span class="line">		echo &quot;我是红灯&quot;,&quot;&lt;br /&gt;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class YellowGlass&#123;</span><br><span class="line">	public function show()&#123;</span><br><span class="line">		echo &quot;我是黄灯&quot;,&quot;&lt;br /&gt;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class GreenGlass&#123;</span><br><span class="line">	public function show()&#123;</span><br><span class="line">		echo &quot;我是绿灯&quot;,&quot;&lt;br /&gt;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$light  = new Light();</span><br><span class="line">$red = new RedGlass();</span><br><span class="line">$yellow = new YellowGlass();</span><br><span class="line">$green = new GreenGlass();</span><br><span class="line">$light -&gt; turn_on($red);</span><br><span class="line">$light -&gt; turn_on($yellow);</span><br><span class="line">$light -&gt; turn_on($green);</span><br></pre></td></tr></table></figure></p>
+<p>如果按PHP本身的特点，不检测类型，本身就可以说是多态的，甚至是变态的额，但是PHP5.3以后，引入了对于对象类型的参数检测，注意，只能检测对象所属的类，其实对于PHP来说，限制了其灵活性，达到Java中多态的效果。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">//类Java多态</span><br><span class="line">class Light&#123;</span><br><span class="line">	public function turn_on(Glass $arg)&#123;</span><br><span class="line">		$arg -&gt; show();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Glass&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class RedGlass extends Glass&#123;</span><br><span class="line">	public function show()&#123;</span><br><span class="line">		echo &quot;我是红灯&quot;,&quot;&lt;br /&gt;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class YellowGlass extends Glass&#123;</span><br><span class="line">	public function show()&#123;</span><br><span class="line">		echo &quot;我是黄灯&quot;,&quot;&lt;br /&gt;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class GreenGlass extends Glass&#123;</span><br><span class="line">	public function show()&#123;</span><br><span class="line">		echo &quot;我是绿灯&quot;,&quot;&lt;br /&gt;&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$light  = new Light();</span><br><span class="line">$red = new RedGlass();</span><br><span class="line">$yellow = new YellowGlass();</span><br><span class="line">$green = new GreenGlass();</span><br><span class="line">$light -&gt; turn_on($red);</span><br><span class="line">$light -&gt; turn_on($yellow);</span><br><span class="line">$light -&gt; turn_on($green);</span><br></pre></td></tr></table></figure></p>
+<h2 id="静态属性与静态方法"><a href="#静态属性与静态方法" class="headerlink" title="静态属性与静态方法"></a>静态属性与静态方法</h2><p>在属性和方法前加static修饰，这种称为静态属性或方法</p>
+<ul>
+<li>从内存角度看，statics属性，存放在类的区域中，普通属性存放在对象中</li>
+<li>类声明完毕，静态属性就存在，不需要依赖于对象来访问</li>
+<li>因为类在内存中只有一个，因此静态属性也只有一个，被所有对象共享（一个类中可有多个静态属性或方法）</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class Human&#123;</span><br><span class="line">	static public $head = 1; </span><br><span class="line">&#125;</span><br><span class="line">echo Human::$head;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>非静态方法，是不能由类名静态调用的，但是，PHP中的面向对象检测并不严格，只要该方法中没有$this，就会转化为静态方法来调用</li>
+<li><h2 id="self与parent详解"><a href="#self与parent详解" class="headerlink" title="self与parent详解"></a>self与parent详解</h2></li>
+<li>self：调用自身类中的属性或方法</li>
+<li>parent：调用父类中的属性或方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">class A&#123;</span><br><span class="line">	public function a1()&#123;</span><br><span class="line">		echo &quot;this is function a1()&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class B extends A&#123;</span><br><span class="line">	public function b1()&#123;</span><br><span class="line">		$this -&gt; a1();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public function b2()&#123;</span><br><span class="line">		parent::a1();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$b = new B();</span><br><span class="line">$b -&gt; b1();</span><br><span class="line">$b -&gt; b2();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>从速度角度看，parent速度稍快一点点，因为子类再找a1()方法时，寻找不到，再找父类</li>
+<li>但是从面向对象的角度看，继承过来的就是自己的，$this更符合面向对象的思想，因为当继承的层次很深时，用parent：：parent：：parent：：parent这样的方式明显不是很合理</li>
+<li>但是当想访问父类的私有属性时，可以通过parent：：parent：：parent：：parent这种方式实现</li>
+</ul>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>在PHP程序开发过程中，为了规范程序设计，使用单例模式对创建对象进行技术规范，避免重复，随意创建对象<br>final在PHP中可以修饰类和方法，不能修饰属性</p>
+<ul>
+<li>修饰类时，被修饰的类不能被继承（其不能有子类）</li>
+<li>修饰方法时，该方法可以被继承，但是不能被重写</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Single&#123;</span><br><span class="line">	public $random = null;</span><br><span class="line">	static protected $ins = null;</span><br><span class="line">	final protected function __construct()&#123;</span><br><span class="line">		$this -&gt; random = mt_rand(1,10);</span><br><span class="line">	&#125;</span><br><span class="line">	static public function getInstance()&#123;</span><br><span class="line">		if(self::$ins instanceof self)&#123;		//判断一个对象是不是属于该类</span><br><span class="line">			return self::$ins;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			self::$ins = new self();</span><br><span class="line">			return self::$ins;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class son extends Single&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">$t1 = son::getInstance();</span><br><span class="line">$t2 = son::getInstance();</span><br><span class="line">print_r($t1);</span><br><span class="line">print_r($t2);</span><br></pre></td></tr></table></figure>
+<h2 id="单例模式主要思路"><a href="#单例模式主要思路" class="headerlink" title="单例模式主要思路"></a>单例模式主要思路</h2><p>1.类有一个静态属性存放对象</p>
+<p>2.保护或私有构造函数，防止外部实例化</p>
+<p>3.内部开放一个公共的静态方法，负责实例化</p>
+<p>4.当静态属性已经存放该对象，直接return该对象，否则，先实例化在return</p>
+<h2 id="魔术方法"><a href="#魔术方法" class="headerlink" title="魔术方法"></a>魔术方法</h2><ul>
+<li>__get()：如果访问的属性没有权限或者不存在，则会自动调用这个魔术方法，并自动把不能访问或者不存在的属性名作为参数，传入方法。</li>
+<li>__set()：当为无权操作或者不存在的属性赋值时，方法会被自动调用，且自动传入两个参数，分别是属性和属性值。</li>
+<li>__isset()：判断对象不可见属性时（private/protected/不存在），会引发方法执行</li>
+<li>__unset()：销毁对象不可见属性时（private/protected/不存在），会引发方法执行，并自动把想销毁的属性名作为参数，传入方法。</li>
+<li>__call()：调用一个不能访问或不存在的方法时，会被自动调用，且自动传入两个参数，分别是不能被调用的方法名和以数组形式返回的不能调用的方法的参数</li>
+<li>__callstatic()：调用一个不能访问或不存在的静态方法时，会被自动调用，且自动传入两个参数，分别是不能被调用的方法名和以数组形式返回的不能调用的方法的参数</li>
+</ul>
+<h2 id="重写与重载"><a href="#重写与重载" class="headerlink" title="重写与重载"></a>重写与重载</h2><ul>
+<li>重写/覆盖：子类重写了父类的同名方法</li>
+<li>重载：存在多个同名方法，但参数类型或个数不同，传入的参数不同，调用的方法不同，但PHP中不行，因为PHP一个类中不允许有多个同名方法</li>
+</ul>
+<h2 id="类常量与魔术常量"><a href="#类常量与魔术常量" class="headerlink" title="类常量与魔术常量"></a>类常量与魔术常量</h2><ul>
+<li>普通常量：define(‘name’,’value’);无论是页面内，类内还是函数类都可以访问</li>
+<li>类内常量：cons name = ‘lihua’;只能在类内访问</li>
+</ul>
+<h2 id="延迟绑定（运行期绑定）"><a href="#延迟绑定（运行期绑定）" class="headerlink" title="延迟绑定（运行期绑定）"></a>延迟绑定（运行期绑定）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Human&#123;</span><br><span class="line">	public static function who()&#123;</span><br><span class="line">		echo &quot;在父类执行&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">	public static function say()&#123;	//子类没有say方法，找到父类，这里的self指父类</span><br><span class="line">		self::who();</span><br><span class="line">	&#125;</span><br><span class="line">	public static function say1()&#123;	</span><br><span class="line">	//子类没有say1方法，找到父类，但是父类调用的是静态方法，调用子类自己的who方法</span><br><span class="line">		static::who();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Stu extends Human&#123;</span><br><span class="line">	public static function who()&#123;</span><br><span class="line">		echo &quot;在子类执行&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$t = new Stu();</span><br><span class="line">$t::say();</span><br><span class="line">$t::say1();</span><br></pre></td></tr></table></figure>
+<h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><ul>
+<li>抽象类：用abstract修饰，不能被实例化，继承抽象类的子类要实现抽象类中的所有抽象方法</li>
+<li>抽象方法：用abstract修饰，不能包含方法体（大括号内的内容）</li>
+<li>有抽象方法，此类必是抽象类，但在抽象类中，不一定有抽象方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">abstract class Rocket&#123;</span><br><span class="line">	public abstract function engine();</span><br><span class="line"></span><br><span class="line">	public abstract function balance();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Plane extends Rocket&#123;</span><br><span class="line">	public function engine()&#123;</span><br><span class="line">		echo &quot;涡扇发动机&quot;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public function balance()&#123;</span><br><span class="line">		echo &quot;平衡舵&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$plane = new Plane();</span><br><span class="line">$plane -&gt; engine();</span><br></pre></td></tr></table></figure>
+<h2 id="接口的概念"><a href="#接口的概念" class="headerlink" title="接口的概念"></a>接口的概念</h2><p>因为接口的方法本身就是抽象的，；不要有方法体，也不要有abstract<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">interface animal&#123;</span><br><span class="line">	public function eat();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface monkey&#123;</span><br><span class="line">	public function run();</span><br><span class="line">	public function cry();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface wisdom&#123;</span><br><span class="line">	public function think();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">interface bird&#123;</span><br><span class="line">	public function fly();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Human implements animal,monkey,wisdom&#123;</span><br><span class="line">	public function eat()&#123;</span><br><span class="line">		echo &quot;吃&quot;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public function run()&#123;</span><br><span class="line">		echo &quot;跑&quot;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public function cry()&#123;</span><br><span class="line">		echo &quot;哭&quot;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public function think()&#123;</span><br><span class="line">		echo &quot;思考&quot;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$lisi = new Human();</span><br><span class="line">$lisi -&gt; think();</span><br></pre></td></tr></table></figure></p>
+<h2 id="接口语言与应用场景"><a href="#接口语言与应用场景" class="headerlink" title="接口语言与应用场景"></a>接口语言与应用场景</h2><ul>
+<li>接口本身即是抽象的，内部声明的方法默认也是抽象的，不用加abstract</li>
+<li>一个类可以一次性实现多个接口，语法用implements实现，然后再把接口的功能给实现</li>
+<li>接口也可以继承，用extends</li>
+<li>接口是一堆方法的说明，不能加属性</li>
+<li>接口的方法必须是公共的</li>
+</ul>
+<h2 id="自动加载"><a href="#自动加载" class="headerlink" title="自动加载"></a>自动加载</h2><p>如果调用某个不存在的类，在报错之前，我们还有一次介入机会，系统会自动调用<strong>autoload()函数，并把类名自动传给</strong>autoload()函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function __autoload($c)&#123;</span><br><span class="line">		require(&apos;./&apos;.$c.&apos;.php&apos;)</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">	$lisi = new Human();</span><br><span class="line">	$t -&gt; run();</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/06/05/PHP基础知识（二、面向对象）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘国坤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘国坤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/06/05/PHP基础知识（二、面向对象）/" itemprop="url">PHP基础知识（二、面向对象）</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-06-05T10:00:17+08:00">
+                2015-06-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="PHP面向对象基本概念"><a href="#PHP面向对象基本概念" class="headerlink" title="PHP面向对象基本概念"></a>PHP面向对象基本概念</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class People&#123;</span><br><span class="line">    public $name = &apos;nobody&apos;;</span><br><span class="line">    public function cry()&#123;</span><br><span class="line">        echo &apos;呱呱坠地&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$man = new Prople();</span><br><span class="line">echo $man-&gt;name;</span><br><span class="line">echo $man-&gt;cry();</span><br></pre></td></tr></table></figure>
+<h2 id="属性与方法的注意点"><a href="#属性与方法的注意点" class="headerlink" title="属性与方法的注意点"></a>属性与方法的注意点</h2><ul>
+<li><p>对于属性值，可以在声明属性的同时进行赋值，也可以先声明并不进行赋值，如果不复制，属性的默认值为null；</p>
+</li>
+<li><p>PHP的属性值必须是一个“直接的值”，不能是表达式（如：1+2）的值，或者函数的返回值等等</p>
+</li>
+<li><p>PHP中的函数不能重复定义（即函数名不能重复），但是全局函数名可以和类中的方法名一样</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Clock&#123;</span><br><span class="line">    public function time()&#123;</span><br><span class="line">        echo &apos;现在时间戳是11111111&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">    public function time2()&#123;</span><br><span class="line">        echo &apos;现在时间戳是&apos;,time();</span><br><span class="line">    &#125;</span><br><span class="line">    public function time3()&#123;</span><br><span class="line">        echo &apos;现在时间戳是&apos;,$this-&gt;time();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$c = new Clock();</span><br><span class="line">$c-&gt;time();    //现在时间戳是11111111</span><br><span class="line">$c-&gt;time2();   //调用系统函数，输出真实的时间戳</span><br><span class="line">$c-&gt;time3();   //现在时间戳是11111111</span><br></pre></td></tr></table></figure>
+<h2 id="构造函数详解"><a href="#构造函数详解" class="headerlink" title="构造函数详解"></a>构造函数详解</h2><p>在类中，有一个构造函数，就是用来初始化对象用的，利用构造函数，就有机会操作对象，并改变它的值</p>
+<p>工作原理：生成对象时，先按类的声明，把属性凑齐，再用__construct()去影响，再返回该对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Human&#123;</span><br><span class="line">    public function __construct($name,$gender)&#123;</span><br><span class="line">        $this -&gt; name = $name;</span><br><span class="line">        $this -&gt; gender = $gender;</span><br><span class="line">    &#125;</span><br><span class="line">    public $name = null;</span><br><span class="line">    public $gender = null;   </span><br><span class="line">&#125;</span><br><span class="line">$a = new Human(&apos;张飞&apos;,&apos;男&apos;);</span><br><span class="line">$b = new Human(&apos;李四&apos;,&apos;男&apos;);</span><br><span class="line">$c = new Human(&apos;黛玉&apos;,&apos;女&apos;);</span><br><span class="line"></span><br><span class="line">echo $a -&gt; name,&quot;&lt;br /&gt;&quot;;    //张飞</span><br><span class="line">echo $b -&gt; name,&quot;&lt;br /&gt;&quot;;    //李四</span><br><span class="line">echo $c -&gt; name,&quot;&lt;br /&gt;&quot;;    //黛玉</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>构造函数的作用时机：每当new一个对象，就会自动对new出来的新对象发挥作用</p>
+</li>
+<li><p>new ClassName()传的参数，是给构造函数用的</p>
+</li>
+<li><p>new ClassName()也可以不传参，但前提是与构造函数里的参数保持一致</p>
+</li>
+<li><p>一个类中，只允许存在一个构造函数</p>
+</li>
+</ul>
+<h2 id="析构函数"><a href="#析构函数" class="headerlink" title="析构函数"></a>析构函数</h2><p>构造函数是在对象产生的时候，自动执行</p>
+<p>析构函数是在对象销毁的时候，自动执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Human&#123;</span><br><span class="line">    public function __construct()&#123;</span><br><span class="line">        echo &quot;出生喽！&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    public $name = null;</span><br><span class="line">    public $gender = null;   </span><br><span class="line">    public function __destruct()&#123;</span><br><span class="line">        echo &quot;还是跪了！&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a = new Human();</span><br><span class="line">$b = new Human();</span><br><span class="line">$c = new Human();</span><br><span class="line">$d = new Human();    //4生4死</span><br><span class="line">unset($a);        //    出生喽！ 还是跪了！</span><br><span class="line">$b = false;       //    出生喽！ 还是跪了！</span><br><span class="line">$c = null;        //    出生喽！ 还是跪了！</span><br></pre></td></tr></table></figure></p>
+<h2 id="对象的销毁："><a href="#对象的销毁：" class="headerlink" title="对象的销毁："></a>对象的销毁：</h2><ul>
+<li><p>显式销毁：unset()，赋值为null，都可以。</p>
+</li>
+<li><p>PHP是脚本语言，在代码执行到最后一行时，所有申请的内存都要释放，自然，对象的内存也要释放，所以对象也被销毁了</p>
+</li>
+</ul>
+<h2 id="析构函数与回收机制详解"><a href="#析构函数与回收机制详解" class="headerlink" title="析构函数与回收机制详解"></a>析构函数与回收机制详解</h2><p>在上例中，如果将对象$b进行如下赋值操作$b = true，还是会立即触发析构函数，原理如下:</p>
+<p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE4a2d8be20988fe9b103fbdf8d378f214/429" alt="image"></p>
+<ul>
+<li>改变了$b的指向，原来内存中的Object对象就没有人指向它，所以会被回收</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Human&#123;</span><br><span class="line">    public $name = null;</span><br><span class="line">    public $gender = null;   </span><br><span class="line">    public function __destruct()&#123;</span><br><span class="line">        echo &quot;死了！&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a = $b = $c = new Human();</span><br><span class="line">unset($a);</span><br><span class="line">echo &apos;unset a&lt;br /&gt;&apos;;</span><br><span class="line">unset($b);</span><br><span class="line">echo &apos;unset b&lt;br /&gt;&apos;;</span><br><span class="line">unset($c);</span><br><span class="line">echo &apos;unset c&lt;br /&gt;&apos;;</span><br><span class="line">/*</span><br><span class="line">unset a</span><br><span class="line">unset b</span><br><span class="line">死了</span><br><span class="line">unset c</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<p>原理如下：</p>
+<p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEe236c9a36f398da137ca217432698355/432" alt="image"></p>
+<h2 id="this绑定"><a href="#this绑定" class="headerlink" title="this绑定"></a>this绑定</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Human&#123;</span><br><span class="line">    public $name = &apos;lisi&apos;;</span><br><span class="line">    public function who()&#123;</span><br><span class="line">        echo $this -&gt; name;</span><br><span class="line">    &#125;</span><br><span class="line">    public function test()&#123;</span><br><span class="line">        echo $name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a = new Human();</span><br><span class="line">echo $a -&gt; name,&apos;&lt;br /&gt;&apos;;	//lisi</span><br><span class="line">$a -&gt; who();			//lisi</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>当一个对象调用其方法时，该方法执行之前，先完成一个绑定</p>
+</li>
+<li><p>$this绑到调动此方法的对象【睡调用就绑定谁】</p>
+</li>
+<li><p>在PHP中，方法想访问成员变量必须要使用this进行绑定，而在Java和C++等其他语言中，可以省略，默认访问成员变量,如test()方法在PHP中不合法，但在Java和C++中却可以</p>
+</li>
+</ul>
+<h2 id="封装的概念"><a href="#封装的概念" class="headerlink" title="封装的概念"></a>封装的概念</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class Human&#123; </span><br><span class="line">    public $money = 1000;</span><br><span class="line">&#125;</span><br><span class="line">$lisi = new Human();</span><br><span class="line">echo $lis -&gt; money;    //1000</span><br><span class="line"></span><br><span class="line">//对属性进行封装</span><br><span class="line">class Human&#123; </span><br><span class="line">    private $money = 1000;</span><br><span class="line">    public fuction shoeMoney()&#123;</span><br><span class="line">        return $this -&gt; money * 0.8;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$lisi = new Human();</span><br><span class="line">echo $lis -&gt; shoeMoney();</span><br></pre></td></tr></table></figure>
+<ul>
+<li>私有的money的属性只能通过相应的方法进行访问，这就是封装在属性上的体现。在方法上的体现也是一个道理。</li>
+</ul>
+<h2 id="权限修饰符"><a href="#权限修饰符" class="headerlink" title="权限修饰符"></a>权限修饰符</h2><p>用来说明：属性/方法的权限特点，写在属性/方法的前面，PHP共有3个权限修饰符</p>
+<ul>
+<li><p>private：私有的，其定义的属性和方法只能在类内部进行访问</p>
+</li>
+<li><p>protect：保护的</p>
+</li>
+<li><p>public：公共的，其定义的属性和方法在任意位置都可以访问</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Human&#123;</span><br><span class="line">    public $name = &apos;lisi&apos;;</span><br><span class="line">    private $money = 1000;</span><br><span class="line">    public function shoeMoney()&#123;</span><br><span class="line">        echo $this -&gt; money;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$a = new Human();</span><br><span class="line">echo $a -&gt; name,&apos;&lt;br /&gt;&apos;;	//lisi</span><br><span class="line">echo $a -&gt; money;			//私有属性，在类的外部不可读写</span><br><span class="line">$a -&gt; shoeMoney();			//1000</span><br></pre></td></tr></table></figure>
+<h2 id="权限控制的BUG"><a href="#权限控制的BUG" class="headerlink" title="权限控制的BUG"></a>权限控制的BUG</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Human&#123;</span><br><span class="line">    private $money = 1000;</span><br><span class="line">    public function getMoney($people)&#123;</span><br><span class="line">        return $people -&gt; money;</span><br><span class="line">    &#125;</span><br><span class="line">    public function setMoney($people)&#123;</span><br><span class="line">    	echo $people -&gt; money -= 500;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$zhangsan = new Human();</span><br><span class="line">$lisi = new Human();</span><br><span class="line">echo $lisi -&gt; getMoney($zhangsan);</span><br><span class="line">$lisi -&gt; setMoney($zhangsan);</span><br><span class="line">print_r($zhangsan);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>从生活的角度看，李四读取和改变张三的钱，是不合理的</p>
+</li>
+<li><p>这是因为在PHP中，并不是以对象为单位俩控制权限，而是以类为单位进行权限控制封装MySQL类</p>
+</li>
+</ul>
+<h2 id="继承的概念"><a href="#继承的概念" class="headerlink" title="继承的概念"></a>继承的概念</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">class Human&#123;</span><br><span class="line">    public $height = 160;</span><br><span class="line">    public function cry()&#123;</span><br><span class="line">        echo &apos;呜呜呜呜&apos;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Stu extends Human&#123;&#125;</span><br><span class="line">$xiaoming = new Stu();</span><br><span class="line">$xiaomming -&gt; cry();    //呜呜呜呜</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>以一个类为父类，另一个类作为其子类，子类在继承父类的属性和方法的基础上，可以进一步的增添和修改</p>
+</li>
+<li><p>一个子类只能有一个父类</p>
+</li>
+</ul>
+<h2 id="继承注意事项"><a href="#继承注意事项" class="headerlink" title="继承注意事项"></a>继承注意事项</h2><ul>
+<li><p>私有属性可以理解为不能被继承（其实可以被继承，但无法操作）</p>
+</li>
+<li><p>public和protected都可以继承，并拥有访问和修改的权限</p>
+</li>
+<li><p>继承时，权限只能越来越宽松或者保持不变，不能越来越严格</p>
+</li>
+</ul>
+<h2 id="构造方法的继承"><a href="#构造方法的继承" class="headerlink" title="构造方法的继承"></a>构造方法的继承</h2><p>构造方法也是可以继承的，new子类时，如果构造方法继承过来，当然也要自动执行，但继承过来，子类重写了，自然执行子类的构造方法（父类的构造方法就不在调用）</p>
+<h2 id="public、protected、private权限详解"><a href="#public、protected、private权限详解" class="headerlink" title="public、protected、private权限详解"></a>public、protected、private权限详解</h2><ul>
+<li>Public权限最为宽松，在任何地方都可以访问</li>
+<li>Protected在自身被定义的类和其子类中可以被访问</li>
+<li>Private只能在其被定义的类中访问</li>
+<li>在PHP中，如果属性和方法前面什么参数也不写，即public/protected/private都不写，则理解为public</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/05/24/PHP基础知识（一、静态变量）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘国坤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘国坤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/05/24/PHP基础知识（一、静态变量）/" itemprop="url">PHP基础知识（一、静态变量)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-05-24T09:54:10+08:00">
+                2015-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h2><p>在PHP中，一共存在8种变量类型：整型，浮点型，字符串，布尔，数组，对象，null，资源</p>
+<ul>
+<li>如果一个变量为null，那么在它被声明后，该变量既不会有值，也不会被标注类型</li>
+</ul>
+<h2 id="变量检测"><a href="#变量检测" class="headerlink" title="变量检测"></a>变量检测</h2><p>isset()函数可以检测变量是否存在，存在返回true，不存在或变量为null返回false</p>
+<h2 id="获取变量类型"><a href="#获取变量类型" class="headerlink" title="获取变量类型"></a>获取变量类型</h2><ul>
+<li><p>gettype()函数可以用来获取变量类型</p>
+</li>
+<li><p>判断是否是我们想要的类型用is_int()，is_float()等等</p>
+</li>
+</ul>
+<h2 id="打印变量"><a href="#打印变量" class="headerlink" title="打印变量"></a>打印变量</h2><ul>
+<li><p>echo：适合打印字符串和数字</p>
+</li>
+<li><p>print_r：适合打印数组</p>
+</li>
+<li><p>var_dump：所有类型都可以，既可以打印值同时也会打印变量类型</p>
+</li>
+</ul>
+<h2 id="变量类型转换"><a href="#变量类型转换" class="headerlink" title="变量类型转换"></a>变量类型转换</h2><p>PHP中变量的类型是可以随时转换的，非常灵活，最常见的是字符串与数字的转换，或是字符串/数字——&gt;布尔值的转换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//字符串到数字的转换:从左到右截取，直到碰到不合法的数字，截取出来的部分转换成数字再参与运算</span><br><span class="line">$a = &quot;12hello&quot;;</span><br><span class="line">$a = $a + 3;</span><br><span class="line">var_dump($a);    //int 15</span><br></pre></td></tr></table></figure></p>
+<p>以下值都被当成布尔型的假，而其他值都被当成布尔型的真</p>
+<ul>
+<li><p>“” (an empty string)</p>
+</li>
+<li><p>0 (0 as an integer)</p>
+</li>
+<li><p>0.0 (0 as a float)</p>
+</li>
+<li><p>“0” (0 as a string)</p>
+</li>
+<li><p>NULL</p>
+</li>
+<li><p>FALSE</p>
+</li>
+<li><p>array() (an empty array)</p>
+</li>
+<li><p>$var; (a variable declared, but without a value)</p>
+</li>
+</ul>
+<h2 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h2><ul>
+<li><p>传值赋值：变量各有自己的内存空间，传值后不影响原有变量的值【两个人看两台电视】</p>
+</li>
+<li><p>引用赋值：两个变量指向公共的内存空间，一个变化，另一个也会变化【两个人看一台电视】</p>
+</li>
+</ul>
+<h2 id="变量销毁"><a href="#变量销毁" class="headerlink" title="变量销毁"></a>变量销毁</h2><p>unset()函数可以用来销毁变量，但是当两个变量都指向同一个内存空间【即引用赋值】时，销魂其中一个变量，另一个依然存在，并不会被销毁。当所有指向这个内存空间的变量都被销毁时，该公共内存空间才会被回收。</p>
+<h2 id="动态变量"><a href="#动态变量" class="headerlink" title="动态变量"></a>动态变量</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$liubei = &quot;河北&quot;;</span><br><span class="line">$laoda = &quot;liubei&quot;;</span><br><span class="line">$paihang = &quot;laoda&quot;;</span><br><span class="line">var_dump($paihang,$$paihang,$$$paihang);    //laoda  liubei  河北</span><br></pre></td></tr></table></figure>
+<h2 id="算术运算符"><a href="#算术运算符" class="headerlink" title="算术运算符"></a>算术运算符</h2><ul>
+<li><p>除数不能为0</p>
+</li>
+<li><p>两个数相加的和如果超出了 integer 的范围，将会被解释为 float</p>
+</li>
+<li><p>取模运算时，结果的正负仅取决于被除数</p>
+</li>
+</ul>
+<h2 id="比较运算符"><a href="#比较运算符" class="headerlink" title="比较运算符"></a>比较运算符</h2><p>凡运算，必有运算结果：比较运算符的运算结果是布尔类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$a = 5;</span><br><span class="line">$b = &quot;5&quot;;</span><br><span class="line">var_dump($a == $b);    //true</span><br><span class="line">var_dump($a === $b);   //false    全等于不仅要求值相等，类型也必须一致</span><br></pre></td></tr></table></figure></p>
+<h2 id="三元运算符"><a href="#三元运算符" class="headerlink" title="三元运算符"></a>三元运算符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//求两个数中较大的数</span><br><span class="line">$a = 10;</span><br><span class="line">$b = 15;</span><br><span class="line">$c = $a&gt;=$b ? $a : $b;</span><br><span class="line">var_dump($c);    // 15</span><br></pre></td></tr></table></figure>
+<h2 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h2><ul>
+<li><p>&amp;&amp;：都为真，值才为真</p>
+</li>
+<li><p>||：只要有一个为真，就为真</p>
+</li>
+</ul>
+<h2 id="递增递减运算符"><a href="#递增递减运算符" class="headerlink" title="递增递减运算符"></a>递增递减运算符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">$b = 5;</span><br><span class="line">$a = $b++;    //先赋值，再自增</span><br><span class="line">var_dump($a,$b);    // 5    6</span><br><span class="line"></span><br><span class="line">$b = 5;</span><br><span class="line">$a = ++$b;    ////先自增，再赋值</span><br><span class="line">var_dump($a,$b);    // 6    6</span><br><span class="line">字符串运算符</span><br><span class="line"></span><br><span class="line">//字符串与字符串</span><br><span class="line">$a = &quot;Hello&quot;;</span><br><span class="line">$b = &quot;world&quot;;</span><br><span class="line">$c = $a.$b;</span><br><span class="line">var_dump($c);    //helloworld</span><br><span class="line"></span><br><span class="line">//字符串与数字</span><br><span class="line">$d = 112;</span><br><span class="line">$c = $c.$d;</span><br><span class="line">var_dump($c);    //helloworld112</span><br><span class="line"></span><br><span class="line">//下面哪个语句运行速度快</span><br><span class="line">$a = &quot;Hello&quot;;</span><br><span class="line">$b = &quot;world&quot;;</span><br><span class="line">echo $a,$b;    //更快</span><br><span class="line">echo $a.$b;</span><br></pre></td></tr></table></figure>
+<h2 id="赋值运算符"><a href="#赋值运算符" class="headerlink" title="赋值运算符"></a>赋值运算符</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//一个赋值运算有两个作用：1是把3赋给$a；2是返回运算结果，即3</span><br><span class="line">$a = 3;</span><br><span class="line">$res = ($a = 3);</span><br><span class="line">var_dump($res);     // 3</span><br></pre></td></tr></table></figure>
+<h2 id="continue和break"><a href="#continue和break" class="headerlink" title="continue和break"></a>continue和break</h2><ul>
+<li><p>continue：跳过本次循环</p>
+</li>
+<li><p>break：直接终止循环</p>
+</li>
+</ul>
+<h2 id="函数概念"><a href="#函数概念" class="headerlink" title="函数概念"></a>函数概念</h2><ul>
+<li><p>一段封装好的代码，可以随时调用</p>
+</li>
+<li><p>返回值是只得到这个值，并不会直接输出</p>
+</li>
+</ul>
+<h2 id="函数定义格式"><a href="#函数定义格式" class="headerlink" title="函数定义格式"></a>函数定义格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function 函数名()&#123;</span><br><span class="line">    //执行语句</span><br><span class="line">    //return;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>命名规范：命名规则和变量是一致的，但是函数不区分大小写</p>
+<h2 id="函数的调用过程与返回值"><a href="#函数的调用过程与返回值" class="headerlink" title="函数的调用过程与返回值"></a>函数的调用过程与返回值</h2><p>函数调用时，代码执行权进入函数，当函数所有语句执行完毕，函数结束，交回执行权，或者函数碰到return语句时，函数返回，教会执行权。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function test()&#123;</span><br><span class="line">    return &quot;hello&quot;,&quot;world&quot;;    //错误，直返return返回一个值</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="函数传参方式"><a href="#函数传参方式" class="headerlink" title="函数传参方式"></a>函数传参方式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function t($a)&#123;</span><br><span class="line">    $a += 1;</span><br><span class="line">&#125;</span><br><span class="line">$a = 3;</span><br><span class="line">t($a);</span><br><span class="line">echo $a;    //3    传参外部$a，相当于将外部$a的值，赋给函数内部$a，而内部$a的值怎么变，和外界无关</span><br><span class="line"></span><br><span class="line">//引用传值</span><br><span class="line">function t2(&amp;$a)&#123;</span><br><span class="line">    $a += 1;</span><br><span class="line">&#125;</span><br><span class="line">$b = 5;</span><br><span class="line">t($b);</span><br><span class="line">echo $b;    //6    $a和$b指向同一个地址</span><br><span class="line">//不推荐这种传值方式，因为函数内部的语句影响到了函数外部的变量，破坏了函数的封装性</span><br></pre></td></tr></table></figure>
+<h2 id="函数中变量的作用域"><a href="#函数中变量的作用域" class="headerlink" title="函数中变量的作用域"></a>函数中变量的作用域</h2><ul>
+<li><p>PHP页面中声明的变量叫“全局变量”，函数内部的变量叫“局部变量”</p>
+</li>
+<li><p>全局变量无法与局部变量进行交互，只有传参时赋值可以</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//如果想局部变量访问全局变量，就需要使用关键字global</span><br><span class="line">$a = 22;</span><br><span class="line">function t()&#123;</span><br><span class="line">    global $a;</span><br><span class="line">    echo $a;</span><br><span class="line">&#125;</span><br><span class="line">t();    // 22</span><br><span class="line"></span><br><span class="line">//超全局变量，在页面的任何部分，包括函数，方法等，都可以直接访问</span><br><span class="line">function t2()&#123;</span><br><span class="line">    print_r($_GET);</span><br><span class="line">&#125;</span><br><span class="line">t2();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="动态调用函数"><a href="#动态调用函数" class="headerlink" title="动态调用函数"></a>动态调用函数</h2><p>可用用变量的值当做函数名，并调用函数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function wel()&#123;</span><br><span class="line">    echo &quot;wlecome&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function beat()&#123;</span><br><span class="line">    echo &quot;beat&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$heart = &quot;wel&quot;;</span><br><span class="line">$heart();    // welcome</span><br></pre></td></tr></table></figure></p>
+<h2 id="字符串定义方式"><a href="#字符串定义方式" class="headerlink" title="字符串定义方式"></a>字符串定义方式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">//定义短字符串</span><br><span class="line">$str1 = &apos;hello&apos;;</span><br><span class="line">$str2 = &quot;world&quot;;</span><br><span class="line">//定义大段字符串</span><br><span class="line"></span><br><span class="line">//heredoc</span><br><span class="line">$str3 = &gt;&gt;&gt;mark</span><br><span class="line">    大段string本身;</span><br><span class="line">mark;</span><br><span class="line"></span><br><span class="line">//nowdoc</span><br><span class="line">$str3 = &gt;&gt;&gt;&apos;mark&apos;</span><br><span class="line">    大段string本身;</span><br><span class="line">mark;</span><br></pre></td></tr></table></figure>
+<h2 id="单双引号的对比"><a href="#单双引号的对比" class="headerlink" title="单双引号的对比"></a>单双引号的对比</h2><ul>
+<li><p>单引号只转义两个符号：’ 和 \</p>
+</li>
+<li><p>双引号可以解析变量</p>
+</li>
+<li><p>单引号不需要解析字符串内有没有变量，需要转义的内容也少，速度比双引号要快，优先使用单引号</p>
+</li>
+<li><p>heredoc与nowdoc的区别就是单引号与双引号的区别</p>
+</li>
+</ul>
+<h2 id="数组的声明方式"><a href="#数组的声明方式" class="headerlink" title="数组的声明方式"></a>数组的声明方式</h2><p>数组是一种复合数据，可以装下多个值，每个值用不同的键来区分<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$arr = array(&apos;001&apos;=&gt;&apos;春&apos;,&apos;002&apos;=&gt;&apos;夏&apos;,&apos;003&apos;=&gt;&apos;秋&apos;,&apos;004&apos;=&gt;&apos;冬&apos;);</span><br><span class="line">//索引数组：键不必有特殊意义，纯数字，这种叫“索引数组”</span><br><span class="line">$arr = array(1=&gt;&apos;东&apos;,2=&gt;&apos;西&apos;,3=&gt;&apos;南&apos;,4=&gt;&apos;北&apos;,);</span><br><span class="line">//关联数组：字符串做键，一般能体现该单元的内容</span><br><span class="line">$stu = array(&apos;name&apos;=&gt;&apos;小明&apos;,&apos;age&apos;=&gt;&apos;20&apos;);</span><br><span class="line">//多维数组：数组里面有数组</span><br><span class="line">$arr = array(0=&gt;&apos;a&apos;,1=&gt;array(&apos;stu&apos;=&gt;&apos;li&apos;,&apos;bag&apos;=&gt;array(&apos;语文&apos;,&apos;数学&apos;)));</span><br></pre></td></tr></table></figure></p>
+<h2 id="数组键的规则"><a href="#数组键的规则" class="headerlink" title="数组键的规则"></a>数组键的规则</h2><ul>
+<li><p>如果不声明键，会从0，1，2，3……递增来生成键</p>
+</li>
+<li><p>如果已经存在1或几个数字键，则从最大的数字键，递增生成数字键</p>
+</li>
+<li><p>如果键声明重复了，后面的值覆盖前面的值</p>
+</li>
+<li><p>键可以是整数（浮点数会转化为整数）也可以是字符串，如果字符串的内容恰好是整数，也理解成整数</p>
+</li>
+</ul>
+<h2 id="操作数组单元"><a href="#操作数组单元" class="headerlink" title="操作数组单元"></a>操作数组单元</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$arr = array(&apos;a&apos;,&apos;b&apos;,&apos;c&apos;);</span><br><span class="line">//增加一个单元</span><br><span class="line">$arr[] = &apos;d&apos;;</span><br><span class="line">$arr[99] = &apos;e&apos;;</span><br><span class="line">//读取单元值</span><br><span class="line">echo $arr[3];</span><br><span class="line">//改一个单元的值</span><br><span class="line">$arr[0] = &apos;A&apos;;</span><br><span class="line">//删除某个单元</span><br><span class="line">unset($arr[1]);</span><br></pre></td></tr></table></figure>
+<h2 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//对于0，1，2……递增的索引数组，使用for循环</span><br><span class="line">$arr = array(&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;);</span><br><span class="line">for($key=0; $key&lt;count($arr); $key++)&#123;</span><br><span class="line">    echo $arr[$key],&quot;&lt;br /&gt;&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//对于关联数组，使用foreach遍历</span><br><span class="line">$arr = array(&apos;name&apos;=&gt;&apos;lisi&apos;,&apos;age&apos;=&gt;&apos;20&apos;,&apos;height&apos;=&gt;&apos;180cm&apos;);</span><br><span class="line">foreach($arr as $key =&gt; $value)&#123;</span><br><span class="line">    echo $key,&apos;:&apos;,$value,&apos;&lt;br /&gt;&apos;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foreach($arr as $v)&#123;</span><br><span class="line">    echo $v,&apos;&lt;br /&gt;&apos;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="数组游标操作"><a href="#数组游标操作" class="headerlink" title="数组游标操作"></a>数组游标操作</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">//取当前游标指向的数组单元的值</span><br><span class="line">$arr = array(&apos;a&apos;,&apos;b&apos;,&apos;c&apos;);</span><br><span class="line">echo current($arr);    //a</span><br><span class="line"></span><br><span class="line">//把数组的游标往后移</span><br><span class="line">next($arr);</span><br><span class="line">echo current($arr);    //b</span><br><span class="line"></span><br><span class="line">//把数组的游标移到最后</span><br><span class="line">end($arr);</span><br><span class="line">echo current($arr);    //c</span><br><span class="line"></span><br><span class="line">//把数组的游标往前移</span><br><span class="line">prev($arr);</span><br><span class="line">echo current($arr);    //b</span><br><span class="line"></span><br><span class="line">//重置游标</span><br><span class="line">reset($arr);</span><br><span class="line">echo current($arr);    //a</span><br></pre></td></tr></table></figure>
+<h2 id="超级全局变量"><a href="#超级全局变量" class="headerlink" title="超级全局变量"></a>超级全局变量</h2><ul>
+<li><p>$_GET：地址栏上获取的值</p>
+</li>
+<li><p>$_POST：POST表单发送的数据</p>
+</li>
+<li><p>$_REQUEST：既有GET也有POST的内容，如果含有相同的数据，POST会覆盖GET，而这可以再php.ini配置文件中进行设置更改</p>
+</li>
+<li><p>$_ENV：操作系统的相关环境信息，容易暴露服务器信息，一般不允许打印，可通过修改php.ini实现</p>
+</li>
+<li><p>$_SERVER：端口，IP地址等环境信息</p>
+</li>
+<li><p>$_DLOBALS：是对全局变量花名册的一个别名，通过该变量，可以任意访问全局变量，简单说，就是将所有全局变量变成其数组里的一个单元</p>
+</li>
+</ul>
+<h2 id="常量系统"><a href="#常量系统" class="headerlink" title="常量系统"></a>常量系统</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">define(&apos;PI&apos;,3.14);</span><br><span class="line">echo PI;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>命名规范：与变量一样，不过习惯上全部大写</p>
+</li>
+<li><p>声明后，值不能修改，也不能重新声明，也不能销毁这个变量</p>
+</li>
+<li><p>常量名前不加$</p>
+</li>
+<li><p>常量一旦定义后，在页面的任何位置都可以访问</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//检测常量是否存在</span><br><span class="line">defined(&apos;PI&apos;);</span><br><span class="line"></span><br><span class="line">//动态常量名</span><br><span class="line">define(&apos;PI&apos;,3.14);</span><br><span class="line">$pai = &apos;PI&apos;;</span><br><span class="line">echo constant(&apos;PI&apos;);    //3.14</span><br><span class="line">echo constant($pai);    //3.14</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h2><p>文件包含的作用在于代码的重用，我们可以把常用的代码写到一个文件里，当需要这些代码工作时，直接引入这些文件就可以了</p>
+<ul>
+<li><p>include();    include_once();    require();    require_once();</p>
+</li>
+<li><p>_once的作用：只引用一次，如果之前已经引用过，就不再引用，但是不叫_once执行速度快一些</p>
+</li>
+<li><p>include和require的区别：如果引入的文件不存在，include尽量往下执行，报warning，require则直接报fatal error，脚本立即停止执行</p>
+</li>
+</ul>
+<h2 id="浮点数不精确"><a href="#浮点数不精确" class="headerlink" title="浮点数不精确"></a>浮点数不精确</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if((0.3 - 0.2) == 0.1)&#123;</span><br><span class="line">    echo &quot;相等&quot;;</span><br><span class="line">&#125;else&#123;</span><br><span class="line">    echo &quot;不相等&quot;;</span><br><span class="line">&#125;</span><br><span class="line">//输出 不相等</span><br></pre></td></tr></table></figure>
+<p>某些小数在十进制下，是有限的，转成二进制要无限循环，因此，损失一些精度，导致浮点数计算和数学上结果不一致</p>
+<h2 id="逻辑运算的短路特性"><a href="#逻辑运算的短路特性" class="headerlink" title="逻辑运算的短路特性"></a>逻辑运算的短路特性</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$a = 3;</span><br><span class="line">$b = 5;</span><br><span class="line">if($a=5 || $b=7)&#123;</span><br><span class="line">    $a++;</span><br><span class="line">    $b++;</span><br><span class="line">&#125;</span><br><span class="line">echo $a;    //1</span><br><span class="line">echo $b;    //6</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">    或运算的优先级比赋值运算的优先级高，经过或运算，得到布尔值true，再赋值给$a，但是布尔值的自增或自减</span><br><span class="line">    并不影响自身，所以true值以数字1的形式输出，$b输出结果为6</span><br><span class="line">*/</span><br></pre></td></tr></table></figure>
+<h2 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//0-100求和</span><br><span class="line">function sum($n)&#123;</span><br><span class="line">    if($n == 1)&#123;</span><br><span class="line">        return 1;</span><br><span class="line">    &#125;</span><br><span class="line">    return $n + sum($n-1);</span><br><span class="line">&#125;</span><br><span class="line">echo sum(100);    //5050</span><br></pre></td></tr></table></figure>
+<h2 id="静态变量"><a href="#静态变量" class="headerlink" title="静态变量"></a>静态变量</h2><p>static变量有一个特点，在第一次函数调用声明之后存在，且不随函数结束而结束，当函数再次调用时，可以直接利用上次结果</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -430,12 +1812,21 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
             
 
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
             
 
             
@@ -443,7 +1834,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
