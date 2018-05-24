@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Redis," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Mac下安装Redis 先安装homebrew  1“ruby -e &amp;quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)”  利用homebrew安装Redis  1brew install redis  启动Redis  1redis-server  客户端连接Redis  1redis-cli   //这个命令一定要另开一个终端窗口[Ctr">
+<meta name="keywords" content="Redis">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis">
+<meta property="og:url" content="http://yoursite.com/2017/08/22/Redis基础（一）/index.html">
+<meta property="og:site_name" content="刘国坤">
+<meta property="og:description" content="Mac下安装Redis 先安装homebrew  1“ruby -e &amp;quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)”  利用homebrew安装Redis  1brew install redis  启动Redis  1redis-server  客户端连接Redis  1redis-cli   //这个命令一定要另开一个终端窗口[Ctr">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-24T09:52:38.297Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis">
+<meta name="twitter:description" content="Mac下安装Redis 先安装homebrew  1“ruby -e &amp;quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)”  利用homebrew安装Redis  1brew install redis  启动Redis  1redis-server  客户端连接Redis  1redis-cli   //这个命令一定要另开一个终端窗口[Ctr">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/22/Redis基础（一）/"/>
+
+
+
+
+
+  <title>Redis | 刘国坤</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">刘国坤</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">自先沉稳 而后爱人</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-个人简历">
+          <a href="/resume/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            个人简历
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/22/Redis基础（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="刘国坤">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="刘国坤">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Redis</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-22T10:00:45+08:00">
+                2017-08-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">服务器</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Mac下安装Redis"><a href="#Mac下安装Redis" class="headerlink" title="Mac下安装Redis"></a>Mac下安装Redis</h2><ol>
+<li>先安装homebrew</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“ruby -e &quot;$(curl -fsSkL raw.github.com/mxcl/homebrew/go)”</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>利用homebrew安装Redis</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install redis</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>启动Redis</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-server</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>客户端连接Redis</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli   //这个命令一定要另开一个终端窗口[Ctr+N]</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>关闭Redis服务</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shutdown    //在客户端终端窗口里面执行</span><br></pre></td></tr></table></figure>
+<h2 id="字符串类型-基础命令"><a href="#字符串类型-基础命令" class="headerlink" title="字符串类型-基础命令"></a>字符串类型-基础命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">set [key] [value]   //插入数据</span><br><span class="line"></span><br><span class="line">get [key]   //查看对应键名的值</span><br><span class="line"></span><br><span class="line">keys *  //查看所有键名</span><br><span class="line"></span><br><span class="line">exists [key]    //判断该键是否存在</span><br><span class="line"></span><br><span class="line">del [key]   //删除该键</span><br><span class="line"></span><br><span class="line">type [key]  //获得键值的数据类型</span><br><span class="line"></span><br><span class="line">incr [key]  //递增对应键名的键值</span><br><span class="line"></span><br><span class="line">decr [key]  //递减对应键名的键值</span><br><span class="line"></span><br><span class="line">incrby [key] (int)num //增加指定整数</span><br><span class="line"></span><br><span class="line">incrbyfloat [key] (float)num //增加指定浮点数</span><br><span class="line"></span><br><span class="line">append [key] [value]    //向尾部追加值，如果追加的字符串开头或结尾包含空格，需要用引号将字符串包起来</span><br><span class="line"></span><br><span class="line">srelen [key]    //获取键值的长度</span><br><span class="line"></span><br><span class="line">mset [key1] [v1] [key2] [v2] [key3] [v3]    //同时设置多个键值</span><br><span class="line"></span><br><span class="line">mget [key1] [key3]  //同时设置多个键值</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>竞态条件:当同一时间有多个客户端连接到Redis，对同一个键的键值同时执行递增操作，最终的键值却只增加一次</p>
+</blockquote>
+<h4 id="位操作"><a href="#位操作" class="headerlink" title="位操作"></a>位操作</h4><ul>
+<li>获取相应二进制位上的的值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getbit [key] [pos]   //位置从0开始</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果需要获取的二进制位的索引超出了键值的二进制位的实际长度则默认位值是0</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">“redis&gt; GETBIT foo 100000</span><br><span class="line">(integer) 0”</span><br></pre></td></tr></table></figure>
+<ul>
+<li>设置相应二进制位上的的值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setbit [key] [pos] [value]  ////位置从0开始</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果要设置的位置超过了键值的二进制位的长度，SETBIT命令会自动将多出的二进制位设置为0<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">“redis&gt; SETBIT nofoo 10000 1</span><br><span class="line">(integer) 0”</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<ul>
+<li>获得字符串类型键中值是1的二进制位个数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bitcount [key]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>“获得字符串类型键中值指定字节区间是1的二进制位个数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bitcount [key] (start)num (end)num</span><br></pre></td></tr></table></figure>
+<ul>
+<li>对多个字符串类型键进行位运算,并将结果存储在指定的键中</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bitop OR [result] [key1] [key2]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>AND[与运算]&nbsp;&nbsp;&nbsp;&nbsp;OR[或运算]&nbsp;&nbsp;&nbsp;&nbsp;XOR[异或运算]</p>
+</blockquote>
+<ul>
+<li>获得指定键的第一个位值是0或者1的位置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bitpos [key] 0</span><br><span class="line"></span><br><span class="line">bitpos [key] 1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>指定二进制位的查询范围,获得指定键的第一个位值是0或者1的位置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">bitpos [key] 0 (start)num (end)num</span><br><span class="line"></span><br><span class="line">bitpos [key] 1  (start)num (end)num</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里的返回结果的偏移量是从头开始算起的，与起始字节无关</p>
+</blockquote>
+<blockquote>
+<p>如果不设置结束字节且键值的所有二进制位都是1，则当要查询值为0的二进制位偏移量时，返回结果会是键值长度的下一个字位的偏移量。这是因为 Redis 会认为键值长度之后的二进制位都是0。</p>
+</blockquote>
+<h2 id="Redis数据类型"><a href="#Redis数据类型" class="headerlink" title="Redis数据类型"></a>Redis数据类型</h2><ol>
+<li>string（字符串类型）</li>
+<li>hash（散列类型）</li>
+<li>list（列表类型）</li>
+<li>set（集合类型）</li>
+<li>zset（有序集合类型</li>
+</ol>
+<h2 id="散列类型-基础命令"><a href="#散列类型-基础命令" class="headerlink" title="散列类型-基础命令"></a>散列类型-基础命令</h2><ul>
+<li>赋值与取值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">hset key field value</span><br><span class="line">hget key field</span><br><span class="line">hmset key field value [field value …]</span><br><span class="line">hmget key field [field …]</span><br><span class="line">hgetall key</span><br><span class="line"></span><br><span class="line">//示例</span><br><span class="line">hset car name BMW</span><br><span class="line">hget car name</span><br><span class="line"></span><br><span class="line">hmset car name BMW color white</span><br><span class="line">hmget car name color</span><br><span class="line">hgetall car</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在Redis中每个键都属于一个明确的数据类型，如通过HSET命令建立的键是散列类型，通过SET命令建立的键是字符串类型等等</p>
+<ul>
+<li>判断字段是否存在</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexists key field</span><br></pre></td></tr></table></figure>
+<ul>
+<li>当字段不存在时赋值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hsetnx key field value</span><br></pre></td></tr></table></figure>
+<ul>
+<li>增加数字</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hincrby key field increment</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>散列类型没有 hincr 命令，但是可以通过 hincrby key field 1来实现,如果键不存在，hincrby命令会自动建立该键并默认相应字段在执行命令前的值为“0”。命令的返回值是增值后的字段值。也就是1。</p>
+</blockquote>
+<ul>
+<li>删除字段</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hdel key field [field …]    //hdel命令可以删除一个或多个字段，返回值是被删除的字段个数</span><br></pre></td></tr></table></figure>
+<ul>
+<li>只获取字段名或字段值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hkeys key</span><br><span class="line">hvals key</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得字段数量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hlen key</span><br></pre></td></tr></table></figure>
+<h2 id="列表类型-基础命令"><a href="#列表类型-基础命令" class="headerlink" title="列表类型-基础命令"></a>列表类型-基础命令</h2><ul>
+<li>向列表两端增加元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lpush key value [value …] [value …] [value …]</span><br><span class="line">rpush key value [value …] [value …] [value …]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lpush numbers 1</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lpush numbers 2 3</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>3</th>
+<th>2</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>从列表两端弹出元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lpop key</span><br><span class="line">rpop key</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获取列表中元素的个数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">llen key</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得列表片段</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lrange key (stars)num (stop)num  //返回索引从 start到 stop之间的所有元素（包含两端的元素</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>lrange命令在取得列表片段的同时不会像lpop一样删除该片段，另外lrange返回的值包含最右边的元素</p>
+</blockquote>
+<ol>
+<li>如果start的索引位置比stop的索引位置靠后，则会返回空列表。</li>
+<li>如果stop大于实际的索引范围，则会返回到列表最右边的元素</li>
+</ol>
+<ul>
+<li>删除列表中指定的值</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lrem key count value    //rem命令会删除列表中前count个值为value的元素，返回值是实际删除的元素个数。</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>根据count值的不同，lrem命令的执行方式会略有差异。</p>
+<ol>
+<li>当count &gt; 0时 lrem 命令会从列表左边开始删除前 count </li>
+<li>当 count &lt; 0时 lrem 命令会从列表右边开始删除前|count|个值为 value 的元素。</li>
+<li>当 count = 0是 lrem命令会删除所有值为 value的元素。</li>
+</ol>
+<ul>
+<li>获得/设置指定索引的元素值</li>
+</ul>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lindex key index</span><br><span class="line">lset key index value</span><br></pre></td></tr></table></figure>
+<ul>
+<li>只保留列表指定片段</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ltrim key start</span><br></pre></td></tr></table></figure>
+<ul>
+<li>向列表中插入元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">linsert key before|after pivot value</span><br><span class="line">//linsert 命令首先会在列表中从左到右查找值为 pivot 的元素，然后根据第二个参数是BEFORE还是AFTER来决定将value插入到该元素的前面还是后面</span><br></pre></td></tr></table></figure>
+<ul>
+<li>将元素从一个列表转到另一个列表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rpoplpush source destination</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当source和destination相同时，RPOPLPUSH命令会不断地将队尾的元素移到队首，借助这个特性我们可以实现一个网站监控系统</p>
+</blockquote>
+<h2 id="集合类型-基础命令"><a href="#集合类型-基础命令" class="headerlink" title="集合类型-基础命令"></a>集合类型-基础命令</h2><ul>
+<li>增加/删除元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sadd key member [member …]</span><br><span class="line">srem key member [member …]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得集合中的所有元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smembers key</span><br></pre></td></tr></table></figure>
+<ul>
+<li>判断元素是否在集合中</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sismembers key member</span><br></pre></td></tr></table></figure>
+<ul>
+<li>集合间运算</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sdiff key [key] [key] [key]     //求差集</span><br><span class="line">sinter key [key] [key] [key]   //求交集</span><br><span class="line">sunion key [key] [key] [key]    //求并集</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得集合中元素个数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scard key</span><br></pre></td></tr></table></figure>
+<ul>
+<li>进行集合运算并将结果存储</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sdiffstore destination key [key …]</span><br><span class="line">sinterstore destination key [key …]</span><br><span class="line">sunionstore destination key [key …]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>随机获得集合中的元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">srandmember key [count]</span><br></pre></td></tr></table></figure>
+<ol>
+<li>当count为正数时，srandmember会随机从集合里获得count个不重复的元素。如果count的值大于集合中的元素个数，则srandmember会返回集合中的全部元素。</li>
+<li>当count为负数时，srandmember会随机从集合里获得|count|个的元素，这些元素有可能相同。</li>
+</ol>
+<ul>
+<li>从集合中随机弹出一个元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spop key</span><br></pre></td></tr></table></figure>
+<h2 id="有序集合类型-基础命令"><a href="#有序集合类型-基础命令" class="headerlink" title="有序集合类型-基础命令"></a>有序集合类型-基础命令</h2><ul>
+<li>有序集合类型在某些方面和列表类型有些相似。</li>
+</ul>
+<ol>
+<li>二者都是有序的。</li>
+<li>二者都可以获得某一范围的元素。<br>但是二者有着很大的区别，这使得它们的应用场景也是不同的。<ol>
+<li>列表类型是通过链表实现的，获取靠近两端的数据速度极快，而当元素增多后，访问中间数据的速度会较慢，所以它更加适合实现如“新鲜事”或“日志”这样很少访问中间元素的应用。</li>
+<li>有序集合类型是使用散列表和跳跃表（Skip list）实现的，所以即使读取位于中间部分的数据速度也很快（时间复杂度是O(log(N))）。</li>
+<li>列表中不能简单地调整某个元素的位置，但是有序集合可以（通过更改这个元素的分数）。</li>
+<li>有序集合要比列表类型更耗费内存。</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>增加元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zadd key score member [score member …]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得元素的分数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zsocre key member</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得排名在某个范围的元素列表</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zrange key start stop [withscores]</span><br><span class="line">zrevrange key start stop [withscores]    //zrevrange命令是按照元素分数从大到小的顺序给出结果的</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果需要同时获得元素的分数的话可以在 ZRANGE 命令的尾部加上 WITHSCORES 参数</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; zrange scoreboard 0 -1 withscores</span><br><span class="line">1) &quot;Peter&quot;</span><br><span class="line">2) &quot;76&quot;</span><br><span class="line">3) &quot;Tom&quot;</span><br><span class="line">4) &quot;89&quot;</span><br><span class="line">5) &quot;David&quot;</span><br><span class="line">6) &quot;100&quot;</span><br></pre></td></tr></table></figure>
+<p>-获得指定分数范围的元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">“zrangebyscore key min max [withscores] [limmit offset count]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>增加某个元素的分数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zincrby key increment member</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zincrby scoreboard 4 Jerry  //加分</span><br><span class="line">zincrby scoreboard -4 Jerry //减分</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得集合中元素的数量</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zcard key</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得指定分数范围内的元素个数</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zcount key min max</span><br></pre></td></tr></table></figure>
+<ul>
+<li>删除一个或多个元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zrem key member [member …]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>按照排名范围删除元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zremrangebyrank key start stop  //从小到大的顺序</span><br></pre></td></tr></table></figure>
+<ul>
+<li>按照分数范围删除元素</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zremrangebyscore key min max</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>示例</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zremrangebyscore testRem (4 5  //不包括4，但是包括5</span><br></pre></td></tr></table></figure>
+<ul>
+<li>获得元素的排名</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zrank key member    //从小到大</span><br><span class="line">zrevrank key member     //从大到小</span><br></pre></td></tr></table></figure>
+<ul>
+<li>计算有序集合的交集</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">zinterstore destination numkeys key [key …] [weight weight [weight …]] [aggregate</span><br><span class="line">SUM|MIN|MAX]</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>当AGGREGATE是SUM时（也就是默认值），destination键中元素的分数是每个参与计算的集合中该元素分数的和。</p>
+</blockquote>
+<blockquote>
+<p>当AGGREGATE是MIN时，destination键中元素的分数是每个参与计算的集合中该元素分数的最小值。</p>
+</blockquote>
+<blockquote>
+<p>当AGGREGATE是MAX时，destination键中元素的分数是每个参与计算的集合中该元素分数的最大值。</p>
+</blockquote>
+<blockquote>
+<p>ZINTERSTORE命令还能够通过WEIGHTS参数设置每个集合的权重，每个集合在参与计算时元素的分数会被乘上该集合的权重。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Redis/" rel="tag"><i class="fa fa-tag"></i> Redis</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/22/NGINX/" rel="next" title="NGINX">
+                <i class="fa fa-chevron-left"></i> NGINX
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/23/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="https://note.youdao.com/yws/api/image/normal/1522844139020?userId=1353002081%40qq.com"
+                alt="刘国坤" />
+            
+              <p class="site-author-name" itemprop="name">刘国坤</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Liuguokun" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1353002081@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5591938345?refer_flag=1001030101_&is_hot=1" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-vk"></i>weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://twitter.com/yourname" target="_blank" title="Twitter">
+                      
+                        <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac下安装Redis"><span class="nav-number">1.</span> <span class="nav-text">Mac下安装Redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串类型-基础命令"><span class="nav-number">2.</span> <span class="nav-text">字符串类型-基础命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#位操作"><span class="nav-number">2.0.1.</span> <span class="nav-text">位操作</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis数据类型"><span class="nav-number">3.</span> <span class="nav-text">Redis数据类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#散列类型-基础命令"><span class="nav-number">4.</span> <span class="nav-text">散列类型-基础命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#列表类型-基础命令"><span class="nav-number">5.</span> <span class="nav-text">列表类型-基础命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集合类型-基础命令"><span class="nav-number">6.</span> <span class="nav-text">集合类型-基础命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有序集合类型-基础命令"><span class="nav-number">7.</span> <span class="nav-text">有序集合类型-基础命令</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">刘国坤</span>
+
+  
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
