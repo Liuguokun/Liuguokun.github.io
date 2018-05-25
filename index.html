@@ -564,7 +564,7 @@ brew安装完成后，执行以下命令：brew insatall memcached
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/22/NGINX/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/22/NGINX实现负载均衡的几种方式/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="刘国坤">
@@ -583,7 +583,7 @@ brew安装完成后，执行以下命令：brew insatall memcached
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/22/NGINX/" itemprop="url">NGINX</a></h1>
+                <a class="post-title-link" href="/2017/06/22/NGINX实现负载均衡的几种方式/" itemprop="url">NGINX实现负载均衡的几种方式</a></h1>
         
 
         <div class="post-meta">
@@ -657,13 +657,19 @@ brew安装完成后，执行以下命令：brew insatall memcached
       
         
           
-          Nginx日志管理我们观察NGINX的server段，可以看到如下类似信息
-#access_log logs/host.access.log main;这说明，
+          要理解负载均衡，必须先搞清楚正向代理和反向代理。
 
-          
+正向代理，代理的是用户。
+反向代理，代理的是服务器
+
+正向代理正向代理类似一个跳板机，代理访问外部资源。
+
+举个例子:
+我是一个用户，我访问不了某网站，但是我能访问一个代理服务器，这个代理服务器呢,他能访问那个我不能访问的网站，于是我先连上代理服务
+          ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2017/06/22/NGINX/#more" rel="contents">
+            <a class="btn" href="/2017/06/22/NGINX实现负载均衡的几种方式/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
