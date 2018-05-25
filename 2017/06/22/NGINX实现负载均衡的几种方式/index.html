@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE328772991d7018fef733b3792751a10b/2206">
 <meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE59219719bc0b9c0465f79a2a8864bed8/2208">
 <meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEeaaa95d1aab1f51edbc7246f6461ccf7/2219">
-<meta property="og:updated_time" content="2018-05-25T10:33:23.379Z">
+<meta property="og:updated_time" content="2018-05-25T11:37:19.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NGINX实现负载均衡的几种方式">
 <meta name="twitter:description" content="要理解负载均衡，必须先搞清楚正向代理和反向代理。  正向代理，代理的是用户。 反向代理，代理的是服务器  正向代理正向代理类似一个跳板机，代理访问外部资源。  举个例子: 我是一个用户，我访问不了某网站，但是我能访问一个代理服务器，这个代理服务器呢,他能访问那个我不能访问的网站，于是我先连上代理服务器,告诉他我需要那个无法访问网站的内容，代理服务器去取回来,然后返回给我。从网站的角度，只在代理服务">
@@ -399,10 +399,8 @@
 <p>总结来说： 正向代理是一个位于客户端和原始服务器(origin server)之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，然后代理向原始服务器转交请求并将获得的内容返回给客户端。客户端必须要进行一些特别的设置才能使用正向代理。</p>
 <p>正向代理的用途：</p>
 <ul>
-<li><p>访问原来无法访问的资源，如google</p>
-</li>
-<li><p>可以做缓存，加速访问资源</p>
-</li>
+<li>访问原来无法访问的资源，如google</li>
+<li>可以做缓存，加速访问资源</li>
 <li>对客户端访问授权，上网进行认证</li>
 <li>代理可以记录用户访问记录（上网行为管理），对外隐藏用户信息</li>
 </ul>
@@ -460,6 +458,39 @@
 </ul>
 <p>配置实例：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#user  nobody;</span><br><span class="line">worker_processes  4;</span><br><span class="line">events &#123;</span><br><span class="line">    # 最大并发数</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line">http&#123;</span><br><span class="line">    # 待选服务器列表</span><br><span class="line">    upstream myproject&#123;</span><br><span class="line">        # ip_hash指令，将同一用户引入同一服务器。</span><br><span class="line">        ip_hash;</span><br><span class="line">        server 125.219.42.4 fail_timeout=60s;</span><br><span class="line">        server 172.31.2.183;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    server&#123;</span><br><span class="line">                # 监听端口</span><br><span class="line">                listen 80;</span><br><span class="line">                # 根目录下</span><br><span class="line">                location / &#123;</span><br><span class="line">                    # 选择哪个服务器列表</span><br><span class="line">                    proxy_pass http://myproject;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="负载均衡引发的问题"><a href="#负载均衡引发的问题" class="headerlink" title="负载均衡引发的问题"></a>负载均衡引发的问题</h2><h3 id="多台机器间session的共享问题"><a href="#多台机器间session的共享问题" class="headerlink" title="多台机器间session的共享问题"></a>多台机器间session的共享问题</h3><p>配置负载均衡比较简单,但是最关键的一个问题是怎么实现多台服务器之间session的共享，下面有几种方法：</p>
+<ol>
+<li><p>不使用session，换作cookie能把session改成cookie，就能避开session的一些弊端，在从前看的一本J2EE的书上，也指明在集群系统中不能用session，否则惹出祸端来就不好办。如果系统不复杂，就优先考虑能否将session去掉，改动起来非常麻烦的话，再用下面的办法。</p>
+</li>
+<li><p>应用服务器自行实现共享</p>
+<p> php可以用数据库或memcached来保存session，从而在php本身建立了一个session集群，用这样的方式可以令 session保证稳定，即使某个节点有故障，session也不会丢失，适用于较为严格但请求量不高的场合。但是它的效率是不会很高的，不适用于对效率要求高的场合。</p>
+</li>
+</ol>
+<p>以上两个办法都跟nginx没什么关系，下面来说说用nginx该如何处理：</p>
+<ol start="3">
+<li>ip_hash：nginx中的ip_hash技术能够将某个ip的请求定向到同一台后端，这样一来这个ip下的某个客户端和某个后端就能建立起稳固的session，ip_hash是在upstream配置中定义的：</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream backend &#123;</span><br><span class="line">    server 127.0.0.1:8080 ;</span><br><span class="line">    server 127.0.0.1:9090 ;</span><br><span class="line">    ip_hash;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>ip_hash是容易理解的，但是因为仅仅能用ip这个因子来分配后端，因此ip_hash是有缺陷的，不能在一些情况下使用：</p>
+<ul>
+<li><p>nginx不是最前端的服务器。ip_hash要求nginx一定是最前端的服务器，否则nginx得不到正确ip，就不能根据ip作hash。譬如使用的是squid为最前端，那么nginx取ip时只能得到squid的服务器ip地址，用这个地址来作分流是肯定错乱的。</p>
+</li>
+<li><p>nginx的后端还有其它方式的负载均衡。假如nginx后端又有其它负载均衡，将请求又通过另外的方式分流了，那么某个客户端的请求肯定不能定位到同一台session应用服务器上。这么算起来，nginx后端只能直接指向应用服务器，或者再搭一个squid，然后指向应用服务器。最好的办法是用location作一次分流，将需要session的部分请求通过ip_hash分流，剩下的走其它后端去。</p>
+</li>
+</ul>
+<ol start="4">
+<li><p>upstream_hash</p>
+<p> 为了解决ip_hash的一些问题，可以使用upstream_hash这个第三方模块，这个模块多数情况下是用作url_hash的，但是并不妨碍将它用来做session共享。假如前端是squid，他会将ip加入x_forwarded_for这个http_header里，用upstream_hash可以用这个头做因子，将请求定向到指定的后端</p>
+</li>
+</ol>
+<h3 id="后端服务器自动加上端口的问题"><a href="#后端服务器自动加上端口的问题" class="headerlink" title="后端服务器自动加上端口的问题"></a>后端服务器自动加上端口的问题</h3><p>一个典型的 Nginx + Apache 应用方案可以是Nginx 占用 80 端口，过滤静态请求，然后动态请求即 Proxy 到 Apache 的 8080 端口。Proxy 反向代理的好处是访问的时候，始终就是 80端口，来访者不会觉察到有任何的区别。但有的应用确非常“聪明”，识别到 Apache 所位于的端口是 8080 ，就会把相关的超链接都一并加上 :8080 的后续。这么就死定了，还能有正常访问麽？！有个方法可以解决这事，就是把 apache 也运行在80端口上。同一台服务器，有Nginx 也有 Apache，2个httpd服务，都是80，不会冲突麽？</p>
+<p>nginx.conf 的配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name www.linuxidc.com;</span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>修改文</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 123.123.123.123:80; #指定Nginx只占用某个公网IP的80端口。</span><br><span class="line">    #listen 123.123.123.124:80; #如果你服务器中有多个IP，还可以指定多个。</span><br><span class="line">    server_name www.linuxidc.com;</span><br><span class="line">....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>把 apache 的配置文件 httpd.conf 中的<br>Listen 80</p>
+<p>改为<br>Listen 127.0.0.1:80</p>
+<p>跟Nginx一样，指定apache所占用的IP及端口。<br>保存退出，重启apache即可生效。</p>
 
       
     </div>
@@ -666,7 +697,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正向代理"><span class="nav-number">1.</span> <span class="nav-text">正向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反向代理"><span class="nav-number">2.</span> <span class="nav-text">反向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二者区别"><span class="nav-number">3.</span> <span class="nav-text">二者区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx的反向代理"><span class="nav-number">4.</span> <span class="nav-text">nginx的反向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是负载均衡"><span class="nav-number">5.</span> <span class="nav-text">什么是负载均衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡的几种常用方式"><span class="nav-number">6.</span> <span class="nav-text">负载均衡的几种常用方式</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正向代理"><span class="nav-number">1.</span> <span class="nav-text">正向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反向代理"><span class="nav-number">2.</span> <span class="nav-text">反向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二者区别"><span class="nav-number">3.</span> <span class="nav-text">二者区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nginx的反向代理"><span class="nav-number">4.</span> <span class="nav-text">nginx的反向代理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是负载均衡"><span class="nav-number">5.</span> <span class="nav-text">什么是负载均衡</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡的几种常用方式"><span class="nav-number">6.</span> <span class="nav-text">负载均衡的几种常用方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载均衡引发的问题"><span class="nav-number">7.</span> <span class="nav-text">负载均衡引发的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多台机器间session的共享问题"><span class="nav-number">7.1.</span> <span class="nav-text">多台机器间session的共享问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后端服务器自动加上端口的问题"><span class="nav-number">7.2.</span> <span class="nav-text">后端服务器自动加上端口的问题</span></a></li></ol></li></ol></div>
             
 
           </div>
