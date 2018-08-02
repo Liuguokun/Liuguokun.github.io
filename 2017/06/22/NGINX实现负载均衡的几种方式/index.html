@@ -87,17 +87,17 @@
 <meta property="og:site_name" content="刘国坤">
 <meta property="og:description" content="要理解负载均衡，必须先搞清楚正向代理和反向代理。  正向代理，代理的是用户。 反向代理，代理的是服务器  正向代理正向代理类似一个跳板机，代理访问外部资源。  举个例子: 我是一个用户，我访问不了某网站，但是我能访问一个代理服务器，这个代理服务器呢,他能访问那个我不能访问的网站，于是我先连上代理服务器,告诉他我需要那个无法访问网站的内容，代理服务器去取回来,然后返回给我。从网站的角度，只在代理服务">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE2da15048fee0be3096e63c5d86c8d0dc/2186">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEac0e6e112b1b863369015a7d4d6c9c57/2192">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE15f8fcf8e7768137e66827492f1d8676/2207">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE328772991d7018fef733b3792751a10b/2206">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE59219719bc0b9c0465f79a2a8864bed8/2208">
-<meta property="og:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEeaaa95d1aab1f51edbc7246f6461ccf7/2219">
-<meta property="og:updated_time" content="2018-05-25T11:37:19.749Z">
+<meta property="og:image" content="http://pa3s7cqy5.bkt.clouddn.com/20161119160128626.jpg.png">
+<meta property="og:image" content="http://pa3s7cqy5.bkt.clouddn.com/20161119160222174.jpg.png">
+<meta property="og:image" content="http://pa3s7cqy5.bkt.clouddn.com/20161119160533335.jpg.png">
+<meta property="og:image" content="http://pa3s7cqy5.bkt.clouddn.com/20161119160609957.jpg.png">
+<meta property="og:image" content="http://pa3s7cqy5.bkt.clouddn.com/20161119160831052.jpg.png">
+<meta property="og:image" content="http://pa3s7cqy5.bkt.clouddn.com/20161119160950856.jpg.png">
+<meta property="og:updated_time" content="2018-08-02T09:25:54.329Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="NGINX实现负载均衡的几种方式">
 <meta name="twitter:description" content="要理解负载均衡，必须先搞清楚正向代理和反向代理。  正向代理，代理的是用户。 反向代理，代理的是服务器  正向代理正向代理类似一个跳板机，代理访问外部资源。  举个例子: 我是一个用户，我访问不了某网站，但是我能访问一个代理服务器，这个代理服务器呢,他能访问那个我不能访问的网站，于是我先连上代理服务器,告诉他我需要那个无法访问网站的内容，代理服务器去取回来,然后返回给我。从网站的角度，只在代理服务">
-<meta name="twitter:image" content="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE2da15048fee0be3096e63c5d86c8d0dc/2186">
+<meta name="twitter:image" content="http://pa3s7cqy5.bkt.clouddn.com/20161119160128626.jpg.png">
 
 
 
@@ -389,13 +389,13 @@
 <li>反向代理，代理的是服务器</li>
 </ul>
 <h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><p>正向代理类似一个跳板机，代理访问外部资源。</p>
-<p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE2da15048fee0be3096e63c5d86c8d0dc/2186" alt="image"></p>
+<p><img src="http://pa3s7cqy5.bkt.clouddn.com/20161119160128626.jpg.png" alt="image"></p>
 <p>举个例子:</p>
 <p>我是一个用户，我访问不了某网站，但是我能访问一个代理服务器，这个代理服务器呢,他能访问那个我不能访问的网站，于是我先连上代理服务器,告诉他我需要那个无法访问网站的内容，代理服务器去取回来,然后返回给我。从网站的角度，只在代理服务器来取内容的时候有一次记录，有时候并不知道是用户的请求，也隐藏了用户的资料，这取决于代理告不告诉网站。</p>
 <blockquote>
 <p>客户端必须设置正向代理服务器，当然前提是要知道正向代理服务器的IP地址，还有代理程序的端口。</p>
 </blockquote>
-<p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEac0e6e112b1b863369015a7d4d6c9c57/2192" alt="image"></p>
+<p><img src="http://pa3s7cqy5.bkt.clouddn.com/20161119160222174.jpg.png" alt="image"></p>
 <p>总结来说： 正向代理是一个位于客户端和原始服务器(origin server)之间的服务器，为了从原始服务器取得内容，客户端向代理发送一个请求并指定目标(原始服务器)，然后代理向原始服务器转交请求并将获得的内容返回给客户端。客户端必须要进行一些特别的设置才能使用正向代理。</p>
 <p>正向代理的用途：</p>
 <ul>
@@ -410,15 +410,15 @@
 <ol>
 <li>保证内网的安全，可以使用反向代理提供WAF功能，阻止web攻击，大型网站，通常将反向代理作为公网访问地址，Web服务器是内网。</li>
 </ol>
-<p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE15f8fcf8e7768137e66827492f1d8676/2207" alt="image"></p>
+<p><img src="http://pa3s7cqy5.bkt.clouddn.com/20161119160533335.jpg.png" alt="image"></p>
 <ol start="2">
 <li>负载均衡，通过反向代理服务器来优化网站的负载</li>
 </ol>
-<p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE328772991d7018fef733b3792751a10b/2206" alt="image"></p>
-<h2 id="二者区别"><a href="#二者区别" class="headerlink" title="二者区别"></a>二者区别</h2><p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCE59219719bc0b9c0465f79a2a8864bed8/2208" alt="image"></p>
+<p><img src="http://pa3s7cqy5.bkt.clouddn.com/20161119160609957.jpg.png" alt="image"></p>
+<h2 id="二者区别"><a href="#二者区别" class="headerlink" title="二者区别"></a>二者区别</h2><p><img src="http://pa3s7cqy5.bkt.clouddn.com/20161119160831052.jpg.png" alt="image"></p>
 <h2 id="nginx的反向代理"><a href="#nginx的反向代理" class="headerlink" title="nginx的反向代理"></a>nginx的反向代理</h2><p>nginx支持配置反向代理，通过反向代理实现网站的负载均衡。这部分先写一个nginx的配置，后续需要深入研究nginx的代理模块和负载均衡模块。</p>
 <p>nginx通过proxy_pass_http 配置代理站点，upstream实现负载均衡。</p>
-<p><img src="https://note.youdao.com/yws/public/resource/2aa7692a4e745734023c7fca3ece7246/xmlnote/WEBRESOURCEeaaa95d1aab1f51edbc7246f6461ccf7/2219" alt="image"></p>
+<p><img src="http://pa3s7cqy5.bkt.clouddn.com/20161119160950856.jpg.png" alt="image"></p>
 <h2 id="什么是负载均衡"><a href="#什么是负载均衡" class="headerlink" title="什么是负载均衡"></a>什么是负载均衡</h2><p>当一台服务器的单位时间内的访问量越大时，服务器压力就越大，大到超过自身承受能力时，服务器就会崩溃。为了避免服务器崩溃，让用户有更好的体验，我们通过负载均衡的方式来分担服务器压力。</p>
 <p>我们可以建立很多很多服务器，组成一个服务器集群，当用户访问网站时，先访问一个中间服务器，在让这个中间服务器在服务器集群中选择一个压力较小的服务器，然后将该访问请求引入该服务器。如此以来，用户的每次访问，都会保证服务器集群中的每个服务器压力趋于平衡，分担了服务器压力，避免了服务器崩溃的情况。</p>
 <p>负载均衡是用反向代理的原理实现的。</p>
